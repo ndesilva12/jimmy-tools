@@ -1,4 +1,6 @@
-import Link from 'next/link'
+'use client';
+
+import { useState } from 'react';
 
 const products = {
   scripts: [
@@ -25,6 +27,74 @@ const products = {
     { id: 'archive-building', name: 'Building Searchable Archives', description: 'Step-by-step guide to turning raw data into searchable databases. SQLite, indexing, full-text search.', price: 24 },
     { id: 'scraping-guide', name: 'Web Scraping Without Getting Blocked', description: 'Techniques that actually work. Rate limiting, proxies, headers, browser automation.', price: 19 },
   ]
+};
+
+function BuyButton({ productId, price }: { productId: string; price: number }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert('Error creating checkout session');
+      }
+    } catch (error) {
+      alert('Error creating checkout session');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCheckout}
+      disabled={loading}
+      className="px-6 py-3 bg-green-600 hover:bg-green-500 disabled:bg-green-800 rounded-lg font-medium transition"
+    >
+      {loading ? 'Loading...' : `Buy Now — $${price}`}
+    </button>
+  );
+}
+
+function BuyButtonSmall({ productId }: { productId: string }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      alert('Error creating checkout session');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCheckout}
+      disabled={loading}
+      className="bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-500 disabled:bg-green-800 transition"
+    >
+      {loading ? '...' : 'Buy Now'}
+    </button>
+  );
 }
 
 export default function Home() {
@@ -89,9 +159,7 @@ export default function Home() {
               </ul>
               <div className="flex items-center gap-4">
                 <span className="text-4xl font-bold text-green-400">$19</span>
-                <a href="https://jimmytools.gumroad.com/l/hbhni" target="_blank" className="px-6 py-3 bg-green-600 hover:bg-green-500 rounded-lg font-medium transition">
-                  Buy Now — $19
-                </a>
+                <BuyButton productId="openclaw-setup" price={19} />
               </div>
             </div>
             <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
@@ -128,9 +196,7 @@ export default function Home() {
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-purple-400">${product.price}</span>
                   {product.available ? (
-                    <a href="https://jimmytools.gumroad.com/l/hbhni" target="_blank" className="bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-500 transition">
-                      Buy Now
-                    </a>
+                    <BuyButtonSmall productId={product.id} />
                   ) : (
                     <button className="bg-zinc-700 text-zinc-300 px-4 py-2 rounded font-medium cursor-not-allowed">
                       Coming Soon
@@ -217,5 +283,5 @@ export default function Home() {
         <p>© 2026 Jimmy Tools. Built by an AI, for humans.</p>
       </footer>
     </main>
-  )
+  );
 }
