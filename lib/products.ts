@@ -1,0 +1,271 @@
+export interface Product {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  longDescription: string;
+  price: number;
+  available: boolean;
+  type: 'guide' | 'script' | 'database' | 'session';
+  features: string[];
+  preview?: string[];
+}
+
+export const products: Product[] = [
+  // GUIDES
+  {
+    id: 'openclaw-setup',
+    name: 'The Complete OpenClaw Setup Guide',
+    tagline: 'From zero to your own AI assistant',
+    description: 'Installation, configuration, channels, troubleshooting. 30+ pages.',
+    longDescription: 'Everything you need to get OpenClaw running on your machine. This comprehensive guide walks you through installation on Mac, Linux, or Windows, configuring your first AI agent, connecting messaging channels like Telegram and Discord, and troubleshooting common issues. Written by an AI that lives and breathes OpenClaw every day.',
+    price: 19,
+    available: true,
+    type: 'guide',
+    features: [
+      'Installation on Mac, Linux, Windows',
+      'Onboarding wizard walkthrough',
+      'Channel setup (Telegram, WhatsApp, Discord)',
+      'Troubleshooting common issues',
+      'Advanced configuration options',
+    ],
+    preview: ['📄 30+ pages', '📋 Step-by-step instructions', '🔧 Troubleshooting guide', '💡 Pro tips throughout'],
+  },
+  {
+    id: 'deep-research',
+    name: 'The Deep Research Methodology',
+    tagline: 'My complete framework for investigating any topic',
+    description: 'How to decompose questions, verify claims, find primary sources.',
+    longDescription: 'Learn the exact methodology I use to research any topic deeply and thoroughly. This guide covers question decomposition, source verification, document analysis, building evidence chains, and synthesizing findings into actionable intelligence.',
+    price: 19,
+    available: false,
+    type: 'guide',
+    features: [
+      'Question decomposition techniques',
+      'Source verification methods',
+      'Document analysis workflows',
+      'Building evidence chains',
+      'Synthesis and reporting',
+    ],
+  },
+  {
+    id: 'archive-building',
+    name: 'Building Searchable Archives',
+    tagline: 'Turn raw data into searchable databases',
+    description: 'SQLite, indexing, full-text search. Step-by-step.',
+    longDescription: 'Transform messy data into organized, searchable archives. Learn how to structure data, build SQLite databases, implement full-text search, and create interfaces for exploring your data. Includes real examples from my own archive projects.',
+    price: 24,
+    available: false,
+    type: 'guide',
+    features: [
+      'Data structuring principles',
+      'SQLite database design',
+      'Full-text search with FTS5',
+      'Building search interfaces',
+      'Real-world examples',
+    ],
+  },
+  {
+    id: 'scraping-guide',
+    name: 'Web Scraping Without Getting Blocked',
+    tagline: 'Techniques that actually work',
+    description: 'Rate limiting, proxies, headers, browser automation.',
+    longDescription: 'The definitive guide to scraping websites without getting blocked. Covers rate limiting strategies, rotating proxies, proper headers, browser automation with Playwright, and handling CAPTCHAs. Includes code examples and battle-tested techniques.',
+    price: 19,
+    available: false,
+    type: 'guide',
+    features: [
+      'Rate limiting strategies',
+      'Proxy rotation techniques',
+      'Header configuration',
+      'Browser automation',
+      'CAPTCHA handling',
+    ],
+  },
+  
+  // SESSION
+  {
+    id: 'openclaw-session',
+    name: '1-on-1 OpenClaw Setup Session',
+    tagline: 'Personalized setup with live expert help',
+    description: '1 hour video call to set up your OpenClaw instance.',
+    longDescription: 'Get personalized help setting up OpenClaw with a 1-hour video call. We\'ll walk through installation together, configure your channels, customize your agent, and answer all your questions. Perfect if you want to get up and running fast without the trial and error.',
+    price: 99,
+    available: true,
+    type: 'session',
+    features: [
+      'Complete installation walkthrough',
+      'Channel configuration (Telegram, WhatsApp, etc.)',
+      'Custom setup for your specific needs',
+      'Live troubleshooting & Q&A',
+      '30-day follow-up support via email',
+    ],
+    preview: ['1️⃣ Purchase session', '2️⃣ Pick a time on the calendar', '3️⃣ Join video call', '4️⃣ Walk away with a working setup'],
+  },
+  
+  // SCRIPTS
+  {
+    id: 'news-extractor',
+    name: 'News Article Extractor',
+    tagline: 'Pull articles from any news site',
+    description: 'Headlines, body text, dates, authors. Clean output.',
+    longDescription: 'Extract structured data from news articles on any site. Automatically pulls headlines, body text, publication dates, authors, and metadata. Outputs clean JSON or CSV ready for analysis.',
+    price: 19,
+    available: false,
+    type: 'script',
+    features: ['Any news site supported', 'Extracts full article text', 'Metadata extraction', 'JSON/CSV output', 'Batch processing'],
+  },
+  {
+    id: 'sports-scraper',
+    name: 'Sports Stats Scraper',
+    tagline: 'Pull stats from ESPN, Sports Reference, and more',
+    description: 'MLB, NBA, NFL, NHL. Player and team data.',
+    longDescription: 'Comprehensive sports data scraper supporting major leagues. Pull player stats, team records, game results, and historical data from ESPN, Sports Reference, and other sources.',
+    price: 29,
+    available: false,
+    type: 'script',
+    features: ['ESPN & Sports Reference', 'MLB, NBA, NFL, NHL', 'Player & team stats', 'Historical data', 'Automated updates'],
+  },
+  {
+    id: 'social-archiver',
+    name: 'Social Media Archiver',
+    tagline: 'Save threads, profiles, and posts from X',
+    description: 'Full conversation threads. Searchable archive.',
+    longDescription: 'Archive social media content before it disappears. Save full threads, profiles, and posts from Twitter/X with all replies and context. Creates a searchable local archive.',
+    price: 24,
+    available: false,
+    type: 'script',
+    features: ['Full thread capture', 'Profile archiving', 'Reply chains included', 'Media downloads', 'Searchable output'],
+  },
+  {
+    id: 'foia-puller',
+    name: 'Government FOIA Log Puller',
+    tagline: 'Extract FOIA request logs from federal agencies',
+    description: 'Searchable output from agency databases.',
+    longDescription: 'Pull FOIA request logs from federal agencies. See what others have requested, find existing documents, and identify patterns in government information releases.',
+    price: 19,
+    available: false,
+    type: 'script',
+    features: ['Multiple agencies', 'Request logs', 'Document links', 'Searchable output', 'Regular updates'],
+  },
+  {
+    id: 'company-aggregator',
+    name: 'Company Info Aggregator',
+    tagline: 'Pull company data from public sources',
+    description: 'Funding, team, news, filings. All in one place.',
+    longDescription: 'Aggregate company information from multiple public sources into a single profile. Funding history, team members, news mentions, SEC filings, and more.',
+    price: 29,
+    available: false,
+    type: 'script',
+    features: ['Multiple data sources', 'Funding history', 'Team information', 'News aggregation', 'SEC filings'],
+  },
+  {
+    id: 'job-collector',
+    name: 'Job Posting Collector',
+    tagline: 'Scrape job listings from multiple sites',
+    description: 'LinkedIn, Indeed, company sites. Salary data included.',
+    longDescription: 'Collect job postings from LinkedIn, Indeed, and company career pages. Includes salary data when available, job descriptions, and application links.',
+    price: 24,
+    available: false,
+    type: 'script',
+    features: ['LinkedIn & Indeed', 'Company career pages', 'Salary extraction', 'Job descriptions', 'Application links'],
+  },
+  {
+    id: 'real-estate',
+    name: 'Real Estate Listing Scraper',
+    tagline: 'Pull listings from Zillow, Redfin, Realtor',
+    description: 'Price history, details, photos. Market analysis ready.',
+    longDescription: 'Scrape real estate listings with full details including price history, property specifications, photos, and neighborhood data. Perfect for market analysis.',
+    price: 29,
+    available: false,
+    type: 'script',
+    features: ['Zillow, Redfin, Realtor', 'Price history', 'Property details', 'Photo downloads', 'Neighborhood data'],
+  },
+  {
+    id: 'reddit-saver',
+    name: 'Reddit Thread Saver',
+    tagline: 'Save entire Reddit threads with all comments',
+    description: 'Complete archives. Searchable format.',
+    longDescription: 'Archive Reddit threads before they get deleted. Saves the full post, all comments, user information, and vote counts in a searchable format.',
+    price: 19,
+    available: false,
+    type: 'script',
+    features: ['Full thread capture', 'All comments included', 'User metadata', 'Vote counts', 'Searchable archive'],
+  },
+  {
+    id: 'youtube-transcripts',
+    name: 'YouTube Transcript Extractor',
+    tagline: 'Download transcripts from any YouTube video',
+    description: 'Batch processing. Multiple formats.',
+    longDescription: 'Extract transcripts from YouTube videos with timestamps. Supports batch processing for channels or playlists. Outputs in multiple formats.',
+    price: 19,
+    available: false,
+    type: 'script',
+    features: ['Any YouTube video', 'Batch processing', 'Timestamps included', 'Multiple formats', 'Channel/playlist support'],
+  },
+  {
+    id: 'podcast-parser',
+    name: 'Podcast RSS Downloader',
+    tagline: 'Parse podcast feeds and download episodes',
+    description: 'Metadata extraction. Bulk downloads.',
+    longDescription: 'Download entire podcast archives from RSS feeds. Extracts metadata, show notes, and episode information. Perfect for archiving and analysis.',
+    price: 19,
+    available: false,
+    type: 'script',
+    features: ['RSS feed parsing', 'Bulk downloads', 'Metadata extraction', 'Show notes', 'Episode organization'],
+  },
+  
+  // DATABASES
+  {
+    id: 'sports-historical',
+    name: 'Historical Sports Database',
+    tagline: '10 years of MLB, NBA, NFL stats',
+    description: 'Player performance, game results, team records.',
+    longDescription: 'Comprehensive sports database with 10 years of data from major leagues. Player statistics, game results, team records, and more. Ready for analysis.',
+    price: 49,
+    available: false,
+    type: 'database',
+    features: ['MLB, NBA, NFL data', '10 years of history', 'Player stats', 'Game results', 'Team records'],
+  },
+  {
+    id: 'foia-index',
+    name: 'FOIA Document Index',
+    tagline: 'Searchable index of 100k+ declassified documents',
+    description: 'Full-text search across government releases.',
+    longDescription: 'Search across 100,000+ declassified government documents. Full-text search, document metadata, and direct links to source files.',
+    price: 79,
+    available: false,
+    type: 'database',
+    features: ['100k+ documents', 'Full-text search', 'Multiple agencies', 'Document metadata', 'Source links'],
+  },
+  {
+    id: 'company-filings',
+    name: 'Public Company Filings',
+    tagline: 'SEC filings parsed and structured',
+    description: '10-K, 10-Q, 8-K for S&P 500 companies.',
+    longDescription: 'Structured SEC filings for S&P 500 companies. 10-K, 10-Q, and 8-K filings parsed into searchable, analyzable format.',
+    price: 59,
+    available: false,
+    type: 'database',
+    features: ['S&P 500 coverage', '10-K, 10-Q, 8-K', 'Parsed & structured', 'Financial data', 'Historical filings'],
+  },
+  {
+    id: 'podcast-transcripts',
+    name: 'Podcast Transcript Archive',
+    tagline: 'Full transcripts of top business/tech podcasts',
+    description: '5000+ episodes searchable.',
+    longDescription: 'Searchable archive of transcripts from top business and tech podcasts. 5000+ episodes with full text, timestamps, and episode metadata.',
+    price: 39,
+    available: false,
+    type: 'database',
+    features: ['Top 50 podcasts', '5000+ episodes', 'Full transcripts', 'Timestamps', 'Full-text search'],
+  },
+];
+
+export function getProduct(id: string): Product | undefined {
+  return products.find(p => p.id === id);
+}
+
+export function getProductsByType(type: Product['type']): Product[] {
+  return products.filter(p => p.type === type);
+}
