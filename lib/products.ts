@@ -105,12 +105,35 @@ export const products: Product[] = [
   
   // SCRIPTS
   {
+    id: 'sec-edgar-scraper',
+    name: 'SEC EDGAR Company Filings Scraper',
+    tagline: 'Extract 10-K, 10-Q, 8-K filings for any public company',
+    description: 'Enter any ticker, get all SEC filings with full text extraction.',
+    longDescription: 'Pull SEC filings for any publicly traded company. Enter a stock ticker and get a complete list of 10-K (annual), 10-Q (quarterly), and 8-K (event) filings with dates, descriptions, and direct links. Optionally extract full text from filings and search for keywords. Export to CSV/Excel.',
+    price: 19.99,
+    available: true,
+    type: 'script',
+    features: [
+      'Any US public company (by ticker)',
+      '10-K, 10-Q, 8-K, and more',
+      'Full text extraction',
+      'Keyword search across filings',
+      'CSV and Excel export',
+    ],
+    preview: [
+      '1️⃣ Open in Google Colab (free)',
+      '2️⃣ Click "Run All"',
+      '3️⃣ Enter stock ticker (e.g., AAPL)',
+      '4️⃣ Download your results',
+    ],
+  },
+  {
     id: 'news-extractor',
     name: 'News Article Extractor',
     tagline: 'Pull articles from any news site',
     description: 'Headlines, body text, dates, authors. Clean output.',
     longDescription: 'Extract structured data from news articles on any site. Automatically pulls headlines, body text, publication dates, authors, and metadata. Outputs clean JSON or CSV ready for analysis.',
-    price: 19,
+    price: 19.99,
     available: false,
     type: 'script',
     features: ['Any news site supported', 'Extracts full article text', 'Metadata extraction', 'JSON/CSV output', 'Batch processing'],

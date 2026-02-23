@@ -12,7 +12,11 @@ const PROTECTED_FILES: Record<string, { path: string; filename: string; contentT
     filename: 'OpenClaw-Setup-Guide.pdf',
     contentType: 'application/pdf',
   },
-  // Add more products here as needed
+  'sec-edgar-scraper': {
+    path: 'protected-files/sec-edgar-scraper.ipynb',
+    filename: 'SEC-EDGAR-Scraper-JimmyTools.ipynb',
+    contentType: 'application/x-ipynb+json',
+  },
 };
 
 interface TokenPayload {

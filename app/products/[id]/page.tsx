@@ -139,13 +139,22 @@ export default function ProductPage() {
               {product.preview && (
                 <div className="mt-8 pt-6 border-t border-zinc-800">
                   <h4 className="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-4">
-                    {product.type === 'session' ? 'How It Works' : 'Preview'}
+                    {product.type === 'session' ? 'How It Works' : 'How to Use'}
                   </h4>
                   <div className="space-y-2">
                     {product.preview.map((item, i) => (
                       <div key={i} className="text-zinc-400 text-sm font-mono">{item}</div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {product.type === 'script' && (
+                <div className="mt-6 p-4 bg-zinc-800/50 rounded-xl">
+                  <p className="text-zinc-400 text-sm">
+                    <span className="text-[#A8C45E] font-semibold">No coding required.</span>{' '}
+                    Scripts run in Google Colab (free). Just open the notebook, click "Run All", and follow the prompts.
+                  </p>
                 </div>
               )}
 
