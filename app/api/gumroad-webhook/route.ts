@@ -1,75 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { v4 as uuidv4 } from 'uuid';
-import fs from 'fs';
-import path from 'path';
+import jwt from 'jsonwebtoken';
 
-// Path to store tokens - use /tmp on Vercel (ephemeral but writable)
-// For production persistence, use Vercel KV, Postgres, or external DB
-const TOKENS_FILE = process.env.VERCEL 
-  ? '/tmp/tokens.json' 
-  : path.join(process.cwd(), 'data', 'tokens.json');
+// Secret for signing tokens - set in Vercel environment variables
+const JWT_SECRET = process.env.JWT_SECRET || 'jimmy-tools-default-secret-change-me';
 
-interface TokenData {
-  token: string;
-  productId: string;
-  productName: string;
-  email: string;
-  saleId: string;
-  createdAt: number;
-  downloadCount: number;
-  expiresAt: number;
-}
-
-// Ensure data directory exists (not needed for /tmp)
-function ensureDataDir() {
-  if (process.env.VERCEL) return; // /tmp always exists on Vercel
-  const dataDir = path.join(process.cwd(), 'data');
-  if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-  }
-}
-
-// Read tokens from file
-function readTokens(): Record<string, TokenData> {
-  ensureDataDir();
-  if (!fs.existsSync(TOKENS_FILE)) {
-    return {};
-  }
-  try {
-    const data = fs.readFileSync(TOKENS_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch (error) {
-    console.error('Error reading tokens file:', error);
-    return {};
-  }
-}
-
-// Write tokens to file
-function writeTokens(tokens: Record<string, TokenData>) {
-  ensureDataDir();
-  fs.writeFileSync(TOKENS_FILE, JSON.stringify(tokens, null, 2));
-}
-
-// Product mapping - matches the slug-based products
+// Product mapping
 const PRODUCT_MAPPING: Record<string, {
   name: string;
   downloadUrl: string;
+  description: string;
+  fileType: string;
+  fileSize: string;
 }> = {
   'hbhni': {
     name: 'The Complete OpenClaw Setup Guide',
     downloadUrl: '/files/openclaw-setup-guide.pdf',
+    description: 'Go from zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.',
+    fileType: 'PDF',
+    fileSize: '2.4 MB',
   },
   'openclaw-setup': {
     name: 'The Complete OpenClaw Setup Guide',
     downloadUrl: '/files/openclaw-setup-guide.pdf',
-  },
-  'investigation-methodology': {
-    name: 'Investigation Methodology Guide',
-    downloadUrl: '/files/investigation-methodology.pdf',
-  },
-  'foia-guide': {
-    name: 'FOIA Request Guide',
-    downloadUrl: '/files/foia-guide.pdf',
+    description: 'Go from zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.',
+    fileType: 'PDF',
+    fileSize: '2.4 MB',
   },
 };
 
@@ -84,68 +39,63 @@ export async function POST(req: NextRequest) {
     const email = formData.get('email') as string;
     const permalink = formData.get('permalink') as string;
 
-    // Validate required fields
-    if (!saleId || !productId || !email) {
-      console.error('Missing required fields:', { saleId, productId, email });
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
+    // Log the webhook
+    console.log('Gumroad webhook received:', { saleId, productId, productName, email, permalink });
+
+    // For verification pings (no sale data), just return success
+    if (!saleId && !email) {
+      return NextResponse.json({ success: true, message: 'Webhook verified' });
     }
 
-    // Log the webhook for debugging
-    console.log('Gumroad webhook received:', {
-      saleId,
-      productId,
-      productName,
-      email,
-      permalink,
-    });
+    // Validate required fields for actual sales
+    if (!saleId || !email) {
+      console.error('Missing required fields:', { saleId, email });
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
 
-    // Generate unique token
-    const token = uuidv4();
-    
-    // Token expires in 7 days
-    const expiresAt = Date.now() + (7 * 24 * 60 * 60 * 1000);
-
-    // Store token data
-    const tokens = readTokens();
-    tokens[token] = {
-      token,
-      productId,
-      productName: productName || 'Unknown Product',
-      email,
-      saleId,
-      createdAt: Date.now(),
-      downloadCount: 0,
-      expiresAt,
+    // Get product info (use Gumroad's productId or permalink)
+    const product = PRODUCT_MAPPING[productId] || PRODUCT_MAPPING[permalink] || {
+      name: productName || 'Digital Product',
+      downloadUrl: '/files/product.pdf',
+      description: 'Your purchased digital product',
+      fileType: 'PDF',
+      fileSize: 'Unknown',
     };
-    writeTokens(tokens);
+
+    // Create JWT token with purchase info (expires in 7 days)
+    const token = jwt.sign(
+      {
+        saleId,
+        productId: productId || permalink,
+        productName: product.name,
+        email,
+        downloadUrl: product.downloadUrl,
+        description: product.description,
+        fileType: product.fileType,
+        fileSize: product.fileSize,
+      },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
 
     // Construct download URL
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://jimmytools.net';
     const downloadUrl = `${baseUrl}/download/${token}`;
 
-    console.log('Token generated:', { token, downloadUrl });
+    console.log('Token generated for:', email, downloadUrl);
 
-    // Return success with download URL
-    // Gumroad can redirect to this URL if configured
     return NextResponse.json({
       success: true,
       download_url: downloadUrl,
-      token,
     });
 
   } catch (error) {
     console.error('Error processing Gumroad webhook:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
-// Health check endpoint
+// Health check / verification endpoint
 export async function GET() {
   return NextResponse.json({
     status: 'ok',
