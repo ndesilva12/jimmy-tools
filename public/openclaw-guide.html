@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Complete OpenClaw Setup Guide - Jimmy Tools</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #fff;
+    }
+    
+    h1 {
+      font-size: 2.5em;
+      font-weight: 700;
+      margin-bottom: 0.5em;
+      color: #111;
+    }
+    
+    h2 {
+      font-size: 1.8em;
+      font-weight: 600;
+      margin-top: 2em;
+      margin-bottom: 0.75em;
+      color: #111;
+      border-bottom: 2px solid #e5e5e5;
+      padding-bottom: 0.25em;
+    }
+    
+    h3 {
+      font-size: 1.3em;
+      font-weight: 600;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: #333;
+    }
+    
+    h4 {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-top: 1.25em;
+      margin-bottom: 0.5em;
+      color: #444;
+    }
+    
+    p {
+      margin-bottom: 1em;
+    }
+    
+    ul, ol {
+      margin-bottom: 1em;
+      padding-left: 1.5em;
+    }
+    
+    li {
+      margin-bottom: 0.5em;
+    }
+    
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #f5f5f5;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    
+    pre {
+      background: #1a1a1a;
+      color: #f5f5f5;
+      padding: 1em 1.5em;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1em 0;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+    
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75em;
+      text-align: left;
+    }
+    
+    th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+    
+    .cover {
+      text-align: center;
+      padding: 80px 20px;
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px;
+    }
+    
+    .cover h1 {
+      color: white;
+      font-size: 3em;
+    }
+    
+    .cover p {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+    
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      margin-bottom: 1em;
+    }
+    
+    .tip {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      padding: 1em;
+      margin: 1em 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .warning {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 1em;
+      margin: 1em 0;
+      border-radius: 0 8px 8px 0;
+    }
+    
+    .toc {
+      background: #f9f9f9;
+      padding: 1.5em;
+      border-radius: 8px;
+      margin: 2em 0;
+    }
+    
+    .toc h3 {
+      margin-top: 0;
+    }
+    
+    .toc ol {
+      margin-bottom: 0;
+    }
+    
+    hr {
+      border: none;
+      border-top: 2px solid #e5e5e5;
+      margin: 3em 0;
+    }
+    
+    @media print {
+      body {
+        padding: 0;
+      }
+      .cover {
+        page-break-after: always;
+      }
+      h2 {
+        page-break-before: always;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover">
+    <div class="badge">JIMMY TOOLS</div>
+    <h1>The Complete OpenClaw Setup Guide</h1>
+    <p>From Zero to Your Own AI Assistant</p>
+    <p style="margin-top: 2em; opacity: 0.8;">Version 1.0 | February 2026</p>
+  </div>
+
+  <div class="toc">
+    <h3>Table of Contents</h3>
+    <ol>
+      <li>What is OpenClaw?</li>
+      <li>System Requirements</li>
+      <li>Installation</li>
+      <li>The Onboarding Wizard</li>
+      <li>Setting Up Channels</li>
+      <li>Verification & Testing</li>
+      <li>Common Issues & Solutions</li>
+      <li>Advanced Configuration</li>
+      <li>Next Steps</li>
+    </ol>
+  </div>
+
+  <h2>1. What is OpenClaw?</h2>
+  
+  <p>OpenClaw is an open-source platform that lets you run your own AI assistant. Unlike ChatGPT or Claude.ai, OpenClaw runs locally on your machine and can:</p>
+  
+  <ul>
+    <li><strong>Connect to messaging apps</strong> — Telegram, WhatsApp, Discord, Signal, iMessage, and more</li>
+    <li><strong>Execute code and scripts</strong> — Run Python, access files, automate tasks</li>
+    <li><strong>Browse the web</strong> — Search, fetch pages, control browsers</li>
+    <li><strong>Access your tools</strong> — Calendar, email, databases, APIs</li>
+    <li><strong>Work autonomously</strong> — Background tasks, scheduled jobs, proactive notifications</li>
+  </ul>
+  
+  <p>Think of it as giving Claude or GPT "hands and feet" to actually do things, not just answer questions.</p>
+
+  <h3>Why Use OpenClaw?</h3>
+  
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>ChatGPT/Claude.ai</th>
+      <th>OpenClaw</th>
+    </tr>
+    <tr>
+      <td>Runs locally</td>
+      <td>❌</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Persistent memory</td>
+      <td>Limited</td>
+      <td>✅ Full file-based</td>
+    </tr>
+    <tr>
+      <td>Executes code</td>
+      <td>❌</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Messaging integration</td>
+      <td>❌</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Custom tools/skills</td>
+      <td>❌</td>
+      <td>✅</td>
+    </tr>
+    <tr>
+      <td>Data stays private</td>
+      <td>❌</td>
+      <td>✅</td>
+    </tr>
+  </table>
+
+  <h2>2. System Requirements</h2>
+  
+  <h3>Hardware</h3>
+  <ul>
+    <li><strong>RAM:</strong> 4GB minimum, 8GB+ recommended</li>
+    <li><strong>Storage:</strong> 2GB free space for OpenClaw + dependencies</li>
+    <li><strong>Network:</strong> Internet connection for AI API calls</li>
+  </ul>
+
+  <h3>Software</h3>
+  <table>
+    <tr>
+      <th>Platform</th>
+      <th>Requirements</th>
+    </tr>
+    <tr>
+      <td><strong>macOS</strong></td>
+      <td>macOS 12+ (Monterey or later)</td>
+    </tr>
+    <tr>
+      <td><strong>Linux</strong></td>
+      <td>Ubuntu 20.04+, Debian 11+, or equivalent</td>
+    </tr>
+    <tr>
+      <td><strong>Windows</strong></td>
+      <td>Windows 10/11 with WSL2 (strongly recommended)</td>
+    </tr>
+  </table>
+
+  <h3>Node.js Requirement</h3>
+  <p>OpenClaw requires <strong>Node.js 22 or newer</strong>.</p>
+  <p>Check your current version:</p>
+  <pre><code>node --version</code></pre>
+  <p>If you don't have Node.js or have an older version, the installer will handle it.</p>
+
+  <h2>3. Installation</h2>
+  
+  <h3>Method 1: Installer Script (Recommended)</h3>
+  <p>The easiest way to install OpenClaw. One command handles everything.</p>
+
+  <h4>macOS / Linux / WSL2</h4>
+  <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+
+  <h4>Windows (PowerShell as Administrator)</h4>
+  <pre><code>iwr -useb https://openclaw.ai/install.ps1 | iex</code></pre>
+
+  <p><strong>What the installer does:</strong></p>
+  <ol>
+    <li>Checks for Node.js 22+ (installs if missing)</li>
+    <li>Installs OpenClaw globally via npm</li>
+    <li>Launches the onboarding wizard</li>
+  </ol>
+
+  <h3>Method 2: Manual npm Install</h3>
+  <p>If you already have Node.js 22+ and prefer manual control:</p>
+  <pre><code># Install OpenClaw
+npm install -g openclaw@latest
+
+# Run onboarding
+openclaw onboard --install-daemon</code></pre>
+
+  <div class="tip">
+    <strong>Troubleshooting: sharp build errors</strong><br>
+    If you see errors about <code>sharp</code> or <code>node-gyp</code>:
+    <pre><code>SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw@latest</code></pre>
+  </div>
+
+  <h3>Windows-Specific Instructions</h3>
+  <p><strong>We strongly recommend using WSL2 on Windows.</strong></p>
+
+  <h4>Installing WSL2</h4>
+  <ol>
+    <li>Open PowerShell as Administrator</li>
+    <li>Run: <code>wsl --install</code></li>
+    <li>Restart your computer</li>
+    <li>Open "Ubuntu" from the Start menu</li>
+    <li>Create a username and password when prompted</li>
+    <li>Now run the Linux installer:
+      <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+    </li>
+  </ol>
+
+  <h2>4. The Onboarding Wizard</h2>
+  
+  <p>After installation, the onboarding wizard guides you through setup.</p>
+  <pre><code>openclaw onboard --install-daemon</code></pre>
+
+  <h3>Step 1: Choose Setup Mode</h3>
+  <pre><code>? Setup mode
+  ❯ QuickStart (recommended defaults)
+    Advanced (full control)</code></pre>
+  <p><strong>QuickStart</strong> is recommended for most users. It uses sensible defaults.</p>
+
+  <h3>Step 2: Authentication</h3>
+  <p>The wizard asks how to authenticate with AI providers.</p>
+
+  <h4>Anthropic (Recommended)</h4>
+  <p>You'll need an Anthropic API key:</p>
+  <ol>
+    <li>Go to <a href="https://console.anthropic.com">console.anthropic.com</a></li>
+    <li>Sign up or log in</li>
+    <li>Navigate to API Keys</li>
+    <li>Create a new key</li>
+    <li>Copy and paste it into the wizard</li>
+  </ol>
+
+  <h3>Step 3: Workspace</h3>
+  <p>The workspace is where OpenClaw stores agent files, memory, and sessions. The default location (<code>~/.openclaw/workspace</code>) works for most users.</p>
+
+  <h3>Step 4: Gateway Settings</h3>
+  <p>The Gateway is the background service that runs OpenClaw. Default settings are secure and work well locally.</p>
+
+  <h3>Step 5: Channels (Optional)</h3>
+  <p>Channels let you message your AI through existing apps. You can add channels later with <code>openclaw configure</code>.</p>
+
+  <h3>Step 6: Install Daemon</h3>
+  <p>This installs OpenClaw as a system service that starts automatically.</p>
+
+  <h3>Step 7: Health Check</h3>
+  <p>The wizard verifies everything works:</p>
+  <pre><code>✓ Gateway started
+✓ Config valid
+✓ Model connection OK
+
+OpenClaw is ready! Run: openclaw dashboard</code></pre>
+
+  <h2>5. Setting Up Channels</h2>
+  
+  <h3>Telegram Setup</h3>
+  <p>Telegram is the easiest channel to set up.</p>
+
+  <h4>Step 1: Create a Bot</h4>
+  <ol>
+    <li>Open Telegram and search for <strong>@BotFather</strong></li>
+    <li>Send <code>/newbot</code></li>
+    <li>Choose a name (e.g., "My Assistant")</li>
+    <li>Choose a username (must end in "bot", e.g., "myassistant_bot")</li>
+    <li>Copy the <strong>API token</strong> BotFather gives you</li>
+  </ol>
+
+  <h4>Step 2: Configure OpenClaw</h4>
+  <pre><code>openclaw configure --section telegram</code></pre>
+  <p>Or edit your config directly and add under <code>channels</code>:</p>
+  <pre><code>{
+  "telegram": {
+    "enabled": true,
+    "botToken": "YOUR_BOT_TOKEN_HERE",
+    "dmPolicy": "pairing"
+  }
+}</code></pre>
+
+  <h4>Step 3: Restart Gateway</h4>
+  <pre><code>openclaw gateway restart</code></pre>
+
+  <h4>Step 4: Start Chatting</h4>
+  <ol>
+    <li>Find your bot on Telegram by its username</li>
+    <li>Send <code>/start</code></li>
+    <li>The bot will ask you to pair (security feature)</li>
+    <li>Once paired, you can chat freely!</li>
+  </ol>
+
+  <h3>WhatsApp Setup</h3>
+  <p>WhatsApp requires more setup but works great once configured.</p>
+
+  <h4>Step 1: Enable WhatsApp Channel</h4>
+  <pre><code>openclaw configure --section whatsapp</code></pre>
+
+  <h4>Step 2: Scan QR Code</h4>
+  <p>OpenClaw uses WhatsApp Web protocol. Restart the gateway and scan the QR code with WhatsApp:</p>
+  <ol>
+    <li>Open WhatsApp on your phone</li>
+    <li>Go to Settings → Linked Devices</li>
+    <li>Tap "Link a Device"</li>
+    <li>Scan the QR code</li>
+  </ol>
+
+  <h2>6. Verification & Testing</h2>
+  
+  <h3>Check Gateway Status</h3>
+  <pre><code>openclaw gateway status</code></pre>
+  <p>Expected output:</p>
+  <pre><code>Service: running
+Gateway: ws://127.0.0.1:18789
+Probe: ok</code></pre>
+
+  <h3>Run Health Check</h3>
+  <pre><code>openclaw doctor</code></pre>
+  <p>This checks for common configuration issues.</p>
+
+  <h3>Open the Dashboard</h3>
+  <pre><code>openclaw dashboard</code></pre>
+  <p>This opens the Control UI in your browser. You can chat directly here without any channel setup.</p>
+
+  <h2>7. Common Issues & Solutions</h2>
+
+  <h3>"openclaw: command not found"</h3>
+  <p><strong>Cause:</strong> The npm global bin directory isn't in your PATH.</p>
+  <p><strong>Solution:</strong></p>
+  <ol>
+    <li>Find your npm prefix: <code>npm prefix -g</code></li>
+    <li>Add to your shell config (~/.zshrc or ~/.bashrc):
+      <pre><code>export PATH="$(npm prefix -g)/bin:$PATH"</code></pre>
+    </li>
+    <li>Reload your shell: <code>source ~/.zshrc</code></li>
+  </ol>
+
+  <h3>Gateway won't start</h3>
+  <p>Check logs:</p>
+  <pre><code>cat /tmp/openclaw/openclaw-$(date +%Y-%m-%d).log</code></pre>
+  <p><strong>Common fixes:</strong></p>
+  <ul>
+    <li>Port in use: <code>openclaw gateway --port 18790</code></li>
+    <li>Permission issues: <code>sudo chown -R $(whoami) ~/.openclaw</code></li>
+    <li>Restart: <code>openclaw gateway stop && openclaw gateway start</code></li>
+  </ul>
+
+  <h3>"Model connection failed"</h3>
+  <p><strong>Cause:</strong> API key invalid or expired.</p>
+  <p><strong>Solution:</strong> Verify your API key at the provider's console, then update: <code>openclaw configure --section auth</code></p>
+
+  <h3>Telegram bot not responding</h3>
+  <p>Check:</p>
+  <ol>
+    <li>Is the gateway running? <code>openclaw gateway status</code></li>
+    <li>Did you pair? Check for a pairing request in Telegram</li>
+    <li>Is the bot token correct in config?</li>
+  </ol>
+
+  <h3>npm install errors on macOS</h3>
+  <p>For sharp/libvips errors:</p>
+  <pre><code>SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw@latest</code></pre>
+  <p>For permission errors:</p>
+  <pre><code>sudo chown -R $(whoami) $(npm prefix -g)/{lib/node_modules,bin,share}</code></pre>
+
+  <h2>8. Advanced Configuration</h2>
+
+  <h3>Config File Location</h3>
+  <pre><code>~/.openclaw/openclaw.json</code></pre>
+  <p>Edit directly with: <code>nano ~/.openclaw/openclaw.json</code></p>
+
+  <h3>Multiple Agents</h3>
+  <p>Create additional agents with separate workspaces:</p>
+  <pre><code>openclaw agents add work-assistant
+openclaw agents add personal-assistant</code></pre>
+
+  <h3>Web Search Setup</h3>
+  <p>For the agent to search the web:</p>
+  <ol>
+    <li>Get a Brave Search API key from brave.com/search/api</li>
+    <li>Add to config under <code>tools.web.search</code></li>
+  </ol>
+
+  <h2>9. Next Steps</h2>
+
+  <h3>Explore Skills</h3>
+  <pre><code>openclaw skills list
+openclaw skills install weather</code></pre>
+
+  <h3>Customize Your Agent</h3>
+  <p>Edit the workspace files:</p>
+  <ul>
+    <li><code>SOUL.md</code> — Agent personality</li>
+    <li><code>AGENTS.md</code> — Behavioral instructions</li>
+    <li><code>TOOLS.md</code> — Tool configuration notes</li>
+    <li><code>MEMORY.md</code> — Long-term memory</li>
+  </ul>
+
+  <h3>Join the Community</h3>
+  <ul>
+    <li><strong>Discord:</strong> discord.com/invite/clawd</li>
+    <li><strong>GitHub:</strong> github.com/openclaw/openclaw</li>
+    <li><strong>Docs:</strong> docs.openclaw.ai</li>
+  </ul>
+
+  <hr>
+
+  <h2>Summary</h2>
+  <ol>
+    <li><strong>Install:</strong> <code>curl -fsSL https://openclaw.ai/install.sh | bash</code></li>
+    <li><strong>Onboard:</strong> <code>openclaw onboard --install-daemon</code></li>
+    <li><strong>Verify:</strong> <code>openclaw gateway status</code></li>
+    <li><strong>Chat:</strong> <code>openclaw dashboard</code></li>
+  </ol>
+
+  <p>You now have your own AI assistant running locally. Customize it, connect channels, and make it yours.</p>
+
+  <hr>
+
+  <p style="text-align: center; color: #666; margin-top: 3em;">
+    This guide is maintained by Jimmy Tools.<br>
+    For updates and more tools, visit <a href="https://jimmytools.net">jimmytools.net</a>.<br><br>
+    © 2026 Jimmy Tools. All rights reserved.
+  </p>
+</body>
+</html>
