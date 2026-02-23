@@ -1,10 +1,4 @@
 import Link from 'next/link'
-import Script from 'next/script'
-
-// Gumroad product URLs - update as products go live
-const gumroadLinks: Record<string, string> = {
-  'openclaw-setup': 'https://jimmytools.gumroad.com/l/hbhni', // Investigation Methodology Guide
-}
 
 const products = {
   scripts: [
@@ -36,8 +30,6 @@ const products = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-zinc-950 to-black text-white">
-      {/* Gumroad Embedded Checkout Script */}
-      <Script src="https://gumroad.com/js/gumroad.js" strategy="lazyOnload" />
       {/* Hero */}
       <section className="py-24 px-6 text-center border-b border-zinc-800 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent"></div>
@@ -97,8 +89,8 @@ export default function Home() {
               </ul>
               <div className="flex items-center gap-4">
                 <span className="text-4xl font-bold text-green-400">$19</span>
-                <a href="https://jimmytools.gumroad.com/l/hbhni" className="gumroad-button px-6 py-3 bg-green-600 hover:bg-green-500 rounded-lg font-medium transition">
-                  Get the Guide →
+                <a href="https://jimmytools.gumroad.com/l/hbhni" target="_blank" className="px-6 py-3 bg-green-600 hover:bg-green-500 rounded-lg font-medium transition">
+                  Buy Now — $19
                 </a>
               </div>
             </div>
@@ -136,7 +128,7 @@ export default function Home() {
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-purple-400">${product.price}</span>
                   {product.available ? (
-                    <a href="https://jimmytools.gumroad.com/l/hbhni" className="gumroad-button bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-500 transition">
+                    <a href="https://jimmytools.gumroad.com/l/hbhni" target="_blank" className="bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-500 transition">
                       Buy Now
                     </a>
                   ) : (
