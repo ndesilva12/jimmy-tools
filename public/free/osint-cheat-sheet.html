@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OSINT Cheat Sheet</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    @page { size: letter; margin: 0.4in; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 9pt;
+      line-height: 1.4;
+      color: #1a1a1a;
+      padding: 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #065f46;
+    }
+    h1 { font-size: 22pt; color: #065f46; margin-bottom: 5px; }
+    .subtitle { color: #666; font-size: 10pt; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .section {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .section h2 {
+      font-size: 11pt;
+      color: #065f46;
+      margin-bottom: 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #d1d5db;
+    }
+    .tool {
+      margin-bottom: 6px;
+    }
+    .tool strong {
+      color: #047857;
+    }
+    .tool-url {
+      color: #6b7280;
+      font-size: 8pt;
+    }
+    .tip {
+      background: #ecfdf5;
+      border-left: 3px solid #10b981;
+      padding: 8px;
+      margin-top: 10px;
+      font-size: 8pt;
+    }
+    .footer {
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 2px solid #065f46;
+      text-align: center;
+      font-size: 9pt;
+    }
+    .cta {
+      background: #065f46;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .cta a { color: #84cc16; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔍 OSINT Cheat Sheet</h1>
+  <p class="subtitle">Quick reference for finding people, companies, and information online</p>
+</div>
+
+<div class="grid">
+  <div class="section">
+    <h2>👤 People Search</h2>
+    <div class="tool"><strong>TruePeopleSearch</strong> - Name → address, phone, relatives<br><span class="tool-url">truepeoplesearch.com</span></div>
+    <div class="tool"><strong>FastPeopleSearch</strong> - Similar, good for current addresses<br><span class="tool-url">fastpeoplesearch.com</span></div>
+    <div class="tool"><strong>ThatsThem</strong> - Email + phone reverse lookup<br><span class="tool-url">thatsthem.com</span></div>
+    <div class="tool"><strong>FamilyTreeNow</strong> - Historical addresses, relatives<br><span class="tool-url">familytreenow.com</span></div>
+    <div class="tip">💡 Cross-reference 3+ sources before trusting results</div>
+  </div>
+
+  <div class="section">
+    <h2>🔗 Username Search</h2>
+    <div class="tool"><strong>Namechk</strong> - Check 100+ platforms instantly<br><span class="tool-url">namechk.com</span></div>
+    <div class="tool"><strong>WhatsMyName</strong> - Most comprehensive<br><span class="tool-url">whatsmyname.app</span></div>
+    <div class="tool"><strong>KnowEm</strong> - Brand/username search<br><span class="tool-url">knowem.com</span></div>
+    <div class="tip">💡 People reuse usernames — one account leads to others</div>
+  </div>
+
+  <div class="section">
+    <h2>📧 Email Investigation</h2>
+    <div class="tool"><strong>Have I Been Pwned</strong> - Breach exposure check<br><span class="tool-url">haveibeenpwned.com</span></div>
+    <div class="tool"><strong>Epieos</strong> - Email → social accounts<br><span class="tool-url">epieos.com</span></div>
+    <div class="tool"><strong>Hunter.io</strong> - Find corporate email patterns<br><span class="tool-url">hunter.io</span></div>
+    <div class="tip">💡 Google the email address — often appears in forum posts, documents</div>
+  </div>
+
+  <div class="section">
+    <h2>🖼️ Image Analysis</h2>
+    <div class="tool"><strong>Yandex Images</strong> - BEST facial recognition<br><span class="tool-url">yandex.com/images</span></div>
+    <div class="tool"><strong>TinEye</strong> - Find image origins<br><span class="tool-url">tineye.com</span></div>
+    <div class="tool"><strong>Google Images</strong> - General reverse search<br><span class="tool-url">images.google.com</span></div>
+    <div class="tool"><strong>FotoForensics</strong> - Detect edited images<br><span class="tool-url">fotoforensics.com</span></div>
+    <div class="tip">💡 Yandex finds faces Google misses — always use both</div>
+  </div>
+
+  <div class="section">
+    <h2>🏢 Business Research</h2>
+    <div class="tool"><strong>OpenCorporates</strong> - Global company search<br><span class="tool-url">opencorporates.com</span></div>
+    <div class="tool"><strong>State SOS Sites</strong> - LLC/corp filings<br><span class="tool-url">[state] secretary of state</span></div>
+    <div class="tool"><strong>SEC EDGAR</strong> - Public company filings<br><span class="tool-url">sec.gov/edgar</span></div>
+    <div class="tool"><strong>ICIJ Offshore Leaks</strong> - Panama Papers data<br><span class="tool-url">offshoreleaks.icij.org</span></div>
+    <div class="tip">💡 Check registered agent — same agent often = same owner</div>
+  </div>
+
+  <div class="section">
+    <h2>🏠 Property & Assets</h2>
+    <div class="tool"><strong>County Assessor</strong> - Property ownership<br><span class="tool-url">[county] property search</span></div>
+    <div class="tool"><strong>Zillow/Redfin</strong> - Sales history, values<br><span class="tool-url">zillow.com</span></div>
+    <div class="tool"><strong>FAA Registry</strong> - Aircraft ownership<br><span class="tool-url">registry.faa.gov</span></div>
+    <div class="tool"><strong>FlightAware</strong> - Track aircraft<br><span class="tool-url">flightaware.com</span></div>
+    <div class="tip">💡 Property in LLC? Search LLC in state records for real owner</div>
+  </div>
+
+  <div class="section">
+    <h2>⚖️ Court Records</h2>
+    <div class="tool"><strong>PACER</strong> - Federal courts<br><span class="tool-url">pacer.uscourts.gov</span></div>
+    <div class="tool"><strong>State Court Sites</strong> - Civil/criminal cases<br><span class="tool-url">[state] court case search</span></div>
+    <div class="tool"><strong>CourtListener</strong> - Free case law<br><span class="tool-url">courtlistener.com</span></div>
+    <div class="tip">💡 RECAP extension gives free access to PACER docs others downloaded</div>
+  </div>
+
+  <div class="section">
+    <h2>🌐 Website/Domain</h2>
+    <div class="tool"><strong>WHOIS</strong> - Domain registration<br><span class="tool-url">lookup.icann.org</span></div>
+    <div class="tool"><strong>Wayback Machine</strong> - Historical pages<br><span class="tool-url">web.archive.org</span></div>
+    <div class="tool"><strong>BuiltWith</strong> - Tech stack analysis<br><span class="tool-url">builtwith.com</span></div>
+    <div class="tool"><strong>Shodan</strong> - Internet-connected devices<br><span class="tool-url">shodan.io</span></div>
+    <div class="tip">💡 Historical WHOIS may show owner before they added privacy</div>
+  </div>
+</div>
+
+<div class="cta">
+  <strong>Want 50+ more techniques?</strong><br>
+  The full OSINT Playbook covers social media forensics, geolocation, OPSEC, and more.<br>
+  <a href="https://jimmytools.net/products/osint-playbook">Get the full guide → jimmytools.net</a>
+</div>
+
+<div class="footer">
+  <strong>jimmytools.net</strong> — Research tools for investigators, journalists, and curious citizens<br>
+  © 2026 Jimmy Tools. Free to share.
+</div>
+
+</body>
+</html>

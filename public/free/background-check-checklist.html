@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Check Checklist</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    @page { size: letter; margin: 0.5in; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 10pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      padding: 30px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 3px solid #9a3412;
+    }
+    h1 { font-size: 26pt; color: #9a3412; margin-bottom: 8px; }
+    .subtitle { color: #666; font-size: 11pt; }
+    h2 {
+      font-size: 13pt;
+      color: #9a3412;
+      margin: 20px 0 12px 0;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #fed7aa;
+    }
+    .checklist { list-style: none; }
+    .checklist li {
+      padding: 8px 0 8px 30px;
+      position: relative;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      font-size: 14pt;
+      color: #9a3412;
+    }
+    .resource {
+      color: #ea580c;
+      font-weight: 500;
+    }
+    .note {
+      background: #fff7ed;
+      border-left: 3px solid #f97316;
+      padding: 10px;
+      margin: 15px 0;
+      font-size: 9pt;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .footer {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 2px solid #9a3412;
+      text-align: center;
+      font-size: 9pt;
+    }
+    .cta {
+      background: #9a3412;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 6px;
+      margin-top: 20px;
+    }
+    .cta a { color: #fde047; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>✅ Background Check Checklist</h1>
+  <p class="subtitle">DIY research using free public records — save $100+ per search</p>
+</div>
+
+<h2>Step 1: Verify Identity</h2>
+<ul class="checklist">
+  <li>Confirm full legal name (including middle name)</li>
+  <li>Get date of birth if possible</li>
+  <li>Search <span class="resource">FastPeopleSearch.com</span> or <span class="resource">TruePeopleSearch.com</span></li>
+  <li>Note all addresses from the past 7 years</li>
+  <li>Identify the county for each address</li>
+</ul>
+
+<h2>Step 2: Criminal Records (Search Each County)</h2>
+<ul class="checklist">
+  <li>Google "<span class="resource">[County Name] court records search</span>"</li>
+  <li>Search criminal case index by name + DOB</li>
+  <li>Note case numbers, charges, and dispositions</li>
+  <li>Repeat for EACH county where they've lived</li>
+  <li>Search <span class="resource">PACER</span> for federal cases (pacer.uscourts.gov)</li>
+</ul>
+
+<h2>Step 3: Sex Offender Registry</h2>
+<ul class="checklist">
+  <li>Search <span class="resource">NSOPW.gov</span> (national database)</li>
+  <li>Also check state-specific registry for more details</li>
+</ul>
+
+<h2>Step 4: Civil Records</h2>
+<ul class="checklist">
+  <li>Search county civil court for lawsuits</li>
+  <li>Check for eviction cases (may be in civil or small claims)</li>
+  <li>Search <span class="resource">PACER</span> for federal civil + bankruptcy</li>
+  <li>Note if they were plaintiff or defendant</li>
+</ul>
+
+<div class="two-col">
+<div>
+<h2>Step 5: Employment/Education</h2>
+<ul class="checklist">
+  <li>Verify employer exists (Google search)</li>
+  <li>Check LinkedIn for work history</li>
+  <li>Verify degree: contact school registrar</li>
+  <li>Check accreditation: <span class="resource">ope.ed.gov</span></li>
+</ul>
+</div>
+<div>
+<h2>Step 6: Professional Licenses</h2>
+<ul class="checklist">
+  <li>Search state licensing board</li>
+  <li>Verify license is active</li>
+  <li>Check for disciplinary actions</li>
+  <li>Medical: <span class="resource">docinfo.org</span></li>
+  <li>Finance: <span class="resource">brokercheck.finra.org</span></li>
+</ul>
+</div>
+</div>
+
+<h2>Step 7: Social Media Review</h2>
+<ul class="checklist">
+  <li>Search name on Facebook, LinkedIn, Instagram, X</li>
+  <li>Check <span class="resource">Namechk.com</span> for username across platforms</li>
+  <li>Review recent posts for red flags</li>
+  <li>Google their email address and phone number</li>
+</ul>
+
+<div class="note">
+<strong>⚠️ Important:</strong> For employment or housing decisions, you may need to use an FCRA-compliant service and get written consent. This checklist is for personal/informal research only.
+</div>
+
+<div class="cta">
+  <strong>Want the complete guide?</strong><br>
+  Full Background Check DIY guide includes state-by-state resources, 5 detailed checklists, property/asset search, and legal considerations.<br>
+  <a href="https://jimmytools.net/products/background-check-diy">Get the full guide → jimmytools.net</a>
+</div>
+
+<div class="footer">
+  <strong>jimmytools.net</strong> — Research tools for investigators, journalists, and curious citizens<br>
+  © 2026 Jimmy Tools. Free to share.
+</div>
+
+</body>
+</html>
