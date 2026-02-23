@@ -37,63 +37,25 @@ export default function SECEdgarTool() {
     setFilings([]);
 
     try {
-      // Step 1: Get CIK from ticker
-      const tickerResponse = await fetch('https://www.sec.gov/files/company_tickers.json');
-      const tickerData = await tickerResponse.json();
-      
-      let foundCompany: CompanyInfo | null = null;
-      for (const entry of Object.values(tickerData) as any[]) {
-        if (entry.ticker.toUpperCase() === ticker.toUpperCase()) {
-          foundCompany = {
-            name: entry.title,
-            cik: String(entry.cik_str).padStart(10, '0'),
-            ticker: entry.ticker,
-          };
-          break;
-        }
-      }
+      const response = await fetch('/api/tools/sec-edgar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ticker, filingTypes }),
+      });
 
-      if (!foundCompany) {
-        setError(`Ticker "${ticker.toUpperCase()}" not found. Please check the symbol.`);
+      const data = await response.json();
+
+      if (data.error && !data.company) {
+        setError(data.error);
         setLoading(false);
         return;
       }
 
-      setCompany(foundCompany);
-
-      // Step 2: Get filings
-      const filingsResponse = await fetch(
-        `https://data.sec.gov/submissions/CIK${foundCompany.cik}.json`,
-        { headers: { 'User-Agent': 'JimmyTools contact@jimmytools.net' } }
-      );
-      const filingsData = await filingsResponse.json();
-
-      const recent = filingsData.filings?.recent || {};
-      const filingsList: Filing[] = [];
-
-      for (let i = 0; i < (recent.accessionNumber?.length || 0); i++) {
-        const formType = recent.form[i];
-        
-        // Filter by selected filing types
-        if (!filingTypes.some(ft => formType.startsWith(ft))) {
-          continue;
-        }
-
-        const accession = recent.accessionNumber[i].replace(/-/g, '');
-        const primaryDoc = recent.primaryDocument[i];
-
-        filingsList.push({
-          formType: formType,
-          filingDate: recent.filingDate[i],
-          description: recent.primaryDocDescription?.[i] || formType,
-          documentUrl: `https://www.sec.gov/Archives/edgar/data/${foundCompany.cik}/${accession}/${primaryDoc}`,
-          accessionNumber: recent.accessionNumber[i],
-        });
-
-        if (filingsList.length >= 100) break; // Limit results
+      if (data.company) {
+        setCompany(data.company);
       }
 
-      setFilings(filingsList);
+      setFilings(data.filings || []);
 
     } catch (err: any) {
       setError(`Error fetching data: ${err.message}`);
