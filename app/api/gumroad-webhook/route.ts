@@ -51,6 +51,14 @@ const PRODUCT_MAPPING: Record<string, {
   name: string;
   downloadUrl: string;
 }> = {
+  'hbhni': {
+    name: 'The Complete OpenClaw Setup Guide',
+    downloadUrl: '/files/openclaw-setup-guide.pdf',
+  },
+  'openclaw-setup': {
+    name: 'The Complete OpenClaw Setup Guide',
+    downloadUrl: '/files/openclaw-setup-guide.pdf',
+  },
   'investigation-methodology': {
     name: 'Investigation Methodology Guide',
     downloadUrl: '/files/investigation-methodology.pdf',

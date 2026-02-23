@@ -22,6 +22,18 @@ const PRODUCT_INFO: Record<string, {
   fileType: string;
   fileSize: string;
 }> = {
+  'hbhni': {
+    description: 'Go from zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.',
+    downloadUrl: '/files/openclaw-setup-guide.pdf',
+    fileType: 'PDF',
+    fileSize: '2.4 MB',
+  },
+  'openclaw-setup': {
+    description: 'Go from zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.',
+    downloadUrl: '/files/openclaw-setup-guide.pdf',
+    fileType: 'PDF',
+    fileSize: '2.4 MB',
+  },
   'investigation-methodology': {
     description: 'A comprehensive PDF guide covering OSINT techniques, source verification, document analysis, and investigative workflows used by professional researchers.',
     downloadUrl: '/files/investigation-methodology.pdf',
