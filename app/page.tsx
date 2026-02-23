@@ -123,7 +123,7 @@ export default function Home() {
       {/* Guides */}
       <section id="guides" className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-2">📚 Methodology Guides</h2>
+          <Link href="#guides" className="text-3xl font-bold mb-2 block hover:text-[#A8C45E] transition cursor-pointer">📚 Methodology Guides</Link>
           <p className="text-zinc-400 mb-8">Complete frameworks, not just tips.</p>
           <div className="grid md:grid-cols-2 gap-6">
             {guides.map((product) => (
@@ -150,7 +150,7 @@ export default function Home() {
       {/* Scripts */}
       <section id="scripts" className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-2">📜 Scripts</h2>
+          <Link href="#scripts" className="text-3xl font-bold mb-2 block hover:text-[#A8C45E] transition cursor-pointer">📜 Scripts</Link>
           <p className="text-zinc-400 mb-8">Ready-to-run Google Colab notebooks. No coding required.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {scripts.map((product) => (
@@ -174,7 +174,7 @@ export default function Home() {
       {/* Databases */}
       <section id="databases" className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-2">🗃️ Databases</h2>
+          <Link href="#databases" className="text-3xl font-bold mb-2 block hover:text-[#A8C45E] transition cursor-pointer">🗃️ Databases</Link>
           <p className="text-zinc-400 mb-8">Pre-scraped, cleaned, and indexed. Hours of work, done for you.</p>
           <div className="grid md:grid-cols-2 gap-6">
             {databases.map((product) => (
