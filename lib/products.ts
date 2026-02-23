@@ -92,6 +92,44 @@ export const products: Product[] = [
     preview: ['📄 50+ pages', '📋 5 complete checklists', '🏛️ State-by-state resources', '⚖️ Legal considerations'],
   },
   
+  // SCRIPTS
+  {
+    id: 'sec-edgar-scraper',
+    name: 'SEC EDGAR Scraper',
+    tagline: 'Extract data from SEC filings instantly',
+    description: 'Google Colab notebook to scrape and parse SEC EDGAR filings.',
+    longDescription: 'Ready-to-run Google Colab notebook for scraping SEC EDGAR filings. Extract data from 10-K, 10-Q, 8-K, and other filing types. No Python knowledge required—just run the cells and download your results.',
+    price: 29,
+    available: true,
+    type: 'script',
+    features: [
+      'Google Colab notebook (no setup)',
+      'Search by company, date, filing type',
+      'Export to CSV or JSON',
+      'Parse financial statements',
+      'Batch processing support',
+    ],
+    preview: ['📜 Ready-to-run notebook', '💾 Export to CSV/JSON', '🔍 Advanced filtering', '📊 Financial data parsing'],
+  },
+  {
+    id: 'gov-salary-scraper',
+    name: 'Government Salary Database Scraper',
+    tagline: 'Build salary databases from public records',
+    description: 'Scrape government employee salary data from state and federal sources.',
+    longDescription: 'Google Colab notebook to scrape government salary databases. Supports federal (OPM) and state-level transparency sites. Clean, structured data ready for analysis. Perfect for journalism, research, or salary benchmarking.',
+    price: 24,
+    available: true,
+    type: 'script',
+    features: [
+      'Google Colab notebook (no setup)',
+      'Federal & state sources',
+      'Clean, normalized output',
+      'Export to CSV or database',
+      'Bulk download support',
+    ],
+    preview: ['📜 Ready-to-run notebook', '🏛️ Multi-source support', '💾 Clean CSV export', '🔄 Batch processing'],
+  },
+
   // SESSION
   {
     id: 'openclaw-session',

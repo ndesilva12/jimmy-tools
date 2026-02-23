@@ -2,7 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import jwt from 'jsonwebtoken';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+// Lazy-init Stripe to avoid build errors when env var is missing
+function getStripe() {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) {
+    throw new Error('STRIPE_SECRET_KEY is not set');
+  }
+  return new Stripe(key);
+}
 
 const JWT_SECRET = process.env.JWT_SECRET || 'jimmy-tools-default-secret-change-me';
 
@@ -53,6 +60,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Retrieve the checkout session from Stripe
+    const stripe = getStripe();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
     
     if (session.payment_status !== 'paid') {
