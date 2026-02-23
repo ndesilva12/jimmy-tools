@@ -62,7 +62,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#9CB853]/10 via-transparent to-transparent"></div>
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
-            <img src="/logo.jpg" alt="Jimmy Tools" className="h-24 md:h-32" />
+            <img src="/logo.jpg" alt="Jimmy Tools" className="h-24 md:h-32 w-auto object-contain" />
           </div>
           <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
             Data extraction scripts, pre-built databases, and methodology guides.<br />

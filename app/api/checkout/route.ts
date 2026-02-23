@@ -32,6 +32,27 @@ const PRODUCTS: Record<string, {
     productId: 'openclaw-session',
     type: 'session',
   },
+  'foia-mastery': {
+    name: 'FOIA Request Mastery',
+    description: 'Complete guide to filing effective FOIA requests, appeals, and litigation. 50+ pages with templates.',
+    price: 2499, // $24.99
+    productId: 'foia-mastery',
+    type: 'digital',
+  },
+  'osint-playbook': {
+    name: "OSINT Investigator's Playbook",
+    description: '50+ techniques to find anyone and investigate anything using open source intelligence. 60+ pages.',
+    price: 2999, // $29.99
+    productId: 'osint-playbook',
+    type: 'digital',
+  },
+  'background-check-diy': {
+    name: 'Background Check DIY',
+    description: 'Research anyone legally using public records. Save $100+ per search. 50+ pages with checklists.',
+    price: 2499, // $24.99
+    productId: 'background-check-diy',
+    type: 'digital',
+  },
 };
 
 export async function POST(req: NextRequest) {
