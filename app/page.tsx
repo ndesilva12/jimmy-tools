@@ -4,7 +4,16 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { products, getProductsByType } from '@/lib/products';
 
-function BuyButton({ productId, price }: { productId: string; price: number }) {
+type ColorTheme = 'emerald' | 'lime' | 'cyan' | 'teal';
+
+const colorClasses: Record<ColorTheme, string> = {
+  emerald: 'bg-emerald-500 hover:bg-emerald-400 disabled:bg-emerald-700',
+  lime: 'bg-lime-500 hover:bg-lime-400 disabled:bg-lime-700',
+  cyan: 'bg-cyan-500 hover:bg-cyan-400 disabled:bg-cyan-700',
+  teal: 'bg-teal-500 hover:bg-teal-400 disabled:bg-teal-700',
+};
+
+function BuyButton({ productId, price, color = 'lime' }: { productId: string; price: number; color?: ColorTheme }) {
   const [loading, setLoading] = useState(false);
 
   const handleCheckout = async () => {
@@ -32,7 +41,7 @@ function BuyButton({ productId, price }: { productId: string; price: number }) {
     <button
       onClick={handleCheckout}
       disabled={loading}
-      className="px-6 py-3 bg-[#9CB853] hover:bg-[#A8C45E] disabled:bg-[#7A9642] text-black rounded-lg font-semibold transition"
+      className={`px-6 py-3 ${colorClasses[color]} text-black rounded-lg font-semibold transition`}
     >
       {loading ? 'Loading...' : `Buy Now — $${price}`}
     </button>
@@ -93,7 +102,7 @@ export default function Home() {
                   <Link href={`/products/${guideProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-emerald-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
-                  <BuyButton productId={guideProduct.id} price={guideProduct.price} />
+                  <BuyButton productId={guideProduct.id} price={guideProduct.price} color="emerald" />
                 </div>
               </div>
             </div>
@@ -118,7 +127,7 @@ export default function Home() {
                   <Link href={`/products/${sessionProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-cyan-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
-                  <BuyButton productId={sessionProduct.id} price={sessionProduct.price} />
+                  <BuyButton productId={sessionProduct.id} price={sessionProduct.price} color="cyan" />
                 </div>
               </div>
             </div>
@@ -143,7 +152,7 @@ export default function Home() {
                   <Link href={`/products/${edgarProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-lime-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
-                  <BuyButton productId={edgarProduct.id} price={edgarProduct.price} />
+                  <BuyButton productId={edgarProduct.id} price={edgarProduct.price} color="lime" />
                 </div>
               </div>
             </div>
@@ -168,7 +177,7 @@ export default function Home() {
                   <Link href={`/products/${salaryProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-lime-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
-                  <BuyButton productId={salaryProduct.id} price={salaryProduct.price} />
+                  <BuyButton productId={salaryProduct.id} price={salaryProduct.price} color="lime" />
                 </div>
               </div>
             </div>
