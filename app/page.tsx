@@ -46,6 +46,7 @@ export default function Home() {
   const sessionProduct = products.find(p => p.id === 'openclaw-session')!;
   const guideProduct = products.find(p => p.id === 'openclaw-setup')!;
   const edgarProduct = products.find(p => p.id === 'sec-edgar-scraper')!;
+  const salaryProduct = products.find(p => p.id === 'gov-salary-scraper')!;
 
   return (
     <main className="min-h-screen bg-black text-white">

@@ -35,6 +35,13 @@ const PRODUCT_INFO: Record<string, {
     fileSize: '14 KB',
     type: 'digital',
   },
+  'gov-salary-scraper': {
+    name: 'Government Salary Database Scraper',
+    description: 'Search public employee salaries across 5 states. Google Colab notebook.',
+    fileType: 'Jupyter Notebook (.ipynb)',
+    fileSize: '26 KB',
+    type: 'digital',
+  },
 };
 
 export async function GET(req: NextRequest) {

@@ -17,6 +17,11 @@ const PROTECTED_FILES: Record<string, { path: string; filename: string; contentT
     filename: 'SEC-EDGAR-Scraper-JimmyTools.ipynb',
     contentType: 'application/x-ipynb+json',
   },
+  'gov-salary-scraper': {
+    path: 'protected-files/gov-salary-scraper.ipynb',
+    filename: 'Government-Salary-Scraper-JimmyTools.ipynb',
+    contentType: 'application/x-ipynb+json',
+  },
 };
 
 interface TokenPayload {
