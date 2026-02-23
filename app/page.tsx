@@ -258,6 +258,59 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 1-on-1 Session */}
+      <section className="py-16 px-6 border-b border-zinc-800 bg-gradient-to-r from-purple-950/30 to-pink-950/30">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-2 text-purple-400 text-sm font-medium mb-4">
+            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
+            PREMIUM SERVICE
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-4">1-on-1 OpenClaw Setup Session</h2>
+              <p className="text-zinc-400 mb-6">
+                Get personalized help setting up your OpenClaw instance. 1 hour video call with Norman covering:
+              </p>
+              <ul className="space-y-2 text-zinc-300 mb-6">
+                <li className="flex items-center gap-2">
+                  <span className="text-purple-400">✓</span> Complete installation walkthrough
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-purple-400">✓</span> Channel configuration (Telegram, WhatsApp, etc.)
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-purple-400">✓</span> Custom setup for your specific needs
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-purple-400">✓</span> Live troubleshooting & Q&A
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-purple-400">✓</span> 30-day follow-up support via email
+                </li>
+              </ul>
+              <div className="flex items-center gap-4">
+                <span className="text-4xl font-bold text-purple-400">$99</span>
+                <BuyButton productId="openclaw-session" price={99} />
+              </div>
+            </div>
+            <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
+              <div className="bg-zinc-800 rounded-lg p-4 mb-4">
+                <div className="text-xs text-zinc-500 mb-2">HOW IT WORKS</div>
+                <div className="font-mono text-sm text-zinc-300 space-y-2">
+                  <div>1️⃣ Purchase session</div>
+                  <div>2️⃣ Pick a time on the calendar</div>
+                  <div>3️⃣ Join video call</div>
+                  <div>4️⃣ Walk away with a working setup</div>
+                </div>
+              </div>
+              <div className="text-sm text-zinc-500">
+                Sessions available 7 days a week
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About */}
       <section className="py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">

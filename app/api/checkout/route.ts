@@ -9,12 +9,21 @@ const PRODUCTS: Record<string, {
   description: string;
   price: number; // in cents
   productId: string;
+  type?: 'digital' | 'session';
 }> = {
   'openclaw-setup': {
     name: 'The Complete OpenClaw Setup Guide',
     description: 'From zero to your own AI assistant. 30+ pages covering installation, configuration, and troubleshooting.',
     price: 1900, // $19.00
     productId: 'openclaw-setup',
+    type: 'digital',
+  },
+  'openclaw-session': {
+    name: '1-on-1 OpenClaw Setup Session',
+    description: '1 hour video call with Norman to set up your OpenClaw instance and answer all your questions.',
+    price: 9900, // $99.00
+    productId: 'openclaw-session',
+    type: 'session',
   },
 };
 

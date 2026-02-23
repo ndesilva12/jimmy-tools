@@ -10,9 +10,11 @@ const JWT_SECRET = process.env.JWT_SECRET || 'jimmy-tools-default-secret-change-
 const PRODUCT_INFO: Record<string, {
   name: string;
   description: string;
-  downloadUrl: string;
-  fileType: string;
-  fileSize: string;
+  downloadUrl?: string;
+  fileType?: string;
+  fileSize?: string;
+  type: 'digital' | 'session';
+  schedulingUrl?: string;
 }> = {
   'openclaw-setup': {
     name: 'The Complete OpenClaw Setup Guide',
@@ -20,6 +22,13 @@ const PRODUCT_INFO: Record<string, {
     downloadUrl: '/files/openclaw-setup-guide.pdf',
     fileType: 'PDF',
     fileSize: '2.4 MB',
+    type: 'digital',
+  },
+  'openclaw-session': {
+    name: '1-on-1 OpenClaw Setup Session',
+    description: '1 hour video call to set up your OpenClaw instance.',
+    type: 'session',
+    schedulingUrl: process.env.CALENDLY_URL || 'https://calendly.com/normancdesilva/openclaw-setup',
   },
 };
 
@@ -41,8 +50,18 @@ export async function GET(req: NextRequest) {
     const productId = session.metadata?.productId || 'openclaw-setup';
     const product = PRODUCT_INFO[productId] || PRODUCT_INFO['openclaw-setup'];
     const email = session.customer_details?.email || 'customer@example.com';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://jimmytools.net';
 
-    // Generate JWT download token
+    // For session products, redirect to scheduling
+    if (product.type === 'session' && product.schedulingUrl) {
+      // Redirect to Calendly with email prefilled
+      const schedulingUrl = new URL(product.schedulingUrl);
+      schedulingUrl.searchParams.set('email', email);
+      schedulingUrl.searchParams.set('name', session.customer_details?.name || '');
+      return NextResponse.redirect(schedulingUrl.toString());
+    }
+
+    // For digital products, generate JWT download token
     const token = jwt.sign(
       {
         saleId: session.id,
@@ -59,7 +78,6 @@ export async function GET(req: NextRequest) {
     );
 
     // Redirect to download page
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://jimmytools.net';
     return NextResponse.redirect(`${baseUrl}/download/${token}`);
 
   } catch (error: any) {
