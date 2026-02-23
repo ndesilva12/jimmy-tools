@@ -8,7 +8,6 @@ interface TokenPayload {
   productId: string;
   productName: string;
   email: string;
-  downloadUrl: string;
   description: string;
   fileType: string;
   fileSize: string;
@@ -28,12 +27,15 @@ export async function GET(req: NextRequest) {
     // Verify and decode the JWT
     const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
 
+    // Generate protected download URL with the same token
+    const downloadUrl = `/api/download-file?token=${encodeURIComponent(token!)}`;
+    
     return NextResponse.json({
       valid: true,
       product: {
         name: decoded.productName,
         description: decoded.description,
-        downloadUrl: decoded.downloadUrl,
+        downloadUrl: downloadUrl,
         fileType: decoded.fileType,
         fileSize: decoded.fileSize,
         expiresAt: decoded.exp * 1000, // Convert to milliseconds

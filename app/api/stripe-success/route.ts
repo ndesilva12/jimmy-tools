@@ -10,7 +10,6 @@ const JWT_SECRET = process.env.JWT_SECRET || 'jimmy-tools-default-secret-change-
 const PRODUCT_INFO: Record<string, {
   name: string;
   description: string;
-  downloadUrl?: string;
   fileType?: string;
   fileSize?: string;
   type: 'digital' | 'session';
@@ -19,9 +18,8 @@ const PRODUCT_INFO: Record<string, {
   'openclaw-setup': {
     name: 'The Complete OpenClaw Setup Guide',
     description: 'Go from zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.',
-    downloadUrl: '/files/openclaw-setup-guide.pdf',
     fileType: 'PDF',
-    fileSize: '2.4 MB',
+    fileSize: '1.4 MB',
     type: 'digital',
   },
   'openclaw-session': {
@@ -64,7 +62,6 @@ export async function GET(req: NextRequest) {
         productId,
         productName: product.name,
         email,
-        downloadUrl: product.downloadUrl,
         description: product.description,
         fileType: product.fileType,
         fileSize: product.fileSize,
