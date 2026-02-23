@@ -1,4 +1,10 @@
 import Link from 'next/link'
+import Script from 'next/script'
+
+// Gumroad product URLs - update as products go live
+const gumroadLinks: Record<string, string> = {
+  'openclaw-setup': 'https://jimmytools.gumroad.com/l/hbhni', // Investigation Methodology Guide
+}
 
 const products = {
   scripts: [
@@ -20,7 +26,7 @@ const products = {
     { id: 'podcast-transcripts', name: 'Podcast Transcript Archive', description: 'Full transcripts of top 50 business/tech podcasts. 5000+ episodes searchable.', price: 39 },
   ],
   guides: [
-    { id: 'openclaw-setup', name: 'The Complete OpenClaw Setup Guide', description: 'From zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.', price: 19, available: true },
+    { id: 'investigation-methodology', name: 'Investigation Methodology Guide', description: 'My complete framework for OSINT research. Source verification, document analysis, investigative workflows. 30+ pages.', price: 19, available: true },
     { id: 'deep-research', name: 'The Deep Research Methodology', description: 'My complete framework for investigating any topic. How to decompose questions, verify claims, find primary sources.', price: 19 },
     { id: 'archive-building', name: 'Building Searchable Archives', description: 'Step-by-step guide to turning raw data into searchable databases. SQLite, indexing, full-text search.', price: 24 },
     { id: 'scraping-guide', name: 'Web Scraping Without Getting Blocked', description: 'Techniques that actually work. Rate limiting, proxies, headers, browser automation.', price: 19 },
@@ -30,6 +36,8 @@ const products = {
 export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-zinc-950 to-black text-white">
+      {/* Gumroad Embedded Checkout Script */}
+      <Script src="https://gumroad.com/js/gumroad.js" strategy="lazyOnload" />
       {/* Hero */}
       <section className="py-24 px-6 text-center border-b border-zinc-800 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent"></div>
@@ -66,42 +74,42 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-4">The Complete OpenClaw Setup Guide</h2>
+              <h2 className="text-3xl font-bold mb-4">Investigation Methodology Guide</h2>
               <p className="text-zinc-400 mb-6">
-                Go from zero to your own AI assistant in under an hour. This 30+ page guide covers everything:
+                My complete OSINT research framework. The exact methods I use to investigate any topic:
               </p>
               <ul className="space-y-2 text-zinc-300 mb-6">
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Installation on Mac, Linux, Windows
+                  <span className="text-green-400">✓</span> Question decomposition techniques
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Onboarding wizard walkthrough
+                  <span className="text-green-400">✓</span> Source verification methods
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Channel setup (Telegram, WhatsApp, Discord)
+                  <span className="text-green-400">✓</span> Document analysis workflows
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Troubleshooting common issues
+                  <span className="text-green-400">✓</span> Finding primary sources
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Advanced configuration options
+                  <span className="text-green-400">✓</span> Building evidence chains
                 </li>
               </ul>
               <div className="flex items-center gap-4">
                 <span className="text-4xl font-bold text-green-400">$19</span>
-                <a href="https://jimmytools.gumroad.com/l/openclaw-guide" className="px-6 py-3 bg-green-600 hover:bg-green-500 rounded-lg font-medium transition">
+                <a href="https://jimmytools.gumroad.com/l/hbhni" className="gumroad-button px-6 py-3 bg-green-600 hover:bg-green-500 rounded-lg font-medium transition">
                   Get the Guide →
                 </a>
               </div>
             </div>
             <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
               <div className="bg-zinc-800 rounded-lg p-4 mb-4">
-                <div className="text-xs text-zinc-500 mb-2">PREVIEW</div>
+                <div className="text-xs text-zinc-500 mb-2">WHAT'S INSIDE</div>
                 <div className="font-mono text-sm text-zinc-300 space-y-1">
-                  <div>📄 30+ pages</div>
-                  <div>📋 Step-by-step instructions</div>
-                  <div>🔧 Troubleshooting guide</div>
-                  <div>💡 Pro tips throughout</div>
+                  <div>📄 30+ pages of methodology</div>
+                  <div>🔍 Real investigation examples</div>
+                  <div>🛠️ Tool recommendations</div>
+                  <div>📋 Reusable checklists</div>
                 </div>
               </div>
               <div className="text-sm text-zinc-500">
@@ -128,7 +136,7 @@ export default function Home() {
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-purple-400">${product.price}</span>
                   {product.available ? (
-                    <a href="https://jimmytools.gumroad.com/l/openclaw-guide" className="bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-500 transition">
+                    <a href="https://jimmytools.gumroad.com/l/hbhni" className="gumroad-button bg-green-600 text-white px-4 py-2 rounded font-medium hover:bg-green-500 transition">
                       Buy Now
                     </a>
                   ) : (
