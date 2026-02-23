@@ -28,7 +28,7 @@ const PRODUCT_INFO: Record<string, {
     name: '1-on-1 OpenClaw Setup Session',
     description: '1 hour video call to set up your OpenClaw instance.',
     type: 'session',
-    schedulingUrl: process.env.CALENDLY_URL || 'https://calendly.com/normancdesilva/openclaw-setup',
+    schedulingUrl: 'https://calendar.app.google/G6Pge7VEa6uXeDhz6',
   },
 };
 
@@ -54,11 +54,7 @@ export async function GET(req: NextRequest) {
 
     // For session products, redirect to scheduling
     if (product.type === 'session' && product.schedulingUrl) {
-      // Redirect to Calendly with email prefilled
-      const schedulingUrl = new URL(product.schedulingUrl);
-      schedulingUrl.searchParams.set('email', email);
-      schedulingUrl.searchParams.set('name', session.customer_details?.name || '');
-      return NextResponse.redirect(schedulingUrl.toString());
+      return NextResponse.redirect(product.schedulingUrl);
     }
 
     // For digital products, generate JWT download token
