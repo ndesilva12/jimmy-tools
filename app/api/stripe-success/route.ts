@@ -52,9 +52,9 @@ export async function GET(req: NextRequest) {
     const email = session.customer_details?.email || 'customer@example.com';
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://jimmytools.net';
 
-    // For session products, redirect to scheduling
-    if (product.type === 'session' && product.schedulingUrl) {
-      return NextResponse.redirect(product.schedulingUrl);
+    // For session products, redirect to booking confirmation page
+    if (product.type === 'session') {
+      return NextResponse.redirect(`${baseUrl}/booking`);
     }
 
     // For digital products, generate JWT download token
