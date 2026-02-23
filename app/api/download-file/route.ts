@@ -12,6 +12,21 @@ const PROTECTED_FILES: Record<string, { path: string; filename: string; contentT
     filename: 'OpenClaw-Setup-Guide.pdf',
     contentType: 'application/pdf',
   },
+  'foia-mastery': {
+    path: 'protected-files/foia-mastery.pdf',
+    filename: 'FOIA-Request-Mastery-JimmyTools.pdf',
+    contentType: 'application/pdf',
+  },
+  'osint-playbook': {
+    path: 'protected-files/osint-playbook.pdf',
+    filename: 'OSINT-Investigators-Playbook-JimmyTools.pdf',
+    contentType: 'application/pdf',
+  },
+  'background-check-diy': {
+    path: 'protected-files/background-check-diy.pdf',
+    filename: 'Background-Check-DIY-JimmyTools.pdf',
+    contentType: 'application/pdf',
+  },
   'sec-edgar-scraper': {
     path: 'protected-files/sec-edgar-scraper.ipynb',
     filename: 'SEC-EDGAR-Scraper-JimmyTools.ipynb',

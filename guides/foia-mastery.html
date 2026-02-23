@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FOIA Request Mastery</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    @page {
+      size: letter;
+      margin: 0.75in 0.75in 1in 0.75in;
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 10pt;
+        color: #666;
+      }
+    }
+    
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    
+    /* Cover Page */
+    .cover {
+      page-break-after: always;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+      color: white;
+      margin: -0.75in;
+      padding: 2in 1in;
+    }
+    
+    .cover h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 42pt;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    
+    .cover .subtitle {
+      font-size: 16pt;
+      opacity: 0.9;
+      margin-bottom: 60px;
+      max-width: 500px;
+    }
+    
+    .cover .author {
+      font-family: 'Inter', sans-serif;
+      font-size: 12pt;
+      opacity: 0.7;
+      margin-top: auto;
+    }
+    
+    .cover .logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: #84cc16;
+      margin-top: 20px;
+    }
+    
+    /* TOC */
+    .toc {
+      page-break-after: always;
+      padding-top: 40px;
+    }
+    
+    .toc h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 24pt;
+      margin-bottom: 30px;
+      color: #1a365d;
+    }
+    
+    .toc ul {
+      list-style: none;
+    }
+    
+    .toc li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .toc a {
+      color: #1a1a1a;
+      text-decoration: none;
+    }
+    
+    .toc .chapter-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #1a365d;
+      margin-right: 15px;
+    }
+    
+    /* Content */
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 28pt;
+      color: #1a365d;
+      margin: 40px 0 20px 0;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 18pt;
+      color: #2d3748;
+      margin: 30px 0 15px 0;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 14pt;
+      color: #4a5568;
+      margin: 25px 0 10px 0;
+      page-break-after: avoid;
+    }
+    
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    
+    ul, ol {
+      margin: 15px 0 15px 25px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    .tip-box {
+      background: #f0fff4;
+      border-left: 4px solid #48bb78;
+      padding: 20px;
+      margin: 25px 0;
+      page-break-inside: avoid;
+    }
+    
+    .tip-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #276749;
+      margin-bottom: 10px;
+      font-size: 12pt;
+    }
+    
+    .warning-box {
+      background: #fffaf0;
+      border-left: 4px solid #ed8936;
+      padding: 20px;
+      margin: 25px 0;
+      page-break-inside: avoid;
+    }
+    
+    .warning-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #c05621;
+      margin-bottom: 10px;
+      font-size: 12pt;
+    }
+    
+    .example-box {
+      background: #ebf8ff;
+      border-left: 4px solid #4299e1;
+      padding: 20px;
+      margin: 25px 0;
+      page-break-inside: avoid;
+    }
+    
+    .example-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #2b6cb0;
+      margin-bottom: 10px;
+      font-size: 12pt;
+    }
+    
+    .template {
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      padding: 25px;
+      margin: 25px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+      white-space: pre-wrap;
+      page-break-inside: avoid;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 10pt;
+    }
+    
+    th {
+      background: #1a365d;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      padding: 12px;
+      text-align: left;
+    }
+    
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    tr:nth-child(even) {
+      background: #f7fafc;
+    }
+    
+    .chapter {
+      page-break-before: always;
+    }
+    
+    .chapter:first-of-type {
+      page-break-before: auto;
+    }
+    
+    code {
+      background: #edf2f7;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 10pt;
+    }
+    
+    blockquote {
+      border-left: 3px solid #cbd5e0;
+      padding-left: 20px;
+      margin: 20px 0;
+      font-style: italic;
+      color: #4a5568;
+    }
+
+    .footer-note {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9pt;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>FOIA Request Mastery</h1>
+  <p class="subtitle">The Complete Guide to Obtaining Government Records Through the Freedom of Information Act</p>
+  <p class="author">A Jimmy Tools Guide</p>
+  <p class="logo">jimmytools.net</p>
+</div>
+
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><span><span class="chapter-num">1</span> Understanding FOIA: Your Right to Know</span></li>
+    <li><span><span class="chapter-num">2</span> Before You File: Research & Preparation</span></li>
+    <li><span><span class="chapter-num">3</span> Crafting the Perfect FOIA Request</span></li>
+    <li><span><span class="chapter-num">4</span> Agency-by-Agency Guide</span></li>
+    <li><span><span class="chapter-num">5</span> Fee Waivers: How to Get Records for Free</span></li>
+    <li><span><span class="chapter-num">6</span> Expedited Processing: Fast-Tracking Your Request</span></li>
+    <li><span><span class="chapter-num">7</span> Understanding Exemptions & Redactions</span></li>
+    <li><span><span class="chapter-num">8</span> The Appeals Process: Fighting Denials</span></li>
+    <li><span><span class="chapter-num">9</span> FOIA Litigation: When to Sue</span></li>
+    <li><span><span class="chapter-num">10</span> State Public Records Laws</span></li>
+    <li><span><span class="chapter-num">11</span> Advanced Techniques & Pro Tips</span></li>
+    <li><span><span class="chapter-num">12</span> Templates & Resources</span></li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 1: Understanding FOIA: Your Right to Know</h1>
+  
+  <p>The Freedom of Information Act (FOIA) is one of the most powerful tools available to American citizens. Signed into law by President Lyndon B. Johnson in 1966, FOIA establishes the public's right to request access to records from any federal agency. The premise is simple but revolutionary: in a democracy, the government's default should be transparency, not secrecy.</p>
+  
+  <p>Yet despite its power, FOIA remains underutilized. Most people don't know they can request government records, and those who do often file poorly-crafted requests that get denied or ignored. This guide will transform you from a FOIA novice into a skilled practitioner capable of extracting information that agencies would prefer to keep hidden.</p>
+  
+  <h2>What FOIA Covers</h2>
+  
+  <p>FOIA applies to all federal agencies in the executive branch, including:</p>
+  <ul>
+    <li>Cabinet departments (State, Defense, Justice, Treasury, etc.)</li>
+    <li>Military departments (Army, Navy, Air Force)</li>
+    <li>Government corporations (USPS, Amtrak)</li>
+    <li>Independent regulatory agencies (SEC, FTC, FCC, FDA)</li>
+    <li>Executive Office of the President (but not the President's immediate staff)</li>
+  </ul>
+  
+  <div class="warning-box">
+    <h4>⚠️ What FOIA Does NOT Cover</h4>
+    <p>Congress, the federal courts, and the President's immediate advisors are exempt from FOIA. State and local governments have their own public records laws (covered in Chapter 10). Private companies are not subject to FOIA, though their communications with government agencies may be obtainable.</p>
+  </div>
+  
+  <h2>What Records Can You Request?</h2>
+  
+  <p>FOIA covers "agency records," which courts have interpreted broadly to include:</p>
+  <ul>
+    <li>Documents, reports, and memos</li>
+    <li>Emails and text messages</li>
+    <li>Photographs, videos, and audio recordings</li>
+    <li>Maps and charts</li>
+    <li>Computer records and databases</li>
+    <li>Contracts and grants</li>
+    <li>Meeting minutes and calendars</li>
+    <li>Scientific data and studies</li>
+  </ul>
+  
+  <p>The key requirement is that the record must already exist—agencies are not required to create new records, conduct research, or answer questions in response to a FOIA request.</p>
+  
+  <h2>Who Can File a FOIA Request?</h2>
+  
+  <p>Anyone can file a FOIA request. You don't need to be a U.S. citizen, journalist, or have any special credentials. Corporations, organizations, and foreign nationals all have equal FOIA rights. You are not required to explain why you want the records, though doing so can sometimes help (particularly for fee waivers).</p>
+  
+  <h2>The FOIA Process Overview</h2>
+  
+  <ol>
+    <li><strong>Submit your request</strong> to the appropriate agency's FOIA office</li>
+    <li><strong>Receive acknowledgment</strong> with a tracking number (usually within 10 days)</li>
+    <li><strong>Agency processes</strong> your request (20 business days statutory deadline, often longer)</li>
+    <li><strong>Receive determination</strong>: full release, partial release with redactions, or denial</li>
+    <li><strong>Appeal</strong> if necessary (agencies must respond within 20 business days)</li>
+    <li><strong>Litigation</strong> as final recourse if appeals fail</li>
+  </ol>
+  
+  <div class="tip-box">
+    <h4>💡 Pro Tip: The 20-Day Myth</h4>
+    <p>While agencies are legally required to respond within 20 business days, the reality is very different. Complex requests can take months or years. The FBI's average processing time exceeds 12 months. Plan accordingly, and consider expedited processing (Chapter 6) for time-sensitive matters.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 2: Before You File: Research & Preparation</h1>
+  
+  <p>The difference between a successful FOIA request and one that languishes in bureaucratic limbo often comes down to preparation. Before drafting your request, invest time in research—it will save you months of waiting and dramatically increase your success rate.</p>
+  
+  <h2>Check Existing FOIA Reading Rooms</h2>
+  
+  <p>Every federal agency maintains an electronic FOIA reading room containing frequently requested records and previously released documents. Check these first—the records you want may already be publicly available.</p>
+  
+  <table>
+    <tr>
+      <th>Agency</th>
+      <th>FOIA Reading Room URL</th>
+    </tr>
+    <tr>
+      <td>FBI</td>
+      <td>vault.fbi.gov</td>
+    </tr>
+    <tr>
+      <td>CIA</td>
+      <td>cia.gov/readingroom</td>
+    </tr>
+    <tr>
+      <td>State Department</td>
+      <td>foia.state.gov</td>
+    </tr>
+    <tr>
+      <td>DOJ</td>
+      <td>justice.gov/oip/foia-library</td>
+    </tr>
+    <tr>
+      <td>DHS</td>
+      <td>dhs.gov/foia-library</td>
+    </tr>
+    <tr>
+      <td>DOD</td>
+      <td>open.defense.gov/Transparency/FOIA</td>
+    </tr>
+    <tr>
+      <td>NSA</td>
+      <td>nsa.gov/Helpful-Links/FOIA-Homepage</td>
+    </tr>
+    <tr>
+      <td>IRS</td>
+      <td>irs.gov/uac/foia-library</td>
+    </tr>
+  </table>
+  
+  <h2>Search FOIA Logs and Completed Requests</h2>
+  
+  <p>Many agencies publish logs of all FOIA requests received, including descriptions and current status. These logs are goldmines for:</p>
+  <ul>
+    <li>Finding requests similar to yours (saves time by learning what worked)</li>
+    <li>Identifying previously released records you can request copies of</li>
+    <li>Understanding how the agency categorizes and processes requests</li>
+    <li>Discovering topics others are investigating</li>
+  </ul>
+  
+  <h3>Key FOIA Log Resources</h3>
+  <ul>
+    <li><strong>FOIAonline</strong> (foiaonline.gov) – Shared portal for EPA, Commerce, NARA, and others</li>
+    <li><strong>FOIA.gov</strong> – Central FOIA portal with links to all agencies</li>
+    <li><strong>MuckRock</strong> (muckrock.com) – Database of 100,000+ completed FOIA requests</li>
+    <li><strong>DocumentCloud</strong> – Searchable repository of released documents</li>
+  </ul>
+  
+  <h2>Identify the Right Agency (and Office)</h2>
+  
+  <p>Government records are scattered across hundreds of agencies, sub-agencies, and offices. Sending your request to the wrong place delays everything. Research which specific office likely has the records you want.</p>
+  
+  <div class="example-box">
+    <h4>📋 Example: Investigating a Government Contract</h4>
+    <p>You want records about a $50 million IT contract. Your options:</p>
+    <ul>
+      <li><strong>Contracting agency</strong> – Has the contract itself and performance evaluations</li>
+      <li><strong>GSA</strong> – May have records if contract used GSA schedule</li>
+      <li><strong>GAO</strong> – May have audit records (note: GAO isn't subject to FOIA, but publishes reports)</li>
+      <li><strong>SBA</strong> – May have records if small business set-aside was involved</li>
+      <li><strong>Inspector General</strong> – May have investigation records if fraud alleged</li>
+    </ul>
+    <p>You might need to file with multiple agencies to get the complete picture.</p>
+  </div>
+  
+  <h2>Understand the Agency's Records Systems</h2>
+  
+  <p>Before requesting, learn how the agency organizes its records:</p>
+  <ul>
+    <li><strong>Records schedules</strong> – Posted on NARA's website, show what records exist and retention periods</li>
+    <li><strong>Privacy Act Systems of Records Notices (SORNs)</strong> – Describe databases containing personal information</li>
+    <li><strong>Agency organizational charts</strong> – Help identify which division has your records</li>
+    <li><strong>Previous FOIA responses</strong> – Reveal how the agency describes and categorizes records</li>
+  </ul>
+  
+  <h2>Narrow Your Request Strategically</h2>
+  
+  <p>FOIA requests fail for two main reasons: too broad or too narrow. Finding the sweet spot requires understanding the tradeoffs:</p>
+  
+  <table>
+    <tr>
+      <th>Request Type</th>
+      <th>Pros</th>
+      <th>Cons</th>
+    </tr>
+    <tr>
+      <td>Very Broad</td>
+      <td>Catches everything relevant</td>
+      <td>Expensive, slow, may be denied as "unreasonably burdensome"</td>
+    </tr>
+    <tr>
+      <td>Very Narrow</td>
+      <td>Fast, cheap, easy to process</td>
+      <td>May miss important records, agency interprets narrowly</td>
+    </tr>
+    <tr>
+      <td>Strategic (Ideal)</td>
+      <td>Comprehensive but focused</td>
+      <td>Requires research and knowledge of agency systems</td>
+    </tr>
+  </table>
+  
+  <div class="tip-box">
+    <h4>💡 The "Reasonably Described" Standard</h4>
+    <p>FOIA requires requests to "reasonably describe" the records sought. This means an agency employee familiar with the subject should be able to locate the records with a reasonable amount of effort. If your request is so vague that no one could find what you're looking for, it can be denied.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 3: Crafting the Perfect FOIA Request</h1>
+  
+  <p>A well-crafted FOIA request is precise, professional, and anticipates agency objections. This chapter provides the framework and language that maximizes your chances of success.</p>
+  
+  <h2>Essential Elements of Every Request</h2>
+  
+  <ol>
+    <li><strong>Clear identification as a FOIA request</strong> – Put "FOIA Request" in the subject line and first sentence</li>
+    <li><strong>Specific description of records sought</strong> – Be precise about what you want</li>
+    <li><strong>Date range</strong> – Specify the time period covered</li>
+    <li><strong>Format preference</strong> – Request electronic records in native format</li>
+    <li><strong>Fee category declaration</strong> – State whether you're media, commercial, educational, or other</li>
+    <li><strong>Fee waiver request</strong> – If applicable, include justification (see Chapter 5)</li>
+    <li><strong>Contact information</strong> – Full name, address, phone, email</li>
+  </ol>
+  
+  <h2>The Magic Words That Work</h2>
+  
+  <p>Certain phrases signal to FOIA officers that you know what you're doing:</p>
+  
+  <ul>
+    <li><strong>"All records, including but not limited to..."</strong> – Prevents narrow interpretation</li>
+    <li><strong>"Electronic records in native format"</strong> – Gets you searchable documents, not printed PDFs</li>
+    <li><strong>"Communications including emails, text messages, instant messages, and messaging app communications"</strong> – Covers modern communication channels</li>
+    <li><strong>"Final and draft versions"</strong> – Drafts often contain information removed from finals</li>
+    <li><strong>"Please search all locations where responsive records may be stored, including personal devices and accounts used for government business"</strong> – Covers Hillary Clinton-style private servers</li>
+  </ul>
+  
+  <div class="template">
+<strong>FOIA REQUEST TEMPLATE</strong>
+
+[Date]
+
+FOIA Officer
+[Agency Name]
+[Address]
+
+<strong>RE: Freedom of Information Act Request</strong>
+
+Dear FOIA Officer:
+
+This is a request under the Freedom of Information Act, 5 U.S.C. § 552.
+
+I request copies of all records, including but not limited to documents, memoranda, correspondence, emails, text messages, reports, studies, data, photographs, and audio/video recordings, concerning [SPECIFIC SUBJECT].
+
+Please search for responsive records created or received between [START DATE] and [END DATE].
+
+Specifically, I request:
+
+1. [Specific record type #1]
+2. [Specific record type #2]
+3. [Specific record type #3]
+
+Please search all locations where responsive records may be stored, including but not limited to electronic systems, paper files, and personal devices or accounts used for government business.
+
+I request that records be provided in electronic format, in their native file format where possible (e.g., .docx, .xlsx, .pdf), delivered via email or secure file transfer.
+
+<strong>Fee Category:</strong> I am [a representative of the news media / an educational institution / other]. [Brief justification if claiming reduced fees.]
+
+<strong>Fee Waiver Request:</strong> [If applicable, see Chapter 5 for language]
+
+<strong>Expedited Processing:</strong> [If applicable, see Chapter 6 for language]
+
+If any responsive records are withheld in whole or in part, please provide an index identifying each withheld record, the FOIA exemption(s) claimed, and a brief explanation of how each exemption applies.
+
+If you have any questions about this request, please contact me at [phone] or [email]. I look forward to your response within the 20 business days required by law.
+
+Sincerely,
+
+[Your Name]
+[Address]
+[Phone]
+[Email]
+</div>
+  
+  <h2>Describing Records: Techniques That Work</h2>
+  
+  <h3>The Subject + Date + Author/Recipient Method</h3>
+  <p>The clearest requests specify the subject matter, date range, and who created or received the records:</p>
+  
+  <div class="example-box">
+    <h4>📋 Example</h4>
+    <p>"All emails sent or received by Assistant Secretary John Smith between January 1, 2023 and December 31, 2023 containing the words 'Project Atlas' or 'Atlas contract.'"</p>
+  </div>
+  
+  <h3>The Document Type Method</h3>
+  <p>When you know a specific document exists, describe its type and purpose:</p>
+  
+  <div class="example-box">
+    <h4>📋 Example</h4>
+    <p>"The Environmental Impact Statement prepared for the proposed Willow Project oil drilling in the National Petroleum Reserve-Alaska, including all draft versions and public comments received."</p>
+  </div>
+  
+  <h3>The Event-Based Method</h3>
+  <p>For records about a specific incident or event:</p>
+  
+  <div class="example-box">
+    <h4>📋 Example</h4>
+    <p>"All records relating to the January 15, 2024 chemical spill at the XYZ Manufacturing facility in Houston, Texas, including inspection reports, enforcement actions, correspondence with the facility, and internal memoranda."</p>
+  </div>
+  
+  <h2>Avoiding Common Mistakes</h2>
+  
+  <div class="warning-box">
+    <h4>❌ DON'T: Ask Questions</h4>
+    <p>Wrong: "Why did the agency approve this permit?"</p>
+    <p>Right: "All records documenting the agency's decision to approve Permit No. 12345, including staff analyses, recommendations, and decision memos."</p>
+  </div>
+  
+  <div class="warning-box">
+    <h4>❌ DON'T: Request "Any and All Records"</h4>
+    <p>Wrong: "Any and all records about immigration."</p>
+    <p>Right: "All policy memoranda issued by the Office of Immigration Policy between 2022-2024 concerning asylum eligibility standards."</p>
+  </div>
+  
+  <div class="warning-box">
+    <h4>❌ DON'T: Forget Date Ranges</h4>
+    <p>Open-ended requests invite delays. Always specify dates, even if broad (e.g., "2000-present").</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 4: Agency-by-Agency Guide</h1>
+  
+  <p>Each federal agency has its own FOIA culture, quirks, and processing times. This chapter provides insider knowledge on navigating the most-requested agencies.</p>
+  
+  <h2>FBI (Federal Bureau of Investigation)</h2>
+  
+  <p><strong>Average processing time:</strong> 12-18 months</p>
+  <p><strong>Submission:</strong> efoia.fbi.gov (electronic) or FBI FOIPA Request, Attn: FOIPA Request, 200 Constitution Dr., Winchester, VA 22602</p>
+  
+  <p>The FBI maintains extensive files on individuals, organizations, and events. Their FOIA operation is the largest in the government, processing over 15,000 requests annually.</p>
+  
+  <h3>What Works with the FBI</h3>
+  <ul>
+    <li><strong>Request by file number</strong> if you know it (format: 100-HQ-12345)</li>
+    <li><strong>Include subject's full name, DOB, and SSN</strong> for background files</li>
+    <li><strong>Check The Vault first</strong> – thousands of files already released</li>
+    <li><strong>Request specific field office files</strong> in addition to HQ files</li>
+  </ul>
+  
+  <h3>FBI-Specific Exemptions to Expect</h3>
+  <ul>
+    <li><strong>b(7)(A)</strong> – Records compiled for law enforcement that could interfere with proceedings</li>
+    <li><strong>b(7)(C)</strong> – Personal privacy of third parties (names often redacted)</li>
+    <li><strong>b(7)(D)</strong> – Confidential source information</li>
+    <li><strong>b(7)(E)</strong> – Law enforcement techniques and procedures</li>
+  </ul>
+  
+  <h2>CIA (Central Intelligence Agency)</h2>
+  
+  <p><strong>Average processing time:</strong> 2-5 years</p>
+  <p><strong>Submission:</strong> cia.gov/readingroom/foia_request or CIA, FOIA, Washington, DC 20505</p>
+  
+  <p>The CIA is notoriously slow and secretive. However, they have released millions of pages over the years, and persistence pays off.</p>
+  
+  <h3>What Works with the CIA</h3>
+  <ul>
+    <li><strong>Request historical records</strong> – Better success with records 25+ years old</li>
+    <li><strong>Use the CREST database</strong> – 13 million pages searchable online</li>
+    <li><strong>Cite Mandatory Declassification Review (MDR)</strong> – Separate process that sometimes works better than FOIA</li>
+    <li><strong>Request specific documents by name</strong> when possible</li>
+  </ul>
+  
+  <h2>State Department</h2>
+  
+  <p><strong>Average processing time:</strong> 2-4 years (complex), 6-12 months (simple)</p>
+  <p><strong>Submission:</strong> foia.state.gov</p>
+  
+  <p>State Department FOIA is overwhelmed with requests, particularly for diplomatic cables and communications.</p>
+  
+  <h3>What Works with State</h3>
+  <ul>
+    <li><strong>Use the Virtual Reading Room</strong> – Many cables already released</li>
+    <li><strong>Request specific embassy/consulate cables</strong> rather than all cables on a topic</li>
+    <li><strong>Cite case numbers from previous releases</strong> to get related documents</li>
+  </ul>
+  
+  <h2>Department of Defense</h2>
+  
+  <p><strong>Average processing time:</strong> Varies widely by component (30 days to 2+ years)</p>
+  <p><strong>Submission:</strong> Varies by component – must submit to specific service/agency</p>
+  
+  <p>DOD is actually dozens of separate FOIA operations. You must identify the correct component:</p>
+  <ul>
+    <li><strong>Army</strong> – armyfoia.army.mil</li>
+    <li><strong>Navy</strong> – secnav.navy.mil/foia</li>
+    <li><strong>Air Force</strong> – efoia.af.mil</li>
+    <li><strong>NSA</strong> – nsa.gov/foia</li>
+    <li><strong>DIA</strong> – dia.mil/foia</li>
+    <li><strong>NRO</strong> – nro.gov/foia</li>
+  </ul>
+  
+  <h2>Department of Justice</h2>
+  
+  <p><strong>Average processing time:</strong> 6-18 months</p>
+  <p><strong>Submission:</strong> Varies by component (FBI, DEA, ATF, BOP, etc. have separate FOIA offices)</p>
+  
+  <h3>Key DOJ Components</h3>
+  <ul>
+    <li><strong>Office of Information Policy (OIP)</strong> – Sets FOIA policy, handles appeals</li>
+    <li><strong>Criminal Division</strong> – Prosecution records</li>
+    <li><strong>Civil Rights Division</strong> – Civil rights enforcement</li>
+    <li><strong>EOUSA</strong> – U.S. Attorney office records</li>
+    <li><strong>OIG</strong> – Inspector General investigations</li>
+  </ul>
+  
+  <h2>IRS (Internal Revenue Service)</h2>
+  
+  <p><strong>Average processing time:</strong> 30-90 days</p>
+  <p><strong>Submission:</strong> irs.gov/uac/freedom-of-information</p>
+  
+  <p>The IRS is relatively efficient but heavily protects taxpayer information. You cannot FOIA someone else's tax returns or individual tax information.</p>
+  
+  <h3>What You CAN Get from the IRS</h3>
+  <ul>
+    <li>Internal policy documents and guidance</li>
+    <li>Statistics and aggregate data</li>
+    <li>Your own tax records (use Form 4506-T instead)</li>
+    <li>Organization exemption applications (Form 1023/1024) – public for 501(c)(3)s</li>
+    <li>Private letter rulings (with identifying info redacted)</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 5: Fee Waivers: How to Get Records for Free</h1>
+  
+  <p>FOIA allows agencies to charge fees for searching, reviewing, and duplicating records. However, agencies must waive or reduce fees when disclosure "is in the public interest because it is likely to contribute significantly to public understanding of the operations or activities of the government and is not primarily in the commercial interest of the requester."</p>
+  
+  <h2>The Fee Waiver Test</h2>
+  
+  <p>To qualify for a fee waiver, you must demonstrate:</p>
+  
+  <ol>
+    <li><strong>Subject matter</strong> – The requested records concern government operations or activities</li>
+    <li><strong>Informative value</strong> – Disclosure is likely to contribute to public understanding</li>
+    <li><strong>Public benefited</strong> – The public, not just the requester, will benefit</li>
+    <li><strong>Significance</strong> – The contribution will be significant</li>
+    <li><strong>Non-commercial</strong> – Disclosure is not primarily for commercial purposes</li>
+    <li><strong>Ability to disseminate</strong> – You have the ability and intent to share information publicly</li>
+  </ol>
+  
+  <h2>Fee Waiver Language That Works</h2>
+  
+  <div class="template">
+<strong>FEE WAIVER REQUEST</strong>
+
+I request a waiver of all fees associated with this request pursuant to 5 U.S.C. § 552(a)(4)(A)(iii).
+
+<strong>Public Interest:</strong> The requested records concern [specific government activity]. Disclosure will contribute significantly to public understanding of [specific issue] by revealing [what information will show]. This information is not currently publicly known and will shed light on [government operations/decisions/activities].
+
+<strong>Dissemination Ability:</strong> I am [a journalist / researcher / public interest organization representative] with the ability and intention to disseminate this information to the public through [publication, website, academic research, etc.]. [Describe your platform, audience, or past publications.]
+
+<strong>Non-Commercial Purpose:</strong> I have no commercial interest in these records. This request is made solely to inform the public about government activities, not for any commercial purpose.
+
+Based on these factors, I request that all fees be waived. In the alternative, I request that fees be reduced to the level appropriate for [news media / educational institution] requesters.
+</div>
+  
+  <h2>Fee Categories</h2>
+  
+  <table>
+    <tr>
+      <th>Requester Type</th>
+      <th>Search Fees</th>
+      <th>Review Fees</th>
+      <th>Duplication Fees</th>
+    </tr>
+    <tr>
+      <td>Commercial</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>News Media</td>
+      <td>No</td>
+      <td>No</td>
+      <td>First 100 pages free</td>
+    </tr>
+    <tr>
+      <td>Educational/Scientific</td>
+      <td>No</td>
+      <td>No</td>
+      <td>First 100 pages free</td>
+    </tr>
+    <tr>
+      <td>All Others</td>
+      <td>First 2 hours free</td>
+      <td>No</td>
+      <td>First 100 pages free</td>
+    </tr>
+  </table>
+  
+  <h2>Qualifying as "News Media"</h2>
+  
+  <p>You don't need to work for a major newspaper. The definition includes anyone who:</p>
+  <ul>
+    <li>Publishes a blog, newsletter, or website with news content</li>
+    <li>Contributes to publications (even occasional freelance work)</li>
+    <li>Documents research for public dissemination</li>
+    <li>Operates a podcast or YouTube channel covering news/public affairs</li>
+  </ul>
+  
+  <div class="tip-box">
+    <h4>💡 Start a Substack</h4>
+    <p>A free Substack newsletter documenting your FOIA work can help establish you as "news media" for fee purposes. Even a small subscriber base demonstrates intent to disseminate information publicly.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 6: Expedited Processing: Fast-Tracking Your Request</h1>
+  
+  <p>Standard FOIA processing can take months or years. Expedited processing moves your request to the front of the line—but only if you meet strict criteria.</p>
+  
+  <h2>Grounds for Expedited Processing</h2>
+  
+  <p>Agencies must grant expedited processing when the requester demonstrates:</p>
+  
+  <ol>
+    <li><strong>Imminent threat to life or safety</strong> – Circumstances where delay could cause someone physical harm</li>
+    <li><strong>Urgency to inform the public</strong> – For those primarily engaged in disseminating information, an urgency to inform the public about actual or alleged government activity (news media standard)</li>
+    <li><strong>Loss of due process rights</strong> – Records needed to preserve someone's legal rights</li>
+    <li><strong>Humanitarian need</strong> – Some agencies recognize this as additional grounds</li>
+  </ol>
+  
+  <h2>Meeting the "Urgency to Inform" Standard</h2>
+  
+  <p>This is the most commonly claimed basis. To succeed, you must show:</p>
+  
+  <ul>
+    <li><strong>You are "primarily engaged in disseminating information"</strong> – Journalist, blogger, researcher with public platform</li>
+    <li><strong>The matter involves current events or breaking news</strong> – Not historical research</li>
+    <li><strong>There is genuine urgency</strong> – The news value will diminish with delay</li>
+    <li><strong>The information concerns government activity</strong> – Not private matters</li>
+  </ul>
+  
+  <div class="template">
+<strong>EXPEDITED PROCESSING REQUEST</strong>
+
+I request expedited processing of this FOIA request pursuant to 5 U.S.C. § 552(a)(6)(E).
+
+<strong>Basis:</strong> I am primarily engaged in disseminating information to the public as [describe your role: journalist, researcher, blogger for X publication]. There is an urgency to inform the public about the government activity described in this request because [explain the current news event or urgent circumstances].
+
+<strong>Time Sensitivity:</strong> [Explain why delay would harm the public interest. Is there pending legislation? An ongoing controversy? An approaching deadline?]
+
+<strong>Certification:</strong> I certify that my statements supporting this request for expedited processing are true and correct to the best of my knowledge and belief.
+
+[Signature]
+[Date]
+</div>
+  
+  <div class="warning-box">
+    <h4>⚠️ False Certification Consequences</h4>
+    <p>Your request for expedited processing must include a certification that your statements are true. Making false statements can result in penalties, so only request expedited processing when you have genuine grounds.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 7: Understanding Exemptions & Redactions</h1>
+  
+  <p>FOIA requires disclosure unless records fall within one of nine specific exemptions. Understanding these exemptions helps you anticipate what you'll receive and craft appeals when agencies overreach.</p>
+  
+  <h2>The Nine FOIA Exemptions</h2>
+  
+  <table>
+    <tr>
+      <th>Exemption</th>
+      <th>Protects</th>
+      <th>Common Usage</th>
+    </tr>
+    <tr>
+      <td>(b)(1)</td>
+      <td>Classified national security information</td>
+      <td>CIA, NSA, DOD, State Dept</td>
+    </tr>
+    <tr>
+      <td>(b)(2)</td>
+      <td>Internal personnel rules and practices</td>
+      <td>HR policies, building security</td>
+    </tr>
+    <tr>
+      <td>(b)(3)</td>
+      <td>Information protected by other statutes</td>
+      <td>Tax returns, census data, grand jury</td>
+    </tr>
+    <tr>
+      <td>(b)(4)</td>
+      <td>Trade secrets and commercial information</td>
+      <td>Contractor proposals, business data</td>
+    </tr>
+    <tr>
+      <td>(b)(5)</td>
+      <td>Privileged inter/intra-agency communications</td>
+      <td>Draft documents, deliberations</td>
+    </tr>
+    <tr>
+      <td>(b)(6)</td>
+      <td>Personal privacy</td>
+      <td>Names, addresses, personal info</td>
+    </tr>
+    <tr>
+      <td>(b)(7)</td>
+      <td>Law enforcement records</td>
+      <td>FBI, DEA, investigations</td>
+    </tr>
+    <tr>
+      <td>(b)(8)</td>
+      <td>Financial institution records</td>
+      <td>Bank examination reports</td>
+    </tr>
+    <tr>
+      <td>(b)(9)</td>
+      <td>Geological/geophysical data on wells</td>
+      <td>Oil and gas exploration</td>
+    </tr>
+  </table>
+  
+  <h2>The Most Abused Exemption: (b)(5)</h2>
+  
+  <p>Exemption 5 protects "inter-agency or intra-agency memorandums or letters that would not be available by law to a party other than an agency in litigation." Agencies invoke this exemption to withhold:</p>
+  
+  <ul>
+    <li><strong>Deliberative process privilege</strong> – Draft documents and internal recommendations</li>
+    <li><strong>Attorney-client privilege</strong> – Legal advice to agency</li>
+    <li><strong>Attorney work product</strong> – Materials prepared for litigation</li>
+  </ul>
+  
+  <p>This exemption is frequently overused. Key limits to remember:</p>
+  <ul>
+    <li>Only protects <strong>pre-decisional</strong> documents – final decisions must be released</li>
+    <li>Only protects <strong>deliberative</strong> content – factual information must be segregated and released</li>
+    <li>Does not apply to documents 25+ years old (recent amendment)</li>
+  </ul>
+  
+  <h2>Reading Redacted Documents</h2>
+  
+  <p>Even heavily redacted documents contain valuable information:</p>
+  <ul>
+    <li><strong>Document dates and types</strong> – Show timeline and what records exist</li>
+    <li><strong>Classification markings</strong> – Indicate sensitivity and originating agency</li>
+    <li><strong>Distribution lists</strong> – Reveal who was involved</li>
+    <li><strong>Page numbers</strong> – Show document length and potential missing pages</li>
+    <li><strong>Redaction sizes</strong> – Suggest how much was withheld</li>
+    <li><strong>Exemption codes</strong> – Reveal why information was withheld</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 8: The Appeals Process: Fighting Denials</h1>
+  
+  <p>When your FOIA request is denied or you receive excessive redactions, you have the right to appeal. Appeals are free, require no lawyer, and succeed more often than you might think—agencies grant relief in about 25% of appeals.</p>
+  
+  <h2>When to Appeal</h2>
+  
+  <ul>
+    <li>Request fully denied</li>
+    <li>Excessive or unjustified redactions</li>
+    <li>Fee waiver denied</li>
+    <li>Expedited processing denied</li>
+    <li>Agency failed to respond within statutory timeframe</li>
+    <li>Agency claims no responsive records exist (when you know they do)</li>
+    <li>Search was inadequate</li>
+  </ul>
+  
+  <h2>Appeal Deadlines</h2>
+  
+  <p>You generally have <strong>90 days</strong> from the date of the adverse determination to file an appeal. Don't miss this deadline—it's strictly enforced.</p>
+  
+  <h2>Crafting an Effective Appeal</h2>
+  
+  <div class="template">
+<strong>FOIA APPEAL TEMPLATE</strong>
+
+[Date]
+
+[Agency Appeals Officer]
+[Address]
+
+Re: Freedom of Information Act Appeal
+Original Request: [Request number/date]
+
+Dear Appeals Officer:
+
+This is an appeal under the Freedom of Information Act, 5 U.S.C. § 552(a)(6).
+
+On [date], I submitted a FOIA request seeking [brief description]. On [date], [agency component] responded by [describe adverse determination: denying the request, withholding records under exemptions, etc.].
+
+I appeal this determination for the following reasons:
+
+<strong>1. [First argument]</strong>
+[Explain why the exemption was improperly applied, the search was inadequate, etc.]
+
+<strong>2. [Second argument]</strong>
+[Continue with additional arguments]
+
+<strong>Foreseeable Harm:</strong> The agency has not demonstrated that disclosure would cause any foreseeable harm. Under the 2016 FOIA Improvement Act, agencies may only withhold information if disclosure would cause a foreseeable harm to an interest protected by a FOIA exemption or is prohibited by law.
+
+<strong>Segregability:</strong> Even if some information is properly exempt, the agency must release all reasonably segregable non-exempt information. I request that the agency conduct a line-by-line review and release all segregable portions.
+
+<strong>Relief Requested:</strong> I request that [the withheld records be released / the redactions be reduced / the fee waiver be granted / etc.].
+
+Thank you for your consideration of this appeal.
+
+Sincerely,
+
+[Your name and contact information]
+
+<strong>Enclosures:</strong> [Original request, agency response, any supporting documents]
+</div>
+  
+  <h2>Appeal Arguments That Win</h2>
+  
+  <h3>Challenging Exemption (b)(5) – Deliberative Process</h3>
+  <ul>
+    <li>Document is not pre-decisional (decision already made)</li>
+    <li>Document is not deliberative (purely factual)</li>
+    <li>Document is over 25 years old</li>
+    <li>Factual portions are segregable from deliberative portions</li>
+    <li>Agency failed to show foreseeable harm from disclosure</li>
+  </ul>
+  
+  <h3>Challenging Exemption (b)(6) / (b)(7)(C) – Privacy</h3>
+  <ul>
+    <li>Individual is a public figure</li>
+    <li>Individual's role was governmental, not personal</li>
+    <li>Public interest in disclosure outweighs privacy interest</li>
+    <li>Information is already publicly available</li>
+    <li>Individual is deceased (reduced privacy interest)</li>
+  </ul>
+  
+  <h3>Challenging "No Responsive Records"</h3>
+  <ul>
+    <li>Cite evidence that records should exist (news reports, other documents)</li>
+    <li>Request description of search conducted</li>
+    <li>Suggest additional locations agency should search</li>
+    <li>Note that agency is legally required to search all likely locations</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 9: FOIA Litigation: When to Sue</h1>
+  
+  <p>If your appeal is denied, you can sue the agency in federal court. FOIA litigation is one of the few areas where citizens can sue the government with a realistic chance of winning.</p>
+  
+  <h2>When Litigation Makes Sense</h2>
+  
+  <ul>
+    <li>Records are clearly important and agency is stonewalling</li>
+    <li>You've exhausted administrative remedies (appeal denied or not responded to)</li>
+    <li>You have resources (time and money) to pursue litigation</li>
+    <li>The legal issues favor disclosure (agency overreached on exemptions)</li>
+    <li>You have evidence of bad faith or improper withholding</li>
+  </ul>
+  
+  <h2>The FOIA Litigation Advantage</h2>
+  
+  <p>FOIA plaintiffs have significant advantages:</p>
+  <ul>
+    <li><strong>No deference to agency</strong> – Courts review de novo (fresh look)</li>
+    <li><strong>Burden on agency</strong> – Government must prove exemptions apply</li>
+    <li><strong>Attorney fees available</strong> – If you substantially prevail, agency may pay your legal costs</li>
+    <li><strong>In camera review</strong> – Judge can review documents privately to check agency claims</li>
+  </ul>
+  
+  <h2>Finding a FOIA Lawyer</h2>
+  
+  <p>Several organizations provide free or low-cost FOIA legal assistance:</p>
+  <ul>
+    <li><strong>Reporters Committee for Freedom of the Press</strong> – Free legal help for journalists</li>
+    <li><strong>ACLU</strong> – Takes cases with civil liberties implications</li>
+    <li><strong>Electronic Frontier Foundation</strong> – Technology and surveillance cases</li>
+    <li><strong>National Security Archive</strong> – National security and foreign policy</li>
+    <li><strong>Law school clinics</strong> – Many schools have FOIA/First Amendment clinics</li>
+  </ul>
+  
+  <h2>Constructive Exhaustion</h2>
+  
+  <p>If an agency fails to respond to your appeal within 20 business days, you have "constructively exhausted" your administrative remedies and can proceed directly to court without waiting for a response.</p>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 10: State Public Records Laws</h1>
+  
+  <p>Every state has its own public records law (sometimes called "sunshine laws" or "open records acts"). While similar to federal FOIA, state laws vary significantly in strength and procedure.</p>
+  
+  <h2>States with Strong Public Records Laws</h2>
+  
+  <ul>
+    <li><strong>Florida</strong> – Extremely broad, fast response times required</li>
+    <li><strong>Texas</strong> – Strong presumption of openness</li>
+    <li><strong>California</strong> – Broad coverage, attorney fees available</li>
+    <li><strong>New York</strong> – Good access to local government records</li>
+    <li><strong>Virginia</strong> – Strong with criminal penalties for violations</li>
+  </ul>
+  
+  <h2>States with Weak Public Records Laws</h2>
+  
+  <ul>
+    <li><strong>Pennsylvania</strong> – Many exemptions, complex procedures</li>
+    <li><strong>New Jersey</strong> – Slow response times common</li>
+    <li><strong>Mississippi</strong> – Limited coverage</li>
+    <li><strong>Wyoming</strong> – Broad exemptions</li>
+  </ul>
+  
+  <h2>Key Differences from Federal FOIA</h2>
+  
+  <table>
+    <tr>
+      <th>Issue</th>
+      <th>Federal FOIA</th>
+      <th>State Laws (Varies)</th>
+    </tr>
+    <tr>
+      <td>Response time</td>
+      <td>20 business days</td>
+      <td>3-30 days depending on state</td>
+    </tr>
+    <tr>
+      <td>Fees</td>
+      <td>Complex fee structure</td>
+      <td>Often simpler, some states free</td>
+    </tr>
+    <tr>
+      <td>Appeals</td>
+      <td>To agency head</td>
+      <td>Varies (agency, AG, or court)</td>
+    </tr>
+    <tr>
+      <td>Enforcement</td>
+      <td>Federal court</td>
+      <td>State court, sometimes AG</td>
+    </tr>
+    <tr>
+      <td>Attorney fees</td>
+      <td>If substantially prevail</td>
+      <td>Varies by state</td>
+    </tr>
+  </table>
+  
+  <h2>Finding State FOIA Resources</h2>
+  
+  <ul>
+    <li><strong>Reporters Committee</strong> – rcfp.org/open-government-guide (all 50 states)</li>
+    <li><strong>State press associations</strong> – Often publish guides</li>
+    <li><strong>State AG websites</strong> – Many publish sample forms and guidance</li>
+    <li><strong>NFOIC</strong> – National Freedom of Information Coalition (nfoic.org)</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 11: Advanced Techniques & Pro Tips</h1>
+  
+  <h2>The Parallel Request Strategy</h2>
+  
+  <p>Submit the same request to multiple agencies simultaneously. Records about a single topic are often scattered across agencies, and each may have documents the others don't. Cross-referencing responses can also reveal inconsistencies and gaps.</p>
+  
+  <h2>The Historical Records Backdoor</h2>
+  
+  <p>Records over 25 years old may be subject to automatic declassification under Executive Order 13526. For historical records, consider:</p>
+  <ul>
+    <li>Mandatory Declassification Review (MDR) – Alternative to FOIA for classified records</li>
+    <li>National Archives – Historical records are transferred and often more accessible</li>
+    <li>Presidential libraries – May have records not available elsewhere</li>
+  </ul>
+  
+  <h2>The "Reasonably Segregable" Weapon</h2>
+  
+  <p>Agencies must release all "reasonably segregable" portions of documents, even if parts are exempt. When you receive heavily redacted documents, appeal arguing that more information is segregable. This forces line-by-line review.</p>
+  
+  <h2>Using Other FOIA Requests</h2>
+  
+  <p>Search MuckRock, DocumentCloud, and agency reading rooms for requests similar to yours. If someone else already obtained records, you can:</p>
+  <ul>
+    <li>Request the same records (usually faster since already processed)</li>
+    <li>Use their successful request language as a template</li>
+    <li>Identify related documents to request</li>
+  </ul>
+  
+  <h2>The FOIA Ombudsman</h2>
+  
+  <p>The Office of Government Information Services (OGIS) mediates FOIA disputes. They can't force agencies to release records, but can often resolve problems informally. Contact: ogis.archives.gov</p>
+  
+  <h2>Build Relationships with FOIA Officers</h2>
+  
+  <p>FOIA officers are often overworked and underappreciated. Professional, courteous communication—and occasional appreciation—can make your requests go smoother. Don't be adversarial unless necessary.</p>
+  
+  <h2>Track Your Requests Systematically</h2>
+  
+  <p>Create a spreadsheet tracking:</p>
+  <ul>
+    <li>Request date, agency, tracking number</li>
+    <li>20-day deadline and actual response date</li>
+    <li>Outcome (full release, partial, denial)</li>
+    <li>Appeal deadline and status</li>
+    <li>Documents received and key findings</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 12: Templates & Resources</h1>
+  
+  <h2>Standard FOIA Request Template</h2>
+  
+  <div class="template">
+[Date]
+
+FOIA Officer
+[Agency Name]
+[Address]
+
+Re: Freedom of Information Act Request
+
+Dear FOIA Officer:
+
+Pursuant to the Freedom of Information Act, 5 U.S.C. § 552, I request access to and copies of [describe records].
+
+Please search for records dated between [start date] and [end date].
+
+I request records in electronic format where available. If fees exceed $[amount], please contact me for approval before processing.
+
+[I request a fee waiver because... OR I am a representative of the news media and request reduced fees.]
+
+Please contact me at [email/phone] if you have questions.
+
+Sincerely,
+
+[Name]
+[Address]
+[Phone]
+[Email]
+</div>
+  
+  <h2>Key FOIA Websites</h2>
+  
+  <ul>
+    <li><strong>FOIA.gov</strong> – Central government FOIA portal</li>
+    <li><strong>FOIAonline.gov</strong> – Multi-agency request portal</li>
+    <li><strong>MuckRock.com</strong> – File, track, and share requests</li>
+    <li><strong>DocumentCloud.org</strong> – Document repository</li>
+    <li><strong>RCFP.org</strong> – Reporters Committee resources</li>
+    <li><strong>OGIS.archives.gov</strong> – FOIA ombudsman</li>
+    <li><strong>Archives.gov</strong> – National Archives</li>
+  </ul>
+  
+  <h2>Recommended Reading</h2>
+  
+  <ul>
+    <li><em>The Art of Access</em> by David Cullier and Charles Davis</li>
+    <li><em>Freedom of Information</em> by Harold Cross (historical classic)</li>
+    <li>DOJ Guide to the Freedom of Information Act (justice.gov)</li>
+    <li>RCFP Federal FOIA Guide (rcfp.org)</li>
+  </ul>
+  
+  <h2>Agency FOIA Contact List</h2>
+  
+  <table>
+    <tr>
+      <th>Agency</th>
+      <th>FOIA Portal</th>
+    </tr>
+    <tr><td>FBI</td><td>efoia.fbi.gov</td></tr>
+    <tr><td>CIA</td><td>cia.gov/readingroom</td></tr>
+    <tr><td>State</td><td>foia.state.gov</td></tr>
+    <tr><td>DOJ</td><td>justice.gov/oip</td></tr>
+    <tr><td>DHS</td><td>dhs.gov/foia</td></tr>
+    <tr><td>DOD</td><td>open.defense.gov</td></tr>
+    <tr><td>EPA</td><td>foiaonline.gov</td></tr>
+    <tr><td>SEC</td><td>sec.gov/foia</td></tr>
+    <tr><td>FTC</td><td>ftc.gov/foia</td></tr>
+    <tr><td>HHS</td><td>hhs.gov/foia</td></tr>
+  </table>
+  
+  <div class="footer-note">
+    <p><strong>About Jimmy Tools</strong></p>
+    <p>Jimmy Tools provides research guides, databases, and analysis tools for investigators, journalists, and curious citizens. Our mission is to make powerful research capabilities accessible to everyone.</p>
+    <p>Visit us at <strong>jimmytools.net</strong></p>
+    <p>© 2026 Jimmy Tools. This guide is for educational purposes only. Nothing in this guide constitutes legal advice.</p>
+  </div>
+</div>
+
+</body>
+</html>

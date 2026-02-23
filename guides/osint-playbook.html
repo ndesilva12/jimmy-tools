@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OSINT Investigator's Playbook</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    @page {
+      size: letter;
+      margin: 0.75in 0.75in 1in 0.75in;
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 10pt;
+        color: #666;
+      }
+    }
+    
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    
+    .cover {
+      page-break-after: always;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
+      color: white;
+      margin: -0.75in;
+      padding: 2in 1in;
+    }
+    
+    .cover h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 40pt;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    
+    .cover .subtitle {
+      font-size: 15pt;
+      opacity: 0.9;
+      margin-bottom: 60px;
+      max-width: 520px;
+    }
+    
+    .cover .author {
+      font-family: 'Inter', sans-serif;
+      font-size: 12pt;
+      opacity: 0.7;
+      margin-top: auto;
+    }
+    
+    .cover .logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: #84cc16;
+      margin-top: 20px;
+    }
+    
+    .toc {
+      page-break-after: always;
+      padding-top: 40px;
+    }
+    
+    .toc h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 24pt;
+      margin-bottom: 30px;
+      color: #065f46;
+    }
+    
+    .toc ul { list-style: none; }
+    
+    .toc li {
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 10.5pt;
+    }
+    
+    .toc .chapter-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #065f46;
+      margin-right: 12px;
+    }
+    
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 26pt;
+      color: #065f46;
+      margin: 40px 0 20px 0;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 17pt;
+      color: #047857;
+      margin: 28px 0 14px 0;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 13pt;
+      color: #059669;
+      margin: 22px 0 10px 0;
+      page-break-after: avoid;
+    }
+    
+    p { margin-bottom: 14px; text-align: justify; }
+    
+    ul, ol { margin: 14px 0 14px 25px; }
+    li { margin-bottom: 7px; }
+    
+    .tip-box {
+      background: #ecfdf5;
+      border-left: 4px solid #10b981;
+      padding: 18px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    
+    .tip-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #065f46;
+      margin-bottom: 8px;
+      font-size: 11pt;
+    }
+    
+    .warning-box {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 18px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    
+    .warning-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #92400e;
+      margin-bottom: 8px;
+      font-size: 11pt;
+    }
+    
+    .tool-box {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      padding: 18px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    
+    .tool-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #166534;
+      margin-bottom: 8px;
+      font-size: 11pt;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 22px 0;
+      font-size: 9.5pt;
+    }
+    
+    th {
+      background: #065f46;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    tr:nth-child(even) { background: #f0fdf4; }
+    
+    .chapter { page-break-before: always; }
+    .chapter:first-of-type { page-break-before: auto; }
+    
+    code {
+      background: #ecfdf5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 9.5pt;
+    }
+    
+    blockquote {
+      border-left: 3px solid #a7f3d0;
+      padding-left: 18px;
+      margin: 18px 0;
+      font-style: italic;
+      color: #4a5568;
+    }
+    
+    .footer-note {
+      margin-top: 50px;
+      padding-top: 18px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9pt;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>OSINT Investigator's Playbook</h1>
+  <p class="subtitle">50+ Techniques to Find Anyone, Investigate Anything, and Uncover What's Hidden in Plain Sight</p>
+  <p class="author">A Jimmy Tools Guide</p>
+  <p class="logo">jimmytools.net</p>
+</div>
+
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><span class="chapter-num">1</span> Introduction to OSINT</li>
+    <li><span class="chapter-num">2</span> Setting Up Your OSINT Workstation</li>
+    <li><span class="chapter-num">3</span> Search Engine Mastery</li>
+    <li><span class="chapter-num">4</span> Social Media Intelligence</li>
+    <li><span class="chapter-num">5</span> People Search & Identification</li>
+    <li><span class="chapter-num">6</span> Business & Corporate Research</li>
+    <li><span class="chapter-num">7</span> Property & Asset Discovery</li>
+    <li><span class="chapter-num">8</span> Domain & Website Investigation</li>
+    <li><span class="chapter-num">9</span> Email Intelligence</li>
+    <li><span class="chapter-num">10</span> Phone Number Research</li>
+    <li><span class="chapter-num">11</span> Image & Video Analysis</li>
+    <li><span class="chapter-num">12</span> Geolocation Techniques</li>
+    <li><span class="chapter-num">13</span> Vehicle & Transportation</li>
+    <li><span class="chapter-num">14</span> Financial Research</li>
+    <li><span class="chapter-num">15</span> Court Records & Legal Research</li>
+    <li><span class="chapter-num">16</span> Dark Web Basics</li>
+    <li><span class="chapter-num">17</span> Archiving & Preservation</li>
+    <li><span class="chapter-num">18</span> OPSEC: Protecting Yourself</li>
+    <li><span class="chapter-num">19</span> Case Study Walkthroughs</li>
+    <li><span class="chapter-num">20</span> Tool Reference & Resources</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 1: Introduction to OSINT</h1>
+  
+  <p>Open Source Intelligence (OSINT) is the collection and analysis of information from publicly available sources. In an age where people voluntarily share vast amounts of personal information online, OSINT has become one of the most powerful investigative disciplines—used by journalists, law enforcement, intelligence agencies, corporate security teams, private investigators, and curious individuals.</p>
+  
+  <p>This playbook will teach you the techniques professionals use to find people, investigate companies, verify identities, and uncover hidden connections. Everything described here uses legal, publicly available sources—no hacking, no unauthorized access, just the systematic exploitation of information people have made public.</p>
+  
+  <h2>What OSINT Can Reveal</h2>
+  
+  <ul>
+    <li><strong>Identity verification</strong> – Confirm who someone really is</li>
+    <li><strong>Location history</strong> – Track where someone has lived, worked, or traveled</li>
+    <li><strong>Relationships</strong> – Map connections between people and organizations</li>
+    <li><strong>Financial indicators</strong> – Identify assets, business interests, lawsuits</li>
+    <li><strong>Background details</strong> – Criminal records, education, employment history</li>
+    <li><strong>Online activity</strong> – Social media posts, forum comments, dating profiles</li>
+    <li><strong>Real estate</strong> – Properties owned, values, mortgages, sales history</li>
+    <li><strong>Corporate structures</strong> – Business ownership, shell companies, connections</li>
+  </ul>
+  
+  <h2>The OSINT Mindset</h2>
+  
+  <p>Effective OSINT isn't about knowing every tool—it's about systematic thinking:</p>
+  
+  <ol>
+    <li><strong>Define your objective</strong> – What specifically do you want to learn?</li>
+    <li><strong>Identify selectors</strong> – What data points do you have to start? (name, email, phone, photo)</li>
+    <li><strong>Map the data landscape</strong> – Where might relevant information exist?</li>
+    <li><strong>Collect systematically</strong> – Document everything, preserve evidence</li>
+    <li><strong>Analyze connections</strong> – Look for patterns, corroborate findings</li>
+    <li><strong>Verify and validate</strong> – Never trust a single source</li>
+  </ol>
+  
+  <div class="warning-box">
+    <h4>⚠️ Legal & Ethical Boundaries</h4>
+    <p>OSINT uses only publicly available information. This guide does not cover hacking, unauthorized access, impersonation, or any illegal techniques. Even legal research can cross ethical lines—stalking, harassment, and doxing are never acceptable. Use these skills responsibly.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 2: Setting Up Your OSINT Workstation</h1>
+  
+  <p>Before diving into techniques, set up a proper research environment. A dedicated OSINT setup protects your privacy, keeps you organized, and makes investigations more efficient.</p>
+  
+  <h2>Browser Configuration</h2>
+  
+  <h3>Use Separate Browser Profiles</h3>
+  <ul>
+    <li><strong>Personal profile</strong> – Your regular browsing, logged into your accounts</li>
+    <li><strong>OSINT profile</strong> – Clean profile, no logins, private browsing</li>
+    <li><strong>Sock puppet profile</strong> – For research accounts (see OPSEC chapter)</li>
+  </ul>
+  
+  <h3>Essential Browser Extensions</h3>
+  
+  <table>
+    <tr>
+      <th>Extension</th>
+      <th>Purpose</th>
+    </tr>
+    <tr><td>uBlock Origin</td><td>Ad/tracker blocking</td></tr>
+    <tr><td>Privacy Badger</td><td>Tracker detection</td></tr>
+    <tr><td>Wayback Machine</td><td>Quick access to archived pages</td></tr>
+    <tr><td>Exif Viewer</td><td>View image metadata</td></tr>
+    <tr><td>User-Agent Switcher</td><td>Spoof browser identity</td></tr>
+    <tr><td>DownThemAll</td><td>Bulk downloads</td></tr>
+    <tr><td>SingleFile</td><td>Save complete webpages</td></tr>
+  </table>
+  
+  <h2>VPN & Anonymity</h2>
+  
+  <p>A VPN hides your IP address from sites you visit—essential when researching subjects who might monitor for investigators. Choose a reputable no-logs VPN like Mullvad, ProtonVPN, or IVPN.</p>
+  
+  <p>For higher-risk investigations, consider using Tor Browser, which routes traffic through multiple relays. However, many sites block Tor exit nodes.</p>
+  
+  <h2>Documentation Tools</h2>
+  
+  <ul>
+    <li><strong>Hunchly</strong> – Automatic web capture and case management (paid, excellent)</li>
+    <li><strong>Obsidian</strong> – Note-taking with linking for relationship mapping</li>
+    <li><strong>Maltego</strong> – Visual link analysis (free community edition)</li>
+    <li><strong>Archive-It / HTTrack</strong> – Website archiving</li>
+    <li><strong>Spreadsheets</strong> – Simple but effective for tracking data points</li>
+  </ul>
+  
+  <div class="tip-box">
+    <h4>💡 The Sock Puppet Kit</h4>
+    <p>For social media research, you'll need "sock puppet" accounts—fake personas not connected to your real identity. Create accounts with burner email addresses, VPN, and stock photos (properly licensed). Keep detailed notes on each persona. Chapter 18 covers this in depth.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 3: Search Engine Mastery</h1>
+  
+  <p>Google is powerful, but most people only scratch the surface. Advanced search operators let you find specific content that basic searches miss.</p>
+  
+  <h2>Essential Google Operators</h2>
+  
+  <table>
+    <tr>
+      <th>Operator</th>
+      <th>Function</th>
+      <th>Example</th>
+    </tr>
+    <tr><td><code>"exact phrase"</code></td><td>Exact match</td><td><code>"john smith" dallas</code></td></tr>
+    <tr><td><code>site:</code></td><td>Search specific site</td><td><code>site:linkedin.com "john smith"</code></td></tr>
+    <tr><td><code>-keyword</code></td><td>Exclude term</td><td><code>"john smith" -facebook</code></td></tr>
+    <tr><td><code>filetype:</code></td><td>Specific file type</td><td><code>filetype:pdf budget 2024</code></td></tr>
+    <tr><td><code>inurl:</code></td><td>Term in URL</td><td><code>inurl:admin login</code></td></tr>
+    <tr><td><code>intitle:</code></td><td>Term in page title</td><td><code>intitle:"index of" passwords</code></td></tr>
+    <tr><td><code>intext:</code></td><td>Term in page body</td><td><code>intext:"confidential"</code></td></tr>
+    <tr><td><code>before:</code> / <code>after:</code></td><td>Date range</td><td><code>after:2023-01-01 before:2024-01-01</code></td></tr>
+    <tr><td><code>cache:</code></td><td>Cached version</td><td><code>cache:example.com</code></td></tr>
+    <tr><td><code>related:</code></td><td>Similar sites</td><td><code>related:nytimes.com</code></td></tr>
+  </table>
+  
+  <h2>Google Dorking: Finding Exposed Data</h2>
+  
+  <p>"Google dorks" are search queries that find exposed files, directories, and sensitive data. Examples:</p>
+  
+  <ul>
+    <li><code>filetype:xls "password"</code> – Excel files containing passwords</li>
+    <li><code>intitle:"index of" "backup"</code> – Open directory listings with backups</li>
+    <li><code>site:pastebin.com "company name"</code> – Leaked data on paste sites</li>
+    <li><code>inurl:wp-content/uploads filetype:pdf</code> – PDF uploads on WordPress sites</li>
+    <li><code>"email" "phone" filetype:csv</code> – Contact lists in CSV format</li>
+  </ul>
+  
+  <div class="tool-box">
+    <h4>🔧 Google Dork Resources</h4>
+    <ul>
+      <li><strong>Google Hacking Database (GHDB)</strong> – Exploit-DB's collection of dorks</li>
+      <li><strong>DorkSearch</strong> – Pre-built dork generator</li>
+      <li><strong>Pentest-Tools Google Dorks</strong> – Curated security-focused dorks</li>
+    </ul>
+  </div>
+  
+  <h2>Alternative Search Engines</h2>
+  
+  <p>Different engines index different content. Cross-reference results:</p>
+  
+  <ul>
+    <li><strong>Bing</strong> – Different algorithm, sometimes finds things Google misses</li>
+    <li><strong>DuckDuckGo</strong> – Privacy-focused, uses Bing index</li>
+    <li><strong>Yandex</strong> – Russian engine, excellent for facial recognition image search</li>
+    <li><strong>Baidu</strong> – Chinese content and Asian websites</li>
+    <li><strong>Brave Search</strong> – Independent index</li>
+    <li><strong>Ahmia</strong> – Tor hidden services search</li>
+  </ul>
+  
+  <h2>People-Specific Search Engines</h2>
+  
+  <table>
+    <tr>
+      <th>Site</th>
+      <th>Best For</th>
+    </tr>
+    <tr><td>Pipl.com (paid)</td><td>Deep identity search, email/phone lookup</td></tr>
+    <tr><td>ThatsThem.com</td><td>Free people search, addresses, phones</td></tr>
+    <tr><td>FastPeopleSearch.com</td><td>Free comprehensive people search</td></tr>
+    <tr><td>TruePeopleSearch.com</td><td>Free, good for current addresses</td></tr>
+    <tr><td>Spokeo.com (paid)</td><td>Social media aggregation</td></tr>
+    <tr><td>BeenVerified (paid)</td><td>Background check style reports</td></tr>
+  </table>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 4: Social Media Intelligence</h1>
+  
+  <p>Social media is the richest source of personal information. People reveal their locations, relationships, employers, daily routines, and opinions—often without realizing the investigative gold they're providing.</p>
+  
+  <h2>Facebook Investigation</h2>
+  
+  <h3>Profile Discovery</h3>
+  <ul>
+    <li>Search by name + location, employer, or school</li>
+    <li>Use Graph Search alternatives: Social Searcher, StalkFace</li>
+    <li>Find Facebook ID: View page source, search for "entity_id"</li>
+    <li>Direct URL: facebook.com/[username] or facebook.com/profile.php?id=[ID]</li>
+  </ul>
+  
+  <h3>Extracting Information</h3>
+  <ul>
+    <li><strong>Friends list</strong> – Reveals relationships even if hidden (via mutual friends)</li>
+    <li><strong>Tagged photos</strong> – Shows connections and locations</li>
+    <li><strong>Check-ins</strong> – Historical location data</li>
+    <li><strong>Likes/Groups</strong> – Interests, affiliations, communities</li>
+    <li><strong>Life events</strong> – Jobs, education, relationships with dates</li>
+  </ul>
+  
+  <h3>Facebook-Specific Tools</h3>
+  <ul>
+    <li><strong>Who Posted What</strong> (whopostedwhat.com) – Search Facebook posts by keyword/date</li>
+    <li><strong>Lookup-ID</strong> (lookup-id.com) – Find Facebook ID from URL</li>
+    <li><strong>IntelligenceX Facebook Search</strong> – Historical data</li>
+  </ul>
+  
+  <h2>Instagram Investigation</h2>
+  
+  <ul>
+    <li><strong>Username search</strong> – instagram.com/[username]</li>
+    <li><strong>Location tags</strong> – Click location to see all posts at that spot</li>
+    <li><strong>Hashtag research</strong> – Find related posts and accounts</li>
+    <li><strong>Story highlights</strong> – Often contain older revealing content</li>
+    <li><strong>Tagged photos</strong> – Check what others post about them</li>
+  </ul>
+  
+  <div class="tool-box">
+    <h4>🔧 Instagram Tools</h4>
+    <ul>
+      <li><strong>ImgInn</strong> – View stories anonymously</li>
+      <li><strong>StoriesIG</strong> – Download stories</li>
+      <li><strong>Dumpor</strong> – Profile viewer without login</li>
+      <li><strong>Picuki</strong> – Browse and download content</li>
+    </ul>
+  </div>
+  
+  <h2>Twitter/X Investigation</h2>
+  
+  <ul>
+    <li><strong>Advanced Search</strong> – twitter.com/search-advanced (dates, accounts, keywords)</li>
+    <li><strong>From:username</strong> – All tweets from specific account</li>
+    <li><strong>To:username</strong> – Replies to someone</li>
+    <li><strong>@username filter:media</strong> – Only media posts</li>
+    <li><strong>geocode:lat,long,radius</strong> – Tweets from specific location</li>
+  </ul>
+  
+  <h3>Twitter Search Operators</h3>
+  <p><code>"exact phrase" from:username since:2023-01-01 until:2024-01-01 -filter:retweets</code></p>
+  
+  <h2>LinkedIn Investigation</h2>
+  
+  <p>LinkedIn reveals professional history, connections, and organizational structures.</p>
+  
+  <ul>
+    <li><strong>Google dorking</strong> – <code>site:linkedin.com/in "john smith" dallas</code></li>
+    <li><strong>Company pages</strong> – See all employees, org chart</li>
+    <li><strong>Alumni search</strong> – Find people by school and graduation year</li>
+    <li><strong>Connections</strong> – Map professional networks</li>
+    <li><strong>Activity</strong> – Posts, comments, likes reveal interests</li>
+  </ul>
+  
+  <div class="warning-box">
+    <h4>⚠️ LinkedIn Shows Who Viewed</h4>
+    <p>LinkedIn notifies users when someone views their profile (unless you use LinkedIn Premium's private mode). Use logged-out searching, Google cache, or IntelligenceX to avoid detection.</p>
+  </div>
+  
+  <h2>TikTok, Snapchat, Discord</h2>
+  
+  <ul>
+    <li><strong>TikTok</strong> – Search by username, hashtag, sounds. Videos often reveal location/lifestyle</li>
+    <li><strong>Snapchat Map</strong> – Public snaps appear on map with location</li>
+    <li><strong>Discord</strong> – Server search tools, user ID lookup, bot-based searching</li>
+  </ul>
+  
+  <h2>Username Correlation</h2>
+  
+  <p>People reuse usernames across platforms. Find all accounts linked to one username:</p>
+  
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>URL</th>
+    </tr>
+    <tr><td>Namechk</td><td>namechk.com</td></tr>
+    <tr><td>WhatsMyName</td><td>whatsmyname.app</td></tr>
+    <tr><td>KnowEm</td><td>knowem.com</td></tr>
+    <tr><td>Sherlock</td><td>GitHub (command line)</td></tr>
+    <tr><td>Maigret</td><td>GitHub (advanced Sherlock fork)</td></tr>
+  </table>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 5: People Search & Identification</h1>
+  
+  <p>Finding and identifying people is core to OSINT. This chapter covers techniques for locating individuals, verifying identities, and mapping their digital footprint.</p>
+  
+  <h2>Starting with a Name</h2>
+  
+  <ol>
+    <li><strong>Google the name</strong> (with quotes) + location, employer, or other identifier</li>
+    <li><strong>Check people search sites</strong> – FastPeopleSearch, ThatsThem, TruePeopleSearch</li>
+    <li><strong>Search social media</strong> – Facebook, LinkedIn, Instagram, Twitter</li>
+    <li><strong>Check voter records</strong> – Many states publish voter files with addresses, DOB</li>
+    <li><strong>Property records</strong> – County assessor sites show ownership</li>
+    <li><strong>Court records</strong> – Civil and criminal cases</li>
+  </ol>
+  
+  <h2>Starting with an Email Address</h2>
+  
+  <ol>
+    <li><strong>Google the email</strong> – May appear in leaked databases, forum posts, documents</li>
+    <li><strong>Check Have I Been Pwned</strong> – Shows data breaches containing the email</li>
+    <li><strong>Email to social</strong> – Epieos, Holehe check which platforms have accounts</li>
+    <li><strong>Domain whois</strong> – If custom domain, check registration info</li>
+    <li><strong>Gravatar</strong> – gravatar.com/[md5 hash of email] may show photo</li>
+  </ol>
+  
+  <div class="tool-box">
+    <h4>🔧 Email Investigation Tools</h4>
+    <ul>
+      <li><strong>Epieos</strong> – Email to social media accounts</li>
+      <li><strong>Holehe</strong> – Check email registration on 120+ sites</li>
+      <li><strong>Hunter.io</strong> – Find corporate email patterns</li>
+      <li><strong>EmailRep</strong> – Reputation and associations</li>
+      <li><strong>Have I Been Pwned</strong> – Breach database search</li>
+    </ul>
+  </div>
+  
+  <h2>Starting with a Phone Number</h2>
+  
+  <ol>
+    <li><strong>Reverse phone lookup</strong> – TruePeopleSearch, ThatsThem, Whitepages</li>
+    <li><strong>Google the number</strong> – May appear in ads, posts, business listings</li>
+    <li><strong>Check caller ID apps</strong> – Truecaller, Hiya (may show saved name)</li>
+    <li><strong>Carrier lookup</strong> – Identify carrier and number type (mobile/landline/VoIP)</li>
+    <li><strong>WhatsApp/Telegram</strong> – Add number to see profile photo/name</li>
+  </ol>
+  
+  <h2>Starting with a Photo</h2>
+  
+  <p>Reverse image search finds where a photo appears online and can identify people:</p>
+  
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Strength</th>
+    </tr>
+    <tr><td>Google Images</td><td>General reverse search</td></tr>
+    <tr><td>Yandex Images</td><td>Best for facial recognition</td></tr>
+    <tr><td>TinEye</td><td>Finding image origins and modifications</td></tr>
+    <tr><td>PimEyes (paid)</td><td>Facial recognition across web</td></tr>
+    <tr><td>FaceCheck.ID</td><td>Face matching</td></tr>
+  </table>
+  
+  <div class="tip-box">
+    <h4>💡 Yandex is Underrated</h4>
+    <p>Yandex's image search has remarkably good facial recognition. It often identifies people that Google Images misses. Always include Yandex in your reverse image workflow.</p>
+  </div>
+  
+  <h2>Identity Verification Techniques</h2>
+  
+  <p>Once you find information, verify it's the right person:</p>
+  
+  <ul>
+    <li><strong>Cross-reference multiple sources</strong> – Same info from 3+ sources = higher confidence</li>
+    <li><strong>Check for unique identifiers</strong> – Middle name, exact DOB, relatives' names</li>
+    <li><strong>Timeline consistency</strong> – Do job dates, addresses, ages align?</li>
+    <li><strong>Photo matching</strong> – Compare photos across platforms</li>
+    <li><strong>Writing style</strong> – Language patterns consistent across accounts?</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 6: Business & Corporate Research</h1>
+  
+  <p>Corporate OSINT reveals company structures, ownership, financial health, and hidden connections. Whether investigating a business partner, competitor, or suspicious entity, these techniques expose what companies want hidden.</p>
+  
+  <h2>State Business Registrations</h2>
+  
+  <p>Every business entity (LLC, Corporation, etc.) must register with a state. These records reveal:</p>
+  <ul>
+    <li>Date of formation</li>
+    <li>Registered agent (receives legal notices)</li>
+    <li>Officers and directors</li>
+    <li>Business address</li>
+    <li>Annual filings and status</li>
+  </ul>
+  
+  <h3>Key Resources</h3>
+  <table>
+    <tr>
+      <th>Source</th>
+      <th>Coverage</th>
+    </tr>
+    <tr><td>OpenCorporates</td><td>200M+ companies worldwide</td></tr>
+    <tr><td>State SOS websites</td><td>Official state records (search "[state] secretary of state business search")</td></tr>
+    <tr><td>Cobalt Intelligence</td><td>Multi-state aggregated search</td></tr>
+    <tr><td>Corporation Wiki</td><td>Free company/officer search</td></tr>
+  </table>
+  
+  <h2>SEC Filings (Public Companies)</h2>
+  
+  <p>Public companies must file detailed reports with the SEC. Key filings:</p>
+  
+  <ul>
+    <li><strong>10-K</strong> – Annual report (comprehensive business overview)</li>
+    <li><strong>10-Q</strong> – Quarterly financial reports</li>
+    <li><strong>8-K</strong> – Material events (mergers, lawsuits, executive changes)</li>
+    <li><strong>DEF 14A</strong> – Proxy statement (executive compensation, shareholders)</li>
+    <li><strong>Form 4</strong> – Insider trading reports</li>
+    <li><strong>Schedule 13D/G</strong> – Large shareholder disclosures</li>
+  </ul>
+  
+  <p>Search at: <strong>sec.gov/edgar/searchedgar/companysearch.html</strong></p>
+  
+  <h2>Uncovering Shell Companies</h2>
+  
+  <p>Shell companies hide ownership. Red flags:</p>
+  <ul>
+    <li>Registered agent services (CT Corporation, CSC, Registered Agent Inc.)</li>
+    <li>Formation in Delaware, Wyoming, Nevada (strong privacy laws)</li>
+    <li>No physical office or employees</li>
+    <li>Officers are other companies or nominees</li>
+    <li>Recent formation with large asset purchases</li>
+  </ul>
+  
+  <h3>Piercing the Corporate Veil</h3>
+  <ol>
+    <li>Check registered agent—same agent = possibly same owner</li>
+    <li>Search officer names across states</li>
+    <li>Look for common addresses across entities</li>
+    <li>Check UCC filings for financing relationships</li>
+    <li>Search real property records for corporate ownership</li>
+  </ol>
+  
+  <h2>Government Contracts & Grants</h2>
+  
+  <table>
+    <tr>
+      <th>Source</th>
+      <th>What It Shows</th>
+    </tr>
+    <tr><td>USAspending.gov</td><td>All federal spending, contracts, grants</td></tr>
+    <tr><td>FPDS.gov</td><td>Federal procurement data</td></tr>
+    <tr><td>SAM.gov</td><td>Contractor registrations and exclusions</td></tr>
+    <tr><td>Grants.gov</td><td>Grant opportunities and awards</td></tr>
+    <tr><td>GovTribe</td><td>Contract analysis and intelligence</td></tr>
+  </table>
+  
+  <h2>Offshore & International Companies</h2>
+  
+  <ul>
+    <li><strong>ICIJ Offshore Leaks Database</strong> – Panama Papers, Pandora Papers data</li>
+    <li><strong>OpenCorporates</strong> – Global company search</li>
+    <li><strong>UK Companies House</strong> – Excellent free data on UK companies</li>
+    <li><strong>GLEIF</strong> – Legal Entity Identifier database</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 7: Property & Asset Discovery</h1>
+  
+  <p>Real property records are public in the United States, making property ownership one of the easiest assets to research. This chapter covers techniques for finding who owns what.</p>
+  
+  <h2>Real Property Records</h2>
+  
+  <h3>County Assessor/Recorder Offices</h3>
+  <p>Every county maintains property records showing:</p>
+  <ul>
+    <li>Current owner name</li>
+    <li>Mailing address (sometimes different from property)</li>
+    <li>Assessed value and taxes</li>
+    <li>Property characteristics (size, beds/baths, year built)</li>
+    <li>Sales history and prices</li>
+    <li>Mortgage information</li>
+  </ul>
+  
+  <h3>Free Property Search Sites</h3>
+  <table>
+    <tr>
+      <th>Site</th>
+      <th>Coverage</th>
+    </tr>
+    <tr><td>Zillow</td><td>National, estimates and history</td></tr>
+    <tr><td>Redfin</td><td>National, detailed records</td></tr>
+    <tr><td>County assessor websites</td><td>Official records</td></tr>
+    <tr><td>NETR Online</td><td>Links to county record sites</td></tr>
+    <tr><td>SearchSystems.net</td><td>Public record database directory</td></tr>
+  </table>
+  
+  <h2>Finding Hidden Ownership</h2>
+  
+  <p>Properties may be held in LLCs, trusts, or corporate names. To find the real owner:</p>
+  <ol>
+    <li>Note the LLC/trust name on the deed</li>
+    <li>Search state business records for LLC officers</li>
+    <li>Check if the LLC's registered agent address matches other properties</li>
+    <li>Search the trust name in court records (trusts often appear in probate)</li>
+    <li>Look for financing documents—lenders often require personal guarantees</li>
+  </ol>
+  
+  <h2>Vehicle Records</h2>
+  
+  <p>Vehicle ownership is harder to research due to DPPA restrictions, but some avenues exist:</p>
+  <ul>
+    <li><strong>VIN lookup</strong> – NICB VinCheck (theft/total loss), NHTSA recalls</li>
+    <li><strong>License plate lookup</strong> – Limited legal options for non-law enforcement</li>
+    <li><strong>Parking/traffic tickets</strong> – Sometimes appear in court records</li>
+    <li><strong>Social media</strong> – People post their vehicles</li>
+    <li><strong>Business vehicles</strong> – DOT numbers, fleet registrations</li>
+  </ul>
+  
+  <h2>Aircraft & Boats</h2>
+  
+  <p>Aircraft and boat registrations are more accessible:</p>
+  
+  <table>
+    <tr>
+      <th>Asset</th>
+      <th>Source</th>
+    </tr>
+    <tr><td>Aircraft</td><td>FAA Registry (registry.faa.gov)</td></tr>
+    <tr><td>Boats (documented)</td><td>USCG NVDC (st.nmfs.noaa.gov/st1/CoastGuard/)</td></tr>
+    <tr><td>Boats (state)</td><td>State DMV/wildlife agency</td></tr>
+    <tr><td>Flight tracking</td><td>FlightAware, ADS-B Exchange</td></tr>
+    <tr><td>Ship tracking</td><td>MarineTraffic, VesselFinder</td></tr>
+  </table>
+  
+  <h2>UCC Filings</h2>
+  
+  <p>Uniform Commercial Code filings record security interests in personal property. When someone takes a loan secured by equipment, inventory, or accounts receivable, a UCC-1 is filed. These reveal:</p>
+  <ul>
+    <li>Debtor name and address</li>
+    <li>Secured party (lender)</li>
+    <li>Collateral description</li>
+    <li>Filing date and status</li>
+  </ul>
+  <p>Search at state SOS websites or aggregators like BizFilings.</p>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 8: Domain & Website Investigation</h1>
+  
+  <p>Every website leaves a trail. Domain registration, hosting, historical content, and technical details can reveal who's behind a site and how it's connected to others.</p>
+  
+  <h2>WHOIS Lookup</h2>
+  
+  <p>Domain registration records often show owner information (though privacy services are common):</p>
+  <ul>
+    <li><strong>ICANN WHOIS</strong> – lookup.icann.org</li>
+    <li><strong>DomainTools</strong> – Comprehensive WHOIS history (paid)</li>
+    <li><strong>WhoisXML API</strong> – Historical and reverse WHOIS</li>
+    <li><strong>ViewDNS.info</strong> – Multiple DNS tools</li>
+  </ul>
+  
+  <h3>Key WHOIS Fields</h3>
+  <ul>
+    <li><strong>Registrant</strong> – Domain owner (may be privacy-protected)</li>
+    <li><strong>Creation date</strong> – When domain was first registered</li>
+    <li><strong>Name servers</strong> – Can link related domains</li>
+    <li><strong>Registrar</strong> – Where domain was purchased</li>
+  </ul>
+  
+  <h2>Historical WHOIS</h2>
+  
+  <p>Even if current WHOIS is private, historical records may show previous owners:</p>
+  <ul>
+    <li><strong>DomainTools WHOIS History</strong></li>
+    <li><strong>WhoisXML Historical WHOIS</strong></li>
+    <li><strong>SecurityTrails</strong></li>
+  </ul>
+  
+  <h2>Reverse IP & DNS</h2>
+  
+  <p>Find other sites on the same server or with related infrastructure:</p>
+  
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>Function</th>
+    </tr>
+    <tr><td>ViewDNS Reverse IP</td><td>Sites sharing IP address</td></tr>
+    <tr><td>SecurityTrails</td><td>DNS history and associations</td></tr>
+    <tr><td>Shodan</td><td>Internet-connected device search</td></tr>
+    <tr><td>Censys</td><td>Certificate and host search</td></tr>
+    <tr><td>DNSDumpster</td><td>DNS reconnaissance</td></tr>
+  </table>
+  
+  <h2>Website Archives</h2>
+  
+  <p>The Wayback Machine (web.archive.org) stores historical snapshots of websites. Use it to:</p>
+  <ul>
+    <li>See how a site looked in the past</li>
+    <li>Recover deleted content</li>
+    <li>Find old contact information, team pages, etc.</li>
+    <li>Document changes over time</li>
+  </ul>
+  
+  <h2>SSL Certificate Analysis</h2>
+  
+  <p>SSL certificates can reveal related domains and organization info:</p>
+  <ul>
+    <li><strong>crt.sh</strong> – Certificate transparency logs</li>
+    <li><strong>Censys Certificates</strong> – Search by organization, domain</li>
+  </ul>
+  
+  <h2>Technology Fingerprinting</h2>
+  
+  <p>Identify what technology a site uses:</p>
+  <ul>
+    <li><strong>BuiltWith</strong> – Technology stack analysis</li>
+    <li><strong>Wappalyzer</strong> – Browser extension for tech detection</li>
+    <li><strong>WhatRuns</strong> – Similar to BuiltWith</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 9: Email Intelligence</h1>
+  
+  <p>Email addresses are valuable selectors for investigation. This chapter covers techniques for extracting maximum intelligence from an email address.</p>
+  
+  <h2>Email Validation</h2>
+  
+  <p>First, verify the email exists:</p>
+  <ul>
+    <li><strong>Hunter.io Email Verifier</strong></li>
+    <li><strong>NeverBounce</strong></li>
+    <li><strong>ZeroBounce</strong></li>
+  </ul>
+  
+  <h2>Email to Identity</h2>
+  
+  <h3>Check Social Platforms</h3>
+  <ul>
+    <li><strong>Epieos</strong> – Checks Google, Skype, and more</li>
+    <li><strong>Holehe</strong> – Checks 120+ platforms</li>
+    <li><strong>GHunt</strong> – Google account investigation (GitHub tool)</li>
+  </ul>
+  
+  <h3>Gravatar & Avatar Services</h3>
+  <p>Many sites use Gravatar for profile photos. Check: <code>gravatar.com/avatar/[MD5 hash of email]</code></p>
+  
+  <h2>Breach Data</h2>
+  
+  <p>Email addresses appear in data breaches. Legitimate services to check:</p>
+  <ul>
+    <li><strong>Have I Been Pwned</strong> – haveibeenpwned.com</li>
+    <li><strong>DeHashed</strong> – Breach database search</li>
+    <li><strong>IntelligenceX</strong> – Includes some breach data</li>
+  </ul>
+  
+  <div class="warning-box">
+    <h4>⚠️ Legal Warning</h4>
+    <p>Accessing or using stolen credentials is illegal. Breach data services are useful for seeing which breaches an email appeared in, but don't access actual leaked passwords or use them.</p>
+  </div>
+  
+  <h2>Corporate Email Patterns</h2>
+  
+  <p>If you know someone works at a company but not their email:</p>
+  <ol>
+    <li>Find the company's email pattern (john.smith@, jsmith@, john_smith@)</li>
+    <li>Construct the likely email</li>
+    <li>Verify it exists</li>
+  </ol>
+  
+  <p><strong>Hunter.io</strong> and <strong>RocketReach</strong> help identify corporate email patterns.</p>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 10: Phone Number Research</h1>
+  
+  <h2>Carrier Identification</h2>
+  
+  <p>Determine if a number is mobile, landline, or VoIP:</p>
+  <ul>
+    <li><strong>Twilio Lookup API</strong></li>
+    <li><strong>NumVerify</strong></li>
+    <li><strong>Carrier Lookup tools</strong></li>
+  </ul>
+  
+  <h2>Reverse Phone Lookup</h2>
+  
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Type</th>
+    </tr>
+    <tr><td>TruePeopleSearch</td><td>Free</td></tr>
+    <tr><td>ThatsThem</td><td>Free</td></tr>
+    <tr><td>Whitepages</td><td>Freemium</td></tr>
+    <tr><td>Spy Dialer</td><td>Free voicemail lookup</td></tr>
+    <tr><td>Truecaller</td><td>App-based caller ID</td></tr>
+  </table>
+  
+  <h2>Phone to Social Media</h2>
+  
+  <ul>
+    <li><strong>Facebook</strong> – Search by phone number (if not privacy-protected)</li>
+    <li><strong>WhatsApp</strong> – Add number to contacts, see profile photo/status</li>
+    <li><strong>Telegram</strong> – Search by phone number</li>
+    <li><strong>Signal</strong> – Will show if number is registered</li>
+    <li><strong>Viber</strong> – Shows name if user has account</li>
+  </ul>
+  
+  <h2>Google the Number</h2>
+  
+  <p>Search the number (with and without dashes/spaces) to find:</p>
+  <ul>
+    <li>Classified ads</li>
+    <li>Business listings</li>
+    <li>Social media posts</li>
+    <li>Spam reports</li>
+    <li>Forum posts</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 11: Image & Video Analysis</h1>
+  
+  <h2>Reverse Image Search</h2>
+  
+  <p>Always use multiple engines:</p>
+  <ol>
+    <li><strong>Google Images</strong> – General search</li>
+    <li><strong>Yandex</strong> – Best facial recognition</li>
+    <li><strong>TinEye</strong> – Finding original and modifications</li>
+    <li><strong>Bing Visual Search</strong> – Alternative results</li>
+  </ol>
+  
+  <h2>EXIF Data Extraction</h2>
+  
+  <p>Photos contain metadata (EXIF) that may include:</p>
+  <ul>
+    <li>Camera make/model</li>
+    <li>Date and time taken</li>
+    <li>GPS coordinates (!)</li>
+    <li>Software used to edit</li>
+  </ul>
+  
+  <p><strong>Tools:</strong> Jeffrey's EXIF Viewer, FotoForensics, ExifTool</p>
+  
+  <div class="tip-box">
+    <h4>💡 EXIF Often Stripped</h4>
+    <p>Most social media platforms strip EXIF data on upload. However, photos sent via email, posted on forums, or downloaded from cloud storage often retain it.</p>
+  </div>
+  
+  <h2>Image Forensics</h2>
+  
+  <p>Detect manipulated images:</p>
+  <ul>
+    <li><strong>FotoForensics</strong> – Error level analysis</li>
+    <li><strong>InVID/WeVerify</strong> – Video/image verification toolkit</li>
+    <li><strong>Forensically</strong> – Browser-based image forensics</li>
+  </ul>
+  
+  <h2>Facial Recognition</h2>
+  
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Notes</th>
+    </tr>
+    <tr><td>Yandex Images</td><td>Free, effective</td></tr>
+    <tr><td>PimEyes</td><td>Paid, powerful but controversial</td></tr>
+    <tr><td>FaceCheck.ID</td><td>Face search across web</td></tr>
+  </table>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 12: Geolocation Techniques</h1>
+  
+  <p>Geolocation—determining where a photo or video was taken—is one of OSINT's most powerful techniques. Combine visual clues with mapping tools to pinpoint locations.</p>
+  
+  <h2>Visual Clues to Look For</h2>
+  
+  <ul>
+    <li><strong>Signs and text</strong> – Street signs, business names, license plates</li>
+    <li><strong>Architecture</strong> – Building styles vary by region</li>
+    <li><strong>Vegetation</strong> – Plants indicate climate/region</li>
+    <li><strong>Sun position</strong> – Indicates hemisphere and time</li>
+    <li><strong>Shadows</strong> – Help determine time of day</li>
+    <li><strong>Infrastructure</strong> – Power lines, road markings, vehicle types</li>
+    <li><strong>Landmarks</strong> – Mountains, towers, distinctive buildings</li>
+  </ul>
+  
+  <h2>Geolocation Tools</h2>
+  
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>Use</th>
+    </tr>
+    <tr><td>Google Maps/Earth</td><td>Street View, satellite imagery</td></tr>
+    <tr><td>Google Earth Pro</td><td>Historical imagery, measurements</td></tr>
+    <tr><td>SunCalc</td><td>Sun position calculator</td></tr>
+    <tr><td>ShadowCalculator</td><td>Shadow analysis</td></tr>
+    <tr><td>GeoSpy</td><td>AI-based location estimation</td></tr>
+    <tr><td>What3Words</td><td>Precise location encoding</td></tr>
+  </table>
+  
+  <h2>The Geolocation Process</h2>
+  
+  <ol>
+    <li><strong>Identify all visible clues</strong> in the image</li>
+    <li><strong>Research clues</strong> – What do signs say? What language?</li>
+    <li><strong>Narrow to region</strong> – Country, then city/area</li>
+    <li><strong>Search Street View</strong> for matching location</li>
+    <li><strong>Verify</strong> – Do all clues align?</li>
+  </ol>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 13: Vehicle & Transportation</h1>
+  
+  <h2>Flight Tracking</h2>
+  
+  <ul>
+    <li><strong>FlightAware</strong> – Flight tracking, historical data</li>
+    <li><strong>FlightRadar24</strong> – Real-time global flight tracking</li>
+    <li><strong>ADS-B Exchange</strong> – Unfiltered ADS-B data (no blocked aircraft)</li>
+    <li><strong>FAA Registry</strong> – Aircraft ownership records</li>
+  </ul>
+  
+  <h2>Ship Tracking</h2>
+  
+  <ul>
+    <li><strong>MarineTraffic</strong> – Vessel positions and history</li>
+    <li><strong>VesselFinder</strong> – Ship tracking</li>
+    <li><strong>MyShipTracking</strong> – Free vessel tracking</li>
+  </ul>
+  
+  <h2>Vehicle Identification</h2>
+  
+  <ul>
+    <li><strong>VIN decoding</strong> – NHTSA VIN decoder, VinDecoder.net</li>
+    <li><strong>License plate lookup</strong> – Limited without law enforcement access</li>
+    <li><strong>Parking ticket databases</strong> – Some cities publish online</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 14: Financial Research</h1>
+  
+  <h2>SEC Filings</h2>
+  
+  <p>EDGAR (sec.gov/edgar) contains all public company filings. Key searches:</p>
+  <ul>
+    <li>Company filings by name/ticker</li>
+    <li>Full-text search across all filings</li>
+    <li>Insider trading (Form 4)</li>
+    <li>13F institutional holdings</li>
+  </ul>
+  
+  <h2>Campaign Finance</h2>
+  
+  <ul>
+    <li><strong>FEC.gov</strong> – Federal campaign contributions</li>
+    <li><strong>OpenSecrets</strong> – Campaign finance analysis</li>
+    <li><strong>FollowTheMoney</strong> – State-level contributions</li>
+  </ul>
+  
+  <h2>Lobbying Records</h2>
+  
+  <ul>
+    <li><strong>Senate Lobbying Disclosures</strong></li>
+    <li><strong>House Lobbying Disclosures</strong></li>
+    <li><strong>OpenSecrets Lobbying</strong></li>
+    <li><strong>FARA</strong> – Foreign agent registrations</li>
+  </ul>
+  
+  <h2>Bankruptcy & Liens</h2>
+  
+  <ul>
+    <li><strong>PACER</strong> – Federal bankruptcy court records</li>
+    <li><strong>State UCC filings</strong> – Security interests</li>
+    <li><strong>Tax liens</strong> – County recorder offices</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 15: Court Records & Legal Research</h1>
+  
+  <h2>Federal Courts (PACER)</h2>
+  
+  <p>PACER (pacer.uscourts.gov) contains federal court records:</p>
+  <ul>
+    <li>Civil cases</li>
+    <li>Criminal cases</li>
+    <li>Bankruptcy</li>
+    <li>Appeals</li>
+  </ul>
+  <p>Costs $0.10/page, but first $30/quarter is free. <strong>RECAP</strong> browser extension provides free access to previously-downloaded documents.</p>
+  
+  <h2>State Courts</h2>
+  
+  <p>Each state has its own system. Many offer free online search:</p>
+  <ul>
+    <li>Search "[state] court case search"</li>
+    <li>Check both state and county court systems</li>
+    <li>Criminal, civil, family, and probate courts may be separate</li>
+  </ul>
+  
+  <h2>Legal Research</h2>
+  
+  <ul>
+    <li><strong>Google Scholar</strong> – Free case law search</li>
+    <li><strong>CourtListener</strong> – Free legal database</li>
+    <li><strong>Justia</strong> – Free legal information</li>
+    <li><strong>CaseText</strong> – Case law with AI features</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 16: Dark Web Basics</h1>
+  
+  <p>The dark web contains hidden services not indexed by regular search engines. While often associated with illegal activity, it also hosts legitimate privacy-focused services and can be useful for OSINT.</p>
+  
+  <h2>Accessing the Dark Web</h2>
+  
+  <ol>
+    <li>Download <strong>Tor Browser</strong> from torproject.org</li>
+    <li>Connect to Tor network</li>
+    <li>Access .onion addresses</li>
+  </ol>
+  
+  <div class="warning-box">
+    <h4>⚠️ Proceed with Caution</h4>
+    <p>The dark web contains illegal content including marketplaces for drugs, weapons, and stolen data. Viewing such content may be illegal. Use Tor only for legitimate research purposes.</p>
+  </div>
+  
+  <h2>Dark Web Search Engines</h2>
+  
+  <ul>
+    <li><strong>Ahmia</strong> – ahmia.fi (clearnet) or ahmia.onion</li>
+    <li><strong>DuckDuckGo</strong> – duckduckgogg42xjoc72x3sjasowoarfbgcmvfimaftt6twagswzczad.onion</li>
+    <li><strong>Torch</strong> – Dark web search engine</li>
+  </ul>
+  
+  <h2>Legitimate Dark Web Research Uses</h2>
+  
+  <ul>
+    <li>Monitoring for leaked credentials</li>
+    <li>Researching threat actors</li>
+    <li>Accessing privacy-focused services</li>
+    <li>Journalism source protection</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 17: Archiving & Preservation</h1>
+  
+  <p>Online content disappears. Preserve evidence before it's deleted.</p>
+  
+  <h2>Why Archive?</h2>
+  
+  <ul>
+    <li>Content gets deleted or edited</li>
+    <li>Websites go offline</li>
+    <li>Evidence may be needed for legal proceedings</li>
+    <li>Historical documentation</li>
+  </ul>
+  
+  <h2>Archiving Tools</h2>
+  
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>Use</th>
+    </tr>
+    <tr><td>Wayback Machine</td><td>Submit URLs for archiving</td></tr>
+    <tr><td>Archive.today</td><td>Quick page snapshots</td></tr>
+    <tr><td>Hunchly</td><td>Automatic capture during browsing</td></tr>
+    <tr><td>SingleFile</td><td>Save complete pages as single HTML</td></tr>
+    <tr><td>HTTrack</td><td>Download entire websites</td></tr>
+    <tr><td>youtube-dl</td><td>Download videos</td></tr>
+  </table>
+  
+  <h2>Chain of Custody</h2>
+  
+  <p>For evidence that may be used in legal proceedings:</p>
+  <ul>
+    <li>Document exactly when and how you captured it</li>
+    <li>Use tools that create timestamps and hashes</li>
+    <li>Store originals separately from working copies</li>
+    <li>Consider notarized screenshots for critical evidence</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 18: OPSEC: Protecting Yourself</h1>
+  
+  <p>When investigating, protect your own identity and digital footprint.</p>
+  
+  <h2>Browser Separation</h2>
+  
+  <ul>
+    <li>Use separate browser profiles for research</li>
+    <li>Never log into personal accounts while researching</li>
+    <li>Consider a dedicated research VM</li>
+  </ul>
+  
+  <h2>VPN & Anonymity</h2>
+  
+  <ul>
+    <li>Use VPN for all research</li>
+    <li>Tor for sensitive investigations</li>
+    <li>Rotate exit nodes/servers</li>
+  </ul>
+  
+  <h2>Sock Puppet Accounts</h2>
+  
+  <p>Create research personas:</p>
+  <ul>
+    <li>Use burner email (ProtonMail, Tutanota)</li>
+    <li>VPN/Tor when creating</li>
+    <li>Consistent but fictional persona</li>
+    <li>Profile photos from ThisPersonDoesNotExist.com or properly licensed stock</li>
+    <li>Build history before using for research</li>
+  </ul>
+  
+  <div class="warning-box">
+    <h4>⚠️ Account Policies</h4>
+    <p>Creating fake accounts violates most platforms' terms of service. While common in OSINT, be aware of the risks and never use fake accounts for illegal purposes.</p>
+  </div>
+  
+  <h2>Physical Security</h2>
+  
+  <p>For sensitive investigations:</p>
+  <ul>
+    <li>Don't research from identifiable locations</li>
+    <li>Be aware of who can see your screen</li>
+    <li>Use encrypted storage for research files</li>
+    <li>Consider the legal implications of your investigation</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 19: Case Study Walkthroughs</h1>
+  
+  <h2>Case 1: Finding a Person with Only a Name</h2>
+  
+  <p><strong>Scenario:</strong> Find "Michael Johnson" who works in tech in Austin, TX.</p>
+  
+  <ol>
+    <li>Google: <code>"Michael Johnson" Austin tech</code></li>
+    <li>LinkedIn: <code>site:linkedin.com "michael johnson" austin</code></li>
+    <li>Narrow by employer, school, or other identifier</li>
+    <li>Cross-reference social media (Facebook, Twitter)</li>
+    <li>Check voter records (many states publish)</li>
+    <li>Property records in Travis County</li>
+    <li>Verify by matching photos, timeline, connections</li>
+  </ol>
+  
+  <h2>Case 2: Investigating a Suspicious Company</h2>
+  
+  <p><strong>Scenario:</strong> ABC Consulting LLC solicits your business. Verify legitimacy.</p>
+  
+  <ol>
+    <li>State business registration – when formed, who are officers?</li>
+    <li>WHOIS on their domain – when registered, by whom?</li>
+    <li>LinkedIn company page – do employees look real?</li>
+    <li>Google reviews, BBB, Glassdoor</li>
+    <li>Reverse image search any photos</li>
+    <li>Check if address is a virtual office</li>
+    <li>Search officer names for other businesses, lawsuits</li>
+  </ol>
+  
+  <h2>Case 3: Verifying a Social Media Profile</h2>
+  
+  <p><strong>Scenario:</strong> Someone claims to be a doctor. Verify.</p>
+  
+  <ol>
+    <li>Check medical license databases (state medical board)</li>
+    <li>NPI (National Provider Identifier) registry</li>
+    <li>Hospital/practice affiliation verification</li>
+    <li>Medical school alumni directories</li>
+    <li>Cross-reference photo with other sources</li>
+    <li>Check for disciplinary actions</li>
+  </ol>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 20: Tool Reference & Resources</h1>
+  
+  <h2>Essential Bookmarks</h2>
+  
+  <h3>Search</h3>
+  <ul>
+    <li>Google Advanced Search</li>
+    <li>Yandex Images</li>
+    <li>IntelligenceX</li>
+  </ul>
+  
+  <h3>People</h3>
+  <ul>
+    <li>FastPeopleSearch</li>
+    <li>ThatsThem</li>
+    <li>TruePeopleSearch</li>
+    <li>Pipl (paid)</li>
+  </ul>
+  
+  <h3>Social Media</h3>
+  <ul>
+    <li>Namechk (username search)</li>
+    <li>Sherlock/Maigret (command line)</li>
+    <li>Social Searcher</li>
+  </ul>
+  
+  <h3>Email</h3>
+  <ul>
+    <li>Hunter.io</li>
+    <li>Epieos</li>
+    <li>Have I Been Pwned</li>
+  </ul>
+  
+  <h3>Business</h3>
+  <ul>
+    <li>OpenCorporates</li>
+    <li>SEC EDGAR</li>
+    <li>State SOS websites</li>
+  </ul>
+  
+  <h3>Property</h3>
+  <ul>
+    <li>County assessor sites</li>
+    <li>Zillow/Redfin</li>
+    <li>FAA Registry</li>
+  </ul>
+  
+  <h3>Web/Domain</h3>
+  <ul>
+    <li>WHOIS lookup</li>
+    <li>Wayback Machine</li>
+    <li>SecurityTrails</li>
+    <li>Shodan</li>
+  </ul>
+  
+  <h2>Comprehensive Tool Collections</h2>
+  
+  <ul>
+    <li><strong>OSINT Framework</strong> – osintframework.com</li>
+    <li><strong>Bellingcat Online Investigation Toolkit</strong></li>
+    <li><strong>IntelTechniques</strong> – inteltechniques.com</li>
+    <li><strong>Awesome OSINT</strong> – GitHub repository</li>
+  </ul>
+  
+  <h2>Learning Resources</h2>
+  
+  <ul>
+    <li><strong>Bellingcat</strong> – bellingcat.com (case studies)</li>
+    <li><strong>SANS OSINT courses</strong></li>
+    <li><strong>Trace Labs</strong> – Missing persons OSINT CTF</li>
+    <li><strong>r/OSINT</strong> – Reddit community</li>
+  </ul>
+  
+  <div class="footer-note">
+    <p><strong>About Jimmy Tools</strong></p>
+    <p>Jimmy Tools provides research guides, databases, and analysis tools for investigators, journalists, and curious citizens. Our mission is to make powerful research capabilities accessible to everyone.</p>
+    <p>Visit us at <strong>jimmytools.net</strong></p>
+    <p>© 2026 Jimmy Tools. This guide is for educational purposes only. Use these techniques responsibly and legally.</p>
+  </div>
+</div>
+
+</body>
+</html>

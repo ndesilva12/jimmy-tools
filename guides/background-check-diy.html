@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Check DIY</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap');
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    @page {
+      size: letter;
+      margin: 0.75in 0.75in 1in 0.75in;
+      @bottom-center {
+        content: counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 10pt;
+        color: #666;
+      }
+    }
+    
+    body {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    
+    .cover {
+      page-break-after: always;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
+      color: white;
+      margin: -0.75in;
+      padding: 2in 1in;
+    }
+    
+    .cover h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 42pt;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    
+    .cover .subtitle {
+      font-size: 15pt;
+      opacity: 0.9;
+      margin-bottom: 60px;
+      max-width: 520px;
+    }
+    
+    .cover .author {
+      font-family: 'Inter', sans-serif;
+      font-size: 12pt;
+      opacity: 0.7;
+      margin-top: auto;
+    }
+    
+    .cover .logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 14pt;
+      font-weight: 600;
+      color: #84cc16;
+      margin-top: 20px;
+    }
+    
+    .toc {
+      page-break-after: always;
+      padding-top: 40px;
+    }
+    
+    .toc h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 24pt;
+      margin-bottom: 30px;
+      color: #9a3412;
+    }
+    
+    .toc ul { list-style: none; }
+    
+    .toc li {
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 10.5pt;
+    }
+    
+    .toc .chapter-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #9a3412;
+      margin-right: 12px;
+    }
+    
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 26pt;
+      color: #9a3412;
+      margin: 40px 0 20px 0;
+      page-break-after: avoid;
+    }
+    
+    h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 17pt;
+      color: #c2410c;
+      margin: 28px 0 14px 0;
+      page-break-after: avoid;
+    }
+    
+    h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 13pt;
+      color: #ea580c;
+      margin: 22px 0 10px 0;
+      page-break-after: avoid;
+    }
+    
+    p { margin-bottom: 14px; text-align: justify; }
+    
+    ul, ol { margin: 14px 0 14px 25px; }
+    li { margin-bottom: 7px; }
+    
+    .tip-box {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      padding: 18px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    
+    .tip-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #9a3412;
+      margin-bottom: 8px;
+      font-size: 11pt;
+    }
+    
+    .warning-box {
+      background: #fef2f2;
+      border-left: 4px solid #ef4444;
+      padding: 18px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    
+    .warning-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #b91c1c;
+      margin-bottom: 8px;
+      font-size: 11pt;
+    }
+    
+    .checklist-box {
+      background: #fefce8;
+      border: 1px solid #fde047;
+      padding: 18px;
+      margin: 22px 0;
+      page-break-inside: avoid;
+    }
+    
+    .checklist-box h4 {
+      font-family: 'Inter', sans-serif;
+      color: #854d0e;
+      margin-bottom: 10px;
+      font-size: 11pt;
+    }
+    
+    .checklist-box ul {
+      list-style: none;
+      margin-left: 0;
+    }
+    
+    .checklist-box li::before {
+      content: "☐ ";
+      color: #ca8a04;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 22px 0;
+      font-size: 9.5pt;
+    }
+    
+    th {
+      background: #9a3412;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      padding: 10px;
+      text-align: left;
+    }
+    
+    td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    tr:nth-child(even) { background: #fff7ed; }
+    
+    .chapter { page-break-before: always; }
+    .chapter:first-of-type { page-break-before: auto; }
+    
+    code {
+      background: #fff7ed;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 9.5pt;
+    }
+    
+    blockquote {
+      border-left: 3px solid #fdba74;
+      padding-left: 18px;
+      margin: 18px 0;
+      font-style: italic;
+      color: #4a5568;
+    }
+    
+    .cost-table td:nth-child(2) {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: #16a34a;
+    }
+    
+    .footer-note {
+      margin-top: 50px;
+      padding-top: 18px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 9pt;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Background Check DIY</h1>
+  <p class="subtitle">Research Anyone Legally Using Public Records — Save $100+ Per Search</p>
+  <p class="author">A Jimmy Tools Guide</p>
+  <p class="logo">jimmytools.net</p>
+</div>
+
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><span class="chapter-num">1</span> Why DIY Background Checks?</li>
+    <li><span class="chapter-num">2</span> What Information Is Public</li>
+    <li><span class="chapter-num">3</span> The DIY Background Check Process</li>
+    <li><span class="chapter-num">4</span> Identity Verification</li>
+    <li><span class="chapter-num">5</span> Criminal Records Search</li>
+    <li><span class="chapter-num">6</span> Civil Court Records</li>
+    <li><span class="chapter-num">7</span> Sex Offender Registry</li>
+    <li><span class="chapter-num">8</span> Address & Residence History</li>
+    <li><span class="chapter-num">9</span> Employment Verification</li>
+    <li><span class="chapter-num">10</span> Education Verification</li>
+    <li><span class="chapter-num">11</span> Professional License Verification</li>
+    <li><span class="chapter-num">12</span> Financial Red Flags</li>
+    <li><span class="chapter-num">13</span> Social Media Deep Dive</li>
+    <li><span class="chapter-num">14</span> Property & Asset Search</li>
+    <li><span class="chapter-num">15</span> Driving & Vehicle Records</li>
+    <li><span class="chapter-num">16</span> State-by-State Resource Guide</li>
+    <li><span class="chapter-num">17</span> International Background Checks</li>
+    <li><span class="chapter-num">18</span> When to Hire a Professional</li>
+    <li><span class="chapter-num">19</span> Legal Considerations</li>
+    <li><span class="chapter-num">20</span> Quick Reference Checklists</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 1: Why DIY Background Checks?</h1>
+  
+  <p>Background check services charge $30 to $150 per search. They promise comprehensive reports, but here's what they don't tell you: most of the information they sell comes from publicly available records you can access yourself—often for free.</p>
+  
+  <p>This guide teaches you to conduct thorough background checks using the same sources professionals use. You'll learn to verify someone's identity, check for criminal history, confirm employment and education, uncover financial problems, and research their online presence—all without paying a middleman.</p>
+  
+  <h2>When You Need a Background Check</h2>
+  
+  <ul>
+    <li><strong>Hiring employees</strong> – Verify credentials, check for red flags</li>
+    <li><strong>Tenant screening</strong> – Eviction history, criminal background</li>
+    <li><strong>Online dating</strong> – Verify identity, check for concerning history</li>
+    <li><strong>Childcare providers</strong> – Criminal and sex offender checks</li>
+    <li><strong>Business partners</strong> – Financial stability, litigation history</li>
+    <li><strong>Contractors</strong> – Licensing, complaints, lawsuits</li>
+    <li><strong>Elder care</strong> – Protect vulnerable family members</li>
+    <li><strong>Personal safety</strong> – Research someone who seems suspicious</li>
+  </ul>
+  
+  <h2>DIY vs. Professional Services</h2>
+  
+  <table class="cost-table">
+    <tr>
+      <th>Service Type</th>
+      <th>Cost</th>
+      <th>Best For</th>
+    </tr>
+    <tr>
+      <td>Comprehensive paid service (Checkr, GoodHire)</td>
+      <td>$30-150</td>
+      <td>Employers needing FCRA compliance</td>
+    </tr>
+    <tr>
+      <td>Consumer sites (BeenVerified, Spokeo)</td>
+      <td>$20-40/mo</td>
+      <td>Quick searches, convenience</td>
+    </tr>
+    <tr>
+      <td>DIY (this guide)</td>
+      <td>$0-20</td>
+      <td>Personal use, thoroughness</td>
+    </tr>
+  </table>
+  
+  <h2>What DIY Background Checks Reveal</h2>
+  
+  <ul>
+    <li>Current and past addresses</li>
+    <li>Criminal convictions (felonies and misdemeanors)</li>
+    <li>Civil lawsuits and judgments</li>
+    <li>Bankruptcies and liens</li>
+    <li>Sex offender status</li>
+    <li>Professional licenses and disciplinary actions</li>
+    <li>Property ownership</li>
+    <li>Social media presence</li>
+    <li>Education and employment claims</li>
+    <li>Marriage and divorce records</li>
+  </ul>
+  
+  <div class="warning-box">
+    <h4>⚠️ Important Legal Notice</h4>
+    <p>If you're conducting background checks for employment, housing, credit, or insurance purposes, you may be required to use an FCRA-compliant service and obtain written consent. This guide is for personal/informal background research. See Chapter 19 for legal details.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 2: What Information Is Public</h1>
+  
+  <p>In the United States, a surprising amount of personal information is publicly available. Understanding what's public—and where to find it—is the foundation of effective background research.</p>
+  
+  <h2>Always Public (Most States)</h2>
+  
+  <ul>
+    <li><strong>Criminal court records</strong> – Felony and misdemeanor convictions</li>
+    <li><strong>Civil court records</strong> – Lawsuits, judgments, evictions</li>
+    <li><strong>Property records</strong> – Ownership, sales, mortgages</li>
+    <li><strong>Bankruptcy filings</strong> – Federal court records</li>
+    <li><strong>UCC filings</strong> – Secured loans against personal property</li>
+    <li><strong>Business registrations</strong> – LLC/corporation records</li>
+    <li><strong>Professional licenses</strong> – Doctors, lawyers, contractors, etc.</li>
+    <li><strong>Sex offender registries</strong> – Federally mandated public access</li>
+    <li><strong>Federal court records</strong> – Via PACER</li>
+    <li><strong>Campaign contributions</strong> – FEC records</li>
+  </ul>
+  
+  <h2>Sometimes Public (Varies by State)</h2>
+  
+  <ul>
+    <li><strong>Voter registration</strong> – Address, DOB, party affiliation</li>
+    <li><strong>Marriage/divorce records</strong> – Some states restrict</li>
+    <li><strong>Birth/death records</strong> – Usually restricted</li>
+    <li><strong>Arrest records</strong> – Not always public without conviction</li>
+    <li><strong>Driving records</strong> – Usually requires consent</li>
+  </ul>
+  
+  <h2>Not Public (Protected)</h2>
+  
+  <ul>
+    <li><strong>Credit reports</strong> – Requires permissible purpose</li>
+    <li><strong>Medical records</strong> – HIPAA protected</li>
+    <li><strong>Education records</strong> – FERPA protected (direct verification available)</li>
+    <li><strong>Tax returns</strong> – Private</li>
+    <li><strong>Sealed/expunged records</strong> – Legally not accessible</li>
+    <li><strong>Juvenile records</strong> – Sealed in most cases</li>
+  </ul>
+  
+  <h2>The Free People Search Sites</h2>
+  
+  <p>Several websites aggregate public records and make them searchable for free:</p>
+  
+  <table>
+    <tr>
+      <th>Site</th>
+      <th>Strengths</th>
+    </tr>
+    <tr><td>FastPeopleSearch.com</td><td>Free, comprehensive, includes relatives</td></tr>
+    <tr><td>TruePeopleSearch.com</td><td>Good for current addresses</td></tr>
+    <tr><td>ThatsThem.com</td><td>Email and phone lookup</td></tr>
+    <tr><td>Whitepages.com</td><td>Basic info free, details paid</td></tr>
+    <tr><td>FamilyTreeNow.com</td><td>Relatives and historical addresses</td></tr>
+  </table>
+  
+  <div class="tip-box">
+    <h4>💡 Start with Free Sites</h4>
+    <p>Always start with the free people search sites. They aggregate data from voter rolls, property records, and data brokers. Often you'll find addresses, phone numbers, relatives, and age—enough to narrow down and verify identity before digging deeper.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 3: The DIY Background Check Process</h1>
+  
+  <p>An effective background check follows a systematic process. Here's the workflow that professionals use:</p>
+  
+  <h2>Step 1: Gather Starting Information</h2>
+  
+  <p>The more you start with, the easier the search:</p>
+  <ul>
+    <li>Full legal name (including middle name)</li>
+    <li>Date of birth</li>
+    <li>Current address</li>
+    <li>Previous addresses</li>
+    <li>Social Security Number (if provided/consented)</li>
+    <li>Phone number</li>
+    <li>Email address</li>
+  </ul>
+  
+  <h2>Step 2: Verify Identity</h2>
+  
+  <p>Confirm you're researching the right person. Many people share names—you need unique identifiers to ensure accuracy.</p>
+  
+  <h2>Step 3: Build Address History</h2>
+  
+  <p>Criminal records are searched by county. You need to know everywhere the person has lived to do a comprehensive criminal check.</p>
+  
+  <h2>Step 4: Search Criminal Records</h2>
+  
+  <p>Check each county where the person has lived, plus statewide repositories and federal courts.</p>
+  
+  <h2>Step 5: Search Civil Records</h2>
+  
+  <p>Lawsuits, judgments, evictions, and bankruptcies reveal financial responsibility and litigation history.</p>
+  
+  <h2>Step 6: Verify Claims</h2>
+  
+  <p>Check employment history, education, and professional licenses against what the person claims.</p>
+  
+  <h2>Step 7: Search Online Presence</h2>
+  
+  <p>Social media and online activity can reveal character, lifestyle, and red flags.</p>
+  
+  <h2>Step 8: Document Everything</h2>
+  
+  <p>Keep records of what you searched, when, and what you found. This protects you and creates a clear record.</p>
+  
+  <div class="checklist-box">
+    <h4>📋 Basic Background Check Checklist</h4>
+    <ul>
+      <li>Verify identity (name, DOB, addresses match)</li>
+      <li>Check sex offender registry (national)</li>
+      <li>Search criminal records (all counties lived)</li>
+      <li>Search federal court records</li>
+      <li>Check civil court records</li>
+      <li>Search bankruptcy records</li>
+      <li>Verify professional licenses</li>
+      <li>Review social media profiles</li>
+      <li>Google name + location</li>
+    </ul>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 4: Identity Verification</h1>
+  
+  <p>Before investing time in research, confirm you're looking at the right person. "John Smith" returns millions of results—you need to narrow down to one individual.</p>
+  
+  <h2>Unique Identifiers</h2>
+  
+  <ul>
+    <li><strong>Full name + DOB + address</strong> – Usually sufficient</li>
+    <li><strong>Middle name</strong> – Significantly narrows results</li>
+    <li><strong>SSN (last 4 digits)</strong> – If available and consented</li>
+    <li><strong>Driver's license number</strong> – Unique identifier</li>
+    <li><strong>Professional license number</strong> – Verifiable</li>
+  </ul>
+  
+  <h2>Cross-Reference Multiple Sources</h2>
+  
+  <p>A match is confirmed when multiple independent sources show the same information:</p>
+  
+  <ol>
+    <li>People search site shows John Smith, DOB 1/15/1985, at 123 Main St</li>
+    <li>Voter registration shows same name and address</li>
+    <li>Property records show same name owning that address</li>
+    <li>LinkedIn shows same person working at claimed employer</li>
+  </ol>
+  
+  <p>When multiple sources agree, you have high confidence you've identified the right person.</p>
+  
+  <h2>Common Name Problems</h2>
+  
+  <p>For common names, use additional filters:</p>
+  <ul>
+    <li>Employer + name + city</li>
+    <li>School + graduation year + name</li>
+    <li>Relatives' names (from people search sites)</li>
+    <li>Phone number or email</li>
+  </ul>
+  
+  <h2>Aliases and Name Variations</h2>
+  
+  <p>Search for all name variations:</p>
+  <ul>
+    <li>Maiden names (for married women)</li>
+    <li>Former married names (after divorce)</li>
+    <li>Nicknames (Bob/Robert, Bill/William)</li>
+    <li>Middle name as first name</li>
+    <li>Hyphenated names</li>
+    <li>Spelling variations</li>
+  </ul>
+  
+  <div class="tip-box">
+    <h4>💡 People Search Sites Show Aliases</h4>
+    <p>FastPeopleSearch and similar sites often list "Also Known As" names and relatives. This helps identify maiden names and aliases you should also search.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 5: Criminal Records Search</h1>
+  
+  <p>Criminal background is often the most important part of a background check. Here's how to do it thoroughly.</p>
+  
+  <h2>Understanding Criminal Record Sources</h2>
+  
+  <h3>County Court Records</h3>
+  <p>Criminal cases are filed in the county where the crime occurred. For a complete search, you need to check every county where the person has lived or worked.</p>
+  
+  <h3>State Repositories</h3>
+  <p>Many states maintain statewide criminal databases. Access varies—some offer free online search, others require fees or are law-enforcement only.</p>
+  
+  <h3>Federal Courts</h3>
+  <p>Federal crimes (drug trafficking, tax evasion, fraud, etc.) are prosecuted in federal courts, searchable via PACER.</p>
+  
+  <h2>Free Criminal Record Sources</h2>
+  
+  <table>
+    <tr>
+      <th>Source</th>
+      <th>Coverage</th>
+      <th>Cost</th>
+    </tr>
+    <tr><td>County court websites</td><td>Single county</td><td>Usually free</td></tr>
+    <tr><td>State court portals</td><td>Statewide (varies)</td><td>Free-$25</td></tr>
+    <tr><td>PACER</td><td>Federal courts</td><td>$0.10/page</td></tr>
+    <tr><td>VineLink</td><td>Incarcerated individuals</td><td>Free</td></tr>
+    <tr><td>State DOC inmate search</td><td>Current/former inmates</td><td>Free</td></tr>
+  </table>
+  
+  <h2>How to Search County Criminal Records</h2>
+  
+  <ol>
+    <li>Identify all counties where person has lived (from address history)</li>
+    <li>Google "[County name] court records search" or "[County] clerk of court"</li>
+    <li>Navigate to criminal case search</li>
+    <li>Search by name and DOB</li>
+    <li>Review all results—note case numbers for detailed review</li>
+    <li>Check case details for charges, disposition, and sentences</li>
+  </ol>
+  
+  <h2>What Criminal Records Show</h2>
+  
+  <ul>
+    <li><strong>Case number</strong></li>
+    <li><strong>Filing date</strong></li>
+    <li><strong>Charges</strong> (felony/misdemeanor, specific offense)</li>
+    <li><strong>Disposition</strong> (guilty, not guilty, dismissed, nolle prosequi)</li>
+    <li><strong>Sentence</strong> (jail time, probation, fines)</li>
+    <li><strong>Current status</strong> (open, closed)</li>
+  </ul>
+  
+  <h2>Understanding Dispositions</h2>
+  
+  <table>
+    <tr>
+      <th>Disposition</th>
+      <th>Meaning</th>
+    </tr>
+    <tr><td>Guilty / Convicted</td><td>Found guilty, sentence imposed</td></tr>
+    <tr><td>Not Guilty</td><td>Acquitted at trial</td></tr>
+    <tr><td>Dismissed</td><td>Case dropped by prosecutor</td></tr>
+    <tr><td>Nolle Prosequi</td><td>Prosecutor declined to pursue</td></tr>
+    <tr><td>Deferred Adjudication</td><td>Probation; may be dismissed if completed</td></tr>
+    <tr><td>Nolo Contendere</td><td>No contest (treated as guilty for sentencing)</td></tr>
+    <tr><td>Expunged / Sealed</td><td>Record removed from public view</td></tr>
+  </table>
+  
+  <div class="warning-box">
+    <h4>⚠️ Arrests vs. Convictions</h4>
+    <p>An arrest is not a conviction. Many states restrict using arrest records without convictions for employment decisions. Focus on dispositions, not just charges filed.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 6: Civil Court Records</h1>
+  
+  <p>Civil records reveal lawsuits, judgments, evictions, and other legal disputes. They indicate how someone handles conflicts and financial obligations.</p>
+  
+  <h2>Types of Civil Cases</h2>
+  
+  <ul>
+    <li><strong>General civil</strong> – Contract disputes, personal injury, property</li>
+    <li><strong>Small claims</strong> – Low-value disputes (varies by state)</li>
+    <li><strong>Evictions</strong> – Landlord-tenant disputes</li>
+    <li><strong>Family court</strong> – Divorce, custody, child support</li>
+    <li><strong>Probate</strong> – Estates, guardianships</li>
+    <li><strong>Collections</strong> – Debt collection lawsuits</li>
+  </ul>
+  
+  <h2>What Civil Records Reveal</h2>
+  
+  <ul>
+    <li><strong>Financial irresponsibility</strong> – Collections, judgments for unpaid debts</li>
+    <li><strong>Eviction history</strong> – Past rental problems</li>
+    <li><strong>Litigation pattern</strong> – Frequently sues or gets sued</li>
+    <li><strong>Business disputes</strong> – Partner conflicts, contract breaches</li>
+    <li><strong>Divorce details</strong> – Financial issues, custody disputes</li>
+  </ul>
+  
+  <h2>How to Search Civil Records</h2>
+  
+  <p>Same process as criminal—search county by county:</p>
+  <ol>
+    <li>Go to county court website</li>
+    <li>Find civil case search (separate from criminal)</li>
+    <li>Search by party name</li>
+    <li>Note whether person was plaintiff or defendant</li>
+    <li>Review case type and disposition</li>
+  </ol>
+  
+  <h2>Eviction Records</h2>
+  
+  <p>For tenant screening, evictions are critical. They may be in:</p>
+  <ul>
+    <li>Civil court (general jurisdiction)</li>
+    <li>Small claims court</li>
+    <li>Separate housing court (in some cities)</li>
+    <li>Justice of the Peace courts (in some states)</li>
+  </ul>
+  
+  <div class="tip-box">
+    <h4>💡 Both Sides of the Story</h4>
+    <p>Civil records show both parties. Someone listed as defendant in an eviction may have been wrongfully evicted. Someone as plaintiff in many suits may be litigious. Context matters—read the details.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 7: Sex Offender Registry</h1>
+  
+  <p>Sex offender registration is federally mandated and publicly accessible. This should be part of every background check, especially for those working with children or vulnerable populations.</p>
+  
+  <h2>National Sex Offender Search</h2>
+  
+  <p><strong>Dru Sjodin National Sex Offender Public Website (NSOPW)</strong><br>
+  nsopw.gov</p>
+  
+  <p>This federal site searches all 50 states, DC, and territories simultaneously. It's free and comprehensive.</p>
+  
+  <h2>State Registries</h2>
+  
+  <p>Each state also maintains its own registry with additional details:</p>
+  <ul>
+    <li>Search "[State] sex offender registry"</li>
+    <li>Often includes photos</li>
+    <li>May show offense details</li>
+    <li>Shows compliance status</li>
+  </ul>
+  
+  <h2>What Registries Show</h2>
+  
+  <ul>
+    <li>Name and aliases</li>
+    <li>Photo</li>
+    <li>Address</li>
+    <li>Physical description</li>
+    <li>Offense (varies by state)</li>
+    <li>Conviction date</li>
+    <li>Risk level (in some states)</li>
+  </ul>
+  
+  <h2>Neighborhood Search</h2>
+  
+  <p>Most state registries allow searching by address to see registered offenders in an area—useful when moving to a new neighborhood or evaluating a rental property.</p>
+  
+  <div class="warning-box">
+    <h4>⚠️ Registry Limitations</h4>
+    <p>Not all sex offenders are on registries—only those convicted after registration laws passed. Some offenders fail to register. First-time offenders haven't been caught yet. The registry is one tool, not a guarantee of safety.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 8: Address & Residence History</h1>
+  
+  <p>Address history is the foundation of a thorough background check. Criminal and civil records are organized by county—you need to know everywhere someone has lived to search comprehensively.</p>
+  
+  <h2>Finding Address History</h2>
+  
+  <h3>Free People Search Sites</h3>
+  <p>FastPeopleSearch, TruePeopleSearch, and similar sites compile address history from:</p>
+  <ul>
+    <li>Voter registration records</li>
+    <li>Property records</li>
+    <li>Credit header data (from data brokers)</li>
+    <li>Magazine subscriptions and catalog databases</li>
+  </ul>
+  
+  <h3>Verify with Property Records</h3>
+  <p>If the person owned property, county assessor records confirm addresses and dates of ownership.</p>
+  
+  <h3>Social Media Clues</h3>
+  <p>Facebook "Places Lived," LinkedIn locations, and tagged photos can reveal residences not in databases.</p>
+  
+  <h2>How Far Back to Search</h2>
+  
+  <p>Professional background checks typically cover 7-10 years. Consider:</p>
+  <ul>
+    <li><strong>Employment:</strong> 7 years is standard</li>
+    <li><strong>Housing:</strong> 5-7 years typically</li>
+    <li><strong>Serious crimes:</strong> No time limit—felonies are always relevant</li>
+    <li><strong>Dating/personal:</strong> Depends on your comfort level</li>
+  </ul>
+  
+  <h2>Mapping Addresses to Counties</h2>
+  
+  <p>Once you have addresses, identify the county for each:</p>
+  <ol>
+    <li>Google "[Address] what county"</li>
+    <li>Or use Census Bureau geocoding tools</li>
+    <li>Create a list: Address → County → State</li>
+    <li>Search court records for each county</li>
+  </ol>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 9: Employment Verification</h1>
+  
+  <p>People frequently exaggerate or fabricate employment history. Here's how to verify claims.</p>
+  
+  <h2>Direct Employer Verification</h2>
+  
+  <p>Many employers will only confirm:</p>
+  <ul>
+    <li>Dates of employment</li>
+    <li>Job title</li>
+    <li>Eligibility for rehire (sometimes)</li>
+  </ul>
+  
+  <p>They typically won't discuss performance or reason for leaving due to liability concerns.</p>
+  
+  <h2>The Work Number (Equifax)</h2>
+  
+  <p>Many large employers report to The Work Number database. Employees can get their own record free; third-party access requires permissible purpose.</p>
+  
+  <h2>LinkedIn Verification</h2>
+  
+  <p>Cross-reference claimed employment with LinkedIn:</p>
+  <ul>
+    <li>Do dates and titles match?</li>
+    <li>Does the company exist?</li>
+    <li>Do connections confirm the relationship?</li>
+    <li>Are endorsements and recommendations present?</li>
+  </ul>
+  
+  <h2>SEC Filings for Executives</h2>
+  
+  <p>For claimed executive roles at public companies:</p>
+  <ul>
+    <li>Check proxy statements (DEF 14A) for officer listings</li>
+    <li>Search 10-K reports for executive names</li>
+    <li>Form 4 filings show insider trading by officers</li>
+  </ul>
+  
+  <h2>Business Ownership Verification</h2>
+  
+  <p>If someone claims to own a business:</p>
+  <ol>
+    <li>Search state business registry for the company</li>
+    <li>Check if their name appears as officer/owner</li>
+    <li>Verify business is active, not dissolved</li>
+    <li>Check for lawsuits against the business</li>
+  </ol>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 10: Education Verification</h1>
+  
+  <p>Fake degrees are more common than you'd think. Here's how to verify education claims.</p>
+  
+  <h2>National Student Clearinghouse</h2>
+  
+  <p>studentclearinghouse.org</p>
+  <p>Most U.S. colleges and universities report enrollment and degrees to this database. Verification requests are typically made by employers with consent.</p>
+  
+  <h2>Direct University Verification</h2>
+  
+  <p>Contact the registrar's office:</p>
+  <ul>
+    <li>Many schools have online degree verification</li>
+    <li>Phone verification for dates of attendance and degrees</li>
+    <li>Some charge a small fee</li>
+  </ul>
+  
+  <h2>Diploma Mills Red Flags</h2>
+  
+  <p>Signs of a fake degree:</p>
+  <ul>
+    <li>Degree from unaccredited institution</li>
+    <li>School not found on Department of Education database</li>
+    <li>Degree obtained in impossibly short time</li>
+    <li>School has no physical campus</li>
+    <li>Similar name to legitimate school ("Stanford University" vs "Stanfford University")</li>
+  </ul>
+  
+  <h2>Check Accreditation</h2>
+  
+  <p>Department of Education Database: ope.ed.gov/dapip</p>
+  <p>Search for any school to verify it's legitimately accredited.</p>
+  
+  <h2>Alumni Networks</h2>
+  
+  <p>LinkedIn shows alumni connections. If someone claims Harvard MBA but has zero Harvard connections and isn't in any Harvard groups, that's suspicious.</p>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 11: Professional License Verification</h1>
+  
+  <p>If someone claims to be a doctor, lawyer, contractor, or other licensed professional, verification takes minutes.</p>
+  
+  <h2>Medical Licenses</h2>
+  
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>Coverage</th>
+    </tr>
+    <tr><td>State Medical Board</td><td>License status, disciplinary actions</td></tr>
+    <tr><td>FSMB DocInfo</td><td>National physician database</td></tr>
+    <tr><td>NPI Registry</td><td>National Provider Identifier lookup</td></tr>
+    <tr><td>Federation Credentials Verification</td><td>Primary source verification</td></tr>
+  </table>
+  
+  <h2>Legal Licenses</h2>
+  
+  <ul>
+    <li><strong>State Bar websites</strong> – Every state bar has lawyer lookup</li>
+    <li>Shows: License status, disciplinary history, bar admissions</li>
+    <li>Also search: "[Lawyer name] disciplinary action"</li>
+  </ul>
+  
+  <h2>Contractor Licenses</h2>
+  
+  <ul>
+    <li>State contractor licensing boards</li>
+    <li>Check license number against database</li>
+    <li>Verify insurance requirements</li>
+    <li>Check for complaints and violations</li>
+  </ul>
+  
+  <h2>Other Common Licenses</h2>
+  
+  <table>
+    <tr>
+      <th>Profession</th>
+      <th>Verification Source</th>
+    </tr>
+    <tr><td>CPA (Accountant)</td><td>State Board of Accountancy</td></tr>
+    <tr><td>Real Estate Agent</td><td>State Real Estate Commission</td></tr>
+    <tr><td>Nurse</td><td>State Board of Nursing</td></tr>
+    <tr><td>Teacher</td><td>State Department of Education</td></tr>
+    <tr><td>Financial Advisor</td><td>FINRA BrokerCheck, SEC IAPD</td></tr>
+    <tr><td>Insurance Agent</td><td>State Insurance Department</td></tr>
+  </table>
+  
+  <div class="tip-box">
+    <h4>💡 Always Check Disciplinary Actions</h4>
+    <p>A valid license doesn't mean a clean record. Check for disciplinary actions, complaints, and restrictions. A doctor might be licensed but have multiple malpractice findings.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 12: Financial Red Flags</h1>
+  
+  <p>Financial history indicates responsibility and trustworthiness. While you can't access credit reports without consent, public records reveal significant financial problems.</p>
+  
+  <h2>Bankruptcy Records</h2>
+  
+  <p>Bankruptcy filings are federal court records, searchable via PACER:</p>
+  <ul>
+    <li><strong>Chapter 7</strong> – Liquidation (debts discharged)</li>
+    <li><strong>Chapter 11</strong> – Business reorganization</li>
+    <li><strong>Chapter 13</strong> – Personal repayment plan</li>
+  </ul>
+  
+  <p>Bankruptcies remain on credit reports for 7-10 years and are public record indefinitely.</p>
+  
+  <h2>Judgments and Liens</h2>
+  
+  <p>Search county court records for:</p>
+  <ul>
+    <li><strong>Money judgments</strong> – Court ordered to pay debt</li>
+    <li><strong>Tax liens</strong> – IRS or state tax debt (county recorder)</li>
+    <li><strong>Mechanic's liens</strong> – Unpaid contractors</li>
+    <li><strong>Child support liens</strong></li>
+  </ul>
+  
+  <h2>Foreclosures</h2>
+  
+  <p>Foreclosure records appear in:</p>
+  <ul>
+    <li>County court records (judicial foreclosure states)</li>
+    <li>County recorder/deed records (trustee's deed)</li>
+    <li>Property record history</li>
+  </ul>
+  
+  <h2>UCC Filings</h2>
+  
+  <p>Uniform Commercial Code filings at the state level show secured debts against personal property—indicates someone has pledged assets as loan collateral.</p>
+  
+  <h2>Business Failures</h2>
+  
+  <p>Check state records for:</p>
+  <ul>
+    <li>Dissolved or revoked business entities</li>
+    <li>Involuntary dissolution (failure to file, tax issues)</li>
+    <li>Multiple failed businesses</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 13: Social Media Deep Dive</h1>
+  
+  <p>Social media reveals character, lifestyle, and potential red flags that don't appear in official records.</p>
+  
+  <h2>What to Look For</h2>
+  
+  <ul>
+    <li><strong>Consistency</strong> – Does online persona match stated background?</li>
+    <li><strong>Character indicators</strong> – How do they interact with others?</li>
+    <li><strong>Red flags</strong> – Extremism, violence, substance abuse, dishonesty</li>
+    <li><strong>Verification</strong> – Photos, locations, employers matching claims</li>
+    <li><strong>Connections</strong> – Who are their friends and associates?</li>
+  </ul>
+  
+  <h2>Platform-by-Platform Search</h2>
+  
+  <h3>Facebook</h3>
+  <ul>
+    <li>Search by name + location or employer</li>
+    <li>Check privacy settings—some info visible to all</li>
+    <li>Look at friends list, groups, check-ins</li>
+    <li>View tagged photos</li>
+  </ul>
+  
+  <h3>Instagram</h3>
+  <ul>
+    <li>Search username variations</li>
+    <li>Check location tags</li>
+    <li>Review tagged photos by others</li>
+  </ul>
+  
+  <h3>Twitter/X</h3>
+  <ul>
+    <li>Search name and username</li>
+    <li>Review posting history</li>
+    <li>Check who they interact with</li>
+    <li>Look for controversial takes</li>
+  </ul>
+  
+  <h3>LinkedIn</h3>
+  <ul>
+    <li>Compare to resume/stated history</li>
+    <li>Check recommendations (are they real people?)</li>
+    <li>Review activity and posts</li>
+  </ul>
+  
+  <h2>Username Search</h2>
+  
+  <p>People reuse usernames. Find all accounts:</p>
+  <ul>
+    <li>Namechk.com – Check username across platforms</li>
+    <li>WhatsMyName.app – Username search tool</li>
+    <li>KnowEm.com – Brand/username search</li>
+  </ul>
+  
+  <h2>Google the Person</h2>
+  
+  <p>Search variations:</p>
+  <ul>
+    <li>"Full Name" + city</li>
+    <li>"Full Name" + employer</li>
+    <li>"Full Name" + school</li>
+    <li>Email address</li>
+    <li>Phone number</li>
+    <li>Username</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 14: Property & Asset Search</h1>
+  
+  <p>Property records reveal financial status, stability, and sometimes hidden wealth.</p>
+  
+  <h2>Real Property Records</h2>
+  
+  <p>County assessor and recorder offices show:</p>
+  <ul>
+    <li>Property ownership</li>
+    <li>Purchase price and date</li>
+    <li>Current assessed value</li>
+    <li>Mortgage information</li>
+    <li>Tax payment status</li>
+  </ul>
+  
+  <h2>How to Search</h2>
+  
+  <ol>
+    <li>Identify the county</li>
+    <li>Go to county assessor or recorder website</li>
+    <li>Search by owner name</li>
+    <li>Review all properties listed</li>
+  </ol>
+  
+  <h2>Using Zillow and Redfin</h2>
+  
+  <p>These sites aggregate assessor data and add:</p>
+  <ul>
+    <li>Estimated current value</li>
+    <li>Sales history</li>
+    <li>Comparable sales</li>
+    <li>Photos (from listings)</li>
+  </ul>
+  
+  <h2>Hidden Ownership</h2>
+  
+  <p>Property may be in an LLC or trust. If you find LLC ownership:</p>
+  <ol>
+    <li>Search the LLC in state business records</li>
+    <li>Find who the LLC officers/members are</li>
+    <li>May require registered agent research</li>
+  </ol>
+  
+  <h2>Vehicles, Boats, Aircraft</h2>
+  
+  <ul>
+    <li><strong>Vehicles</strong> – Limited access; DMV records protected</li>
+    <li><strong>Aircraft</strong> – FAA Registry (registry.faa.gov) – public</li>
+    <li><strong>Boats (documented)</strong> – USCG NVDC – searchable</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 15: Driving & Vehicle Records</h1>
+  
+  <p>Driving records are protected under the Driver's Privacy Protection Act (DPPA), but there are legal ways to access relevant information.</p>
+  
+  <h2>What's in a Driving Record</h2>
+  
+  <ul>
+    <li>License status (valid, suspended, revoked)</li>
+    <li>Traffic violations</li>
+    <li>DUI/DWI convictions</li>
+    <li>Accidents</li>
+    <li>Points on license</li>
+  </ul>
+  
+  <h2>How to Access</h2>
+  
+  <h3>With Consent</h3>
+  <p>The subject can request their own record and provide it to you. Most states offer online ordering for $5-20.</p>
+  
+  <h3>Employment Screening</h3>
+  <p>Employers hiring drivers can access MVR (Motor Vehicle Records) through authorized services.</p>
+  
+  <h3>Insurance Purposes</h3>
+  <p>Insurers can access driving records with consent.</p>
+  
+  <h2>DUI/DWI Records</h2>
+  
+  <p>DUI convictions appear in criminal court records (searchable as described in Chapter 5). You don't need DMV access to find DUI history.</p>
+  
+  <h2>Traffic Court Records</h2>
+  
+  <p>Some traffic tickets are handled in traffic or municipal court, which may have separate public search systems.</p>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 16: State-by-State Resource Guide</h1>
+  
+  <p>Each state has different systems and accessibility. Here's a quick reference for the most populous states.</p>
+  
+  <h2>California</h2>
+  <ul>
+    <li><strong>Courts:</strong> courts.ca.gov (some counties have separate systems)</li>
+    <li><strong>Business:</strong> businesssearch.sos.ca.gov</li>
+    <li><strong>Professional Licenses:</strong> dca.ca.gov (Department of Consumer Affairs)</li>
+    <li><strong>Property:</strong> Individual county assessor sites</li>
+  </ul>
+  
+  <h2>Texas</h2>
+  <ul>
+    <li><strong>Courts:</strong> txcourts.gov (re:SearchTX for participating counties)</li>
+    <li><strong>Business:</strong> sos.state.tx.us</li>
+    <li><strong>Professional Licenses:</strong> tdlr.texas.gov</li>
+    <li><strong>Criminal:</strong> Texas DPS crime records (publicsite.dps.texas.gov)</li>
+  </ul>
+  
+  <h2>Florida</h2>
+  <ul>
+    <li><strong>Courts:</strong> Excellent—myflcourtaccess.com (statewide)</li>
+    <li><strong>Business:</strong> sunbiz.org</li>
+    <li><strong>Inmates:</strong> fdc.myflorida.com</li>
+    <li><strong>Property:</strong> County property appraiser sites</li>
+  </ul>
+  
+  <h2>New York</h2>
+  <ul>
+    <li><strong>Courts:</strong> iapps.courts.state.ny.us/webcivil (civil); varies for criminal</li>
+    <li><strong>Business:</strong> dos.ny.gov/corporations</li>
+    <li><strong>Professional Licenses:</strong> op.nysed.gov/verification-search</li>
+  </ul>
+  
+  <h2>General State Resources</h2>
+  
+  <p>For any state:</p>
+  <ul>
+    <li>Google "[State] court case search"</li>
+    <li>Google "[State] secretary of state business search"</li>
+    <li>Google "[State] professional license lookup"</li>
+    <li>Google "[State] sex offender registry"</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 17: International Background Checks</h1>
+  
+  <p>Verifying backgrounds for people with international history is more complex, but not impossible.</p>
+  
+  <h2>Challenges</h2>
+  
+  <ul>
+    <li>Different legal systems and record-keeping</li>
+    <li>Language barriers</li>
+    <li>Privacy laws (GDPR in Europe)</li>
+    <li>Less accessible online records</li>
+    <li>Document verification difficulties</li>
+  </ul>
+  
+  <h2>What You Can Do</h2>
+  
+  <h3>Verify Immigration Status</h3>
+  <p>If they claim legal U.S. status, they should have documents. USCIS E-Verify for employers.</p>
+  
+  <h3>International Criminal Records</h3>
+  <p>Many countries offer criminal record checks:</p>
+  <ul>
+    <li><strong>UK:</strong> Disclosure and Barring Service (DBS)</li>
+    <li><strong>Canada:</strong> RCMP criminal record check</li>
+    <li><strong>Australia:</strong> AFP National Police Check</li>
+  </ul>
+  
+  <h3>INTERPOL</h3>
+  <p>INTERPOL's public notices database shows wanted individuals (interpol.int).</p>
+  
+  <h3>Education Verification</h3>
+  <p>Contact universities directly. Many have English-speaking registrar offices.</p>
+  
+  <h2>When to Hire International Specialists</h2>
+  
+  <p>For thorough international checks, consider professional services that have in-country resources. DIY is limited for foreign records.</p>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 18: When to Hire a Professional</h1>
+  
+  <p>DIY background checks work for most purposes, but sometimes you need professional help.</p>
+  
+  <h2>Hire a Professional When:</h2>
+  
+  <ul>
+    <li><strong>FCRA compliance required</strong> – Employment, housing, credit decisions</li>
+    <li><strong>Legal proceedings</strong> – Evidence may need professional documentation</li>
+    <li><strong>International scope</strong> – Foreign records require local expertise</li>
+    <li><strong>Time constraints</strong> – Professionals work faster with established processes</li>
+    <li><strong>Complex subjects</strong> – Multiple aliases, extensive relocation history</li>
+    <li><strong>Surveillance or investigation</strong> – Beyond public records</li>
+  </ul>
+  
+  <h2>Types of Professional Services</h2>
+  
+  <table>
+    <tr>
+      <th>Service Type</th>
+      <th>Use Case</th>
+      <th>Cost Range</th>
+    </tr>
+    <tr><td>Consumer Reporting Agency (Checkr, GoodHire)</td><td>Employment screening</td><td>$30-100</td></tr>
+    <tr><td>Tenant Screening Service</td><td>Landlords</td><td>$25-50</td></tr>
+    <tr><td>Private Investigator</td><td>Complex investigations</td><td>$50-150/hour</td></tr>
+    <tr><td>International Specialists</td><td>Foreign records</td><td>$200-500+</td></tr>
+  </table>
+  
+  <h2>Finding a Licensed PI</h2>
+  
+  <ul>
+    <li>Check state licensing requirements</li>
+    <li>Verify license with state regulatory agency</li>
+    <li>Look for specialization in your type of case</li>
+    <li>Get references and reviews</li>
+    <li>Understand fee structure upfront</li>
+  </ul>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 19: Legal Considerations</h1>
+  
+  <p>Background research is legal, but certain uses are regulated. Understand the rules to stay compliant.</p>
+  
+  <h2>The Fair Credit Reporting Act (FCRA)</h2>
+  
+  <p>FCRA regulates "consumer reports" used for:</p>
+  <ul>
+    <li>Employment decisions</li>
+    <li>Housing decisions</li>
+    <li>Credit decisions</li>
+    <li>Insurance underwriting</li>
+  </ul>
+  
+  <p>If using background information for these purposes, you must:</p>
+  <ul>
+    <li>Use an FCRA-compliant Consumer Reporting Agency</li>
+    <li>Obtain written consent from the subject</li>
+    <li>Follow adverse action procedures if denying based on findings</li>
+  </ul>
+  
+  <h2>When FCRA Doesn't Apply</h2>
+  
+  <ul>
+    <li>Personal dating/relationship research</li>
+    <li>Business due diligence (B2B, not employment)</li>
+    <li>Journalistic investigation</li>
+    <li>Personal safety concerns</li>
+    <li>General curiosity (though ethical limits apply)</li>
+  </ul>
+  
+  <h2>State Laws</h2>
+  
+  <p>Some states have additional restrictions:</p>
+  <ul>
+    <li>"Ban the Box" laws limiting criminal history inquiries in employment</li>
+    <li>Limits on how far back employers can look</li>
+    <li>Restrictions on considering arrests without convictions</li>
+  </ul>
+  
+  <h2>Ethical Boundaries</h2>
+  
+  <p>Legal doesn't always mean ethical:</p>
+  <ul>
+    <li>Don't stalk, harass, or dox</li>
+    <li>Don't use information to discriminate illegally</li>
+    <li>Don't pretend to be someone else to obtain information</li>
+    <li>Respect reasonable privacy expectations</li>
+  </ul>
+  
+  <div class="warning-box">
+    <h4>⚠️ Consult an Attorney</h4>
+    <p>This guide is for educational purposes. For employment screening, tenant screening, or any regulated use, consult with an attorney familiar with FCRA and state laws.</p>
+  </div>
+</div>
+
+<div class="chapter">
+  <h1>Chapter 20: Quick Reference Checklists</h1>
+  
+  <div class="checklist-box">
+    <h4>📋 Basic Personal Background Check</h4>
+    <ul>
+      <li>Google name + location</li>
+      <li>Search 2-3 free people search sites</li>
+      <li>Check sex offender registry (NSOPW.gov)</li>
+      <li>Search social media (Facebook, LinkedIn, Instagram)</li>
+      <li>Search county criminal court (each county of residence)</li>
+      <li>Search county civil court</li>
+      <li>Search federal bankruptcy (PACER)</li>
+    </ul>
+  </div>
+  
+  <div class="checklist-box">
+    <h4>📋 Dating/Relationship Check</h4>
+    <ul>
+      <li>Verify identity (name, age, location match claims)</li>
+      <li>Reverse image search profile photos</li>
+      <li>Check sex offender registry</li>
+      <li>Search criminal records</li>
+      <li>Search marriage/divorce records (if claims single)</li>
+      <li>Google name + "arrest" or "charged"</li>
+      <li>Review social media history</li>
+      <li>Check professional claims (licenses, employer)</li>
+    </ul>
+  </div>
+  
+  <div class="checklist-box">
+    <h4>📋 Tenant Screening</h4>
+    <ul>
+      <li>Verify identity (government ID)</li>
+      <li>Verify income (pay stubs, employer contact)</li>
+      <li>Search eviction records (all prior addresses)</li>
+      <li>Search criminal records</li>
+      <li>Search civil judgments (unpaid debts)</li>
+      <li>Check sex offender registry</li>
+      <li>Contact previous landlords</li>
+      <li>Verify employment</li>
+    </ul>
+  </div>
+  
+  <div class="checklist-box">
+    <h4>📋 Contractor/Service Provider Check</h4>
+    <ul>
+      <li>Verify professional license (state board)</li>
+      <li>Check license for complaints/discipline</li>
+      <li>Search business registration (state SOS)</li>
+      <li>Check BBB for complaints</li>
+      <li>Google business name + "complaints" or "scam"</li>
+      <li>Search civil records (has business been sued?)</li>
+      <li>Verify insurance if required</li>
+      <li>Read online reviews (Google, Yelp)</li>
+    </ul>
+  </div>
+  
+  <div class="checklist-box">
+    <h4>📋 Business Partner/Investor Due Diligence</h4>
+    <ul>
+      <li>Verify identity and credentials</li>
+      <li>Search all businesses owned (state records)</li>
+      <li>Check for bankruptcies (personal and business)</li>
+      <li>Search civil litigation (has been sued?)</li>
+      <li>Check SEC filings if claimed public company role</li>
+      <li>Verify professional licenses</li>
+      <li>Search criminal records</li>
+      <li>Review LinkedIn for consistency</li>
+      <li>Google extensively</li>
+      <li>Check UCC filings (outstanding debts)</li>
+    </ul>
+  </div>
+  
+  <h2>Quick Links Reference</h2>
+  
+  <table>
+    <tr>
+      <th>Resource</th>
+      <th>URL</th>
+    </tr>
+    <tr><td>Sex Offender Registry (National)</td><td>nsopw.gov</td></tr>
+    <tr><td>Federal Court Records</td><td>pacer.uscourts.gov</td></tr>
+    <tr><td>SEC Filings</td><td>sec.gov/edgar</td></tr>
+    <tr><td>FAA Aircraft Registry</td><td>registry.faa.gov</td></tr>
+    <tr><td>FINRA BrokerCheck</td><td>brokercheck.finra.org</td></tr>
+    <tr><td>NPI Registry (Medical)</td><td>npiregistry.cms.hhs.gov</td></tr>
+    <tr><td>FastPeopleSearch</td><td>fastpeoplesearch.com</td></tr>
+    <tr><td>TruePeopleSearch</td><td>truepeoplesearch.com</td></tr>
+    <tr><td>Have I Been Pwned</td><td>haveibeenpwned.com</td></tr>
+    <tr><td>Namechk (Username)</td><td>namechk.com</td></tr>
+  </table>
+  
+  <div class="footer-note">
+    <p><strong>About Jimmy Tools</strong></p>
+    <p>Jimmy Tools provides research guides, databases, and analysis tools for investigators, journalists, and curious citizens. Our mission is to make powerful research capabilities accessible to everyone.</p>
+    <p>Visit us at <strong>jimmytools.net</strong></p>
+    <p>© 2026 Jimmy Tools. This guide is for educational purposes only and does not constitute legal advice.</p>
+  </div>
+</div>
+
+</body>
+</html>
