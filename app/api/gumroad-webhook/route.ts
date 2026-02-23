@@ -3,8 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 
-// Path to store tokens (in production, use a database)
-const TOKENS_FILE = path.join(process.cwd(), 'data', 'tokens.json');
+// Path to store tokens - use /tmp on Vercel (ephemeral but writable)
+// For production persistence, use Vercel KV, Postgres, or external DB
+const TOKENS_FILE = process.env.VERCEL 
+  ? '/tmp/tokens.json' 
+  : path.join(process.cwd(), 'data', 'tokens.json');
 
 interface TokenData {
   token: string;
@@ -17,8 +20,9 @@ interface TokenData {
   expiresAt: number;
 }
 
-// Ensure data directory exists
+// Ensure data directory exists (not needed for /tmp)
 function ensureDataDir() {
+  if (process.env.VERCEL) return; // /tmp always exists on Vercel
   const dataDir = path.join(process.cwd(), 'data');
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir, { recursive: true });

@@ -2,7 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
-const TOKENS_FILE = path.join(process.cwd(), 'data', 'tokens.json');
+// Use /tmp on Vercel (ephemeral but writable)
+const TOKENS_FILE = process.env.VERCEL 
+  ? '/tmp/tokens.json' 
+  : path.join(process.cwd(), 'data', 'tokens.json');
 
 interface TokenData {
   token: string;
