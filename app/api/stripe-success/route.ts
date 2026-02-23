@@ -35,20 +35,6 @@ const PRODUCT_INFO: Record<string, {
     type: 'session',
     schedulingUrl: 'https://calendar.app.google/G6Pge7VEa6uXeDhz6',
   },
-  'sec-edgar-scraper': {
-    name: 'SEC EDGAR Company Filings Scraper',
-    description: 'Extract 10-K, 10-Q, 8-K filings for any public company. Google Colab notebook.',
-    fileType: 'Jupyter Notebook (.ipynb)',
-    fileSize: '14 KB',
-    type: 'digital',
-  },
-  'gov-salary-scraper': {
-    name: 'Government Salary Database Scraper',
-    description: 'Search public employee salaries across 5 states. Google Colab notebook.',
-    fileType: 'Jupyter Notebook (.ipynb)',
-    fileSize: '26 KB',
-    type: 'digital',
-  },
 };
 
 export async function GET(req: NextRequest) {

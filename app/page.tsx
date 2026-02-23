@@ -54,8 +54,6 @@ export default function Home() {
   const databases = getProductsByType('database');
   const sessionProduct = products.find(p => p.id === 'openclaw-session')!;
   const guideProduct = products.find(p => p.id === 'openclaw-setup')!;
-  const edgarProduct = products.find(p => p.id === 'sec-edgar-scraper')!;
-  const salaryProduct = products.find(p => p.id === 'gov-salary-scraper')!;
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -128,56 +126,6 @@ export default function Home() {
                     Learn More
                   </Link>
                   <BuyButton productId={sessionProduct.id} price={sessionProduct.price} color="cyan" />
-                </div>
-              </div>
-            </div>
-
-            {/* SEC EDGAR Scraper - Lime Green */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-lime-500/50 transition">
-              <div className="text-lime-400 text-sm font-medium mb-3">📜 SCRIPT</div>
-              <Link href={`/products/${edgarProduct.id}`} className="block">
-                <h3 className="text-2xl font-bold mb-2 hover:text-lime-400 transition">{edgarProduct.name}</h3>
-              </Link>
-              <p className="text-zinc-400 mb-6">{edgarProduct.tagline}</p>
-              <ul className="space-y-2 text-zinc-300 text-sm mb-6">
-                {edgarProduct.features.slice(0, 4).map((f, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span className="text-lime-400">✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-lime-400">${edgarProduct.price}</span>
-                <div className="flex gap-3">
-                  <Link href={`/products/${edgarProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-lime-500/50 rounded-lg text-sm transition">
-                    Learn More
-                  </Link>
-                  <BuyButton productId={edgarProduct.id} price={edgarProduct.price} color="lime" />
-                </div>
-              </div>
-            </div>
-
-            {/* Gov Salary Scraper - Lime Green */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-lime-500/50 transition">
-              <div className="text-lime-400 text-sm font-medium mb-3">📜 SCRIPT</div>
-              <Link href={`/products/${salaryProduct.id}`} className="block">
-                <h3 className="text-2xl font-bold mb-2 hover:text-lime-400 transition">{salaryProduct.name}</h3>
-              </Link>
-              <p className="text-zinc-400 mb-6">{salaryProduct.tagline}</p>
-              <ul className="space-y-2 text-zinc-300 text-sm mb-6">
-                {salaryProduct.features.slice(0, 4).map((f, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span className="text-lime-400">✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-lime-400">${salaryProduct.price}</span>
-                <div className="flex gap-3">
-                  <Link href={`/products/${salaryProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-lime-500/50 rounded-lg text-sm transition">
-                    Learn More
-                  </Link>
-                  <BuyButton productId={salaryProduct.id} price={salaryProduct.price} color="lime" />
                 </div>
               </div>
             </div>
