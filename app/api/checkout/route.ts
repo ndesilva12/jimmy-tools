@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-// Product configuration
+// Product configuration - prices in cents
 const PRODUCTS: Record<string, {
   name: string;
   description: string;
@@ -14,14 +14,14 @@ const PRODUCTS: Record<string, {
   'openclaw-setup': {
     name: 'The Complete OpenClaw Setup Guide',
     description: 'From zero to your own AI assistant. 30+ pages covering installation, configuration, and troubleshooting.',
-    price: 1900, // $19.00
+    price: 1999, // $19.99
     productId: 'openclaw-setup',
     type: 'digital',
   },
   'openclaw-session': {
     name: '1-on-1 OpenClaw Setup Session',
     description: '1 hour video call with Norman to set up your OpenClaw instance and answer all your questions.',
-    price: 9900, // $99.00
+    price: 50, // TEMP: $0.50 for testing - change back to 9900
     productId: 'openclaw-session',
     type: 'session',
   },

@@ -19,7 +19,7 @@ export const products: Product[] = [
     tagline: 'From zero to your own AI assistant',
     description: 'Installation, configuration, channels, troubleshooting. 30+ pages.',
     longDescription: 'Everything you need to get OpenClaw running on your machine. This comprehensive guide walks you through installation on Mac, Linux, or Windows, configuring your first AI agent, connecting messaging channels like Telegram and Discord, and troubleshooting common issues. Written by an AI that lives and breathes OpenClaw every day.',
-    price: 19,
+    price: 19.99,
     available: true,
     type: 'guide',
     features: [
@@ -37,7 +37,7 @@ export const products: Product[] = [
     tagline: 'My complete framework for investigating any topic',
     description: 'How to decompose questions, verify claims, find primary sources.',
     longDescription: 'Learn the exact methodology I use to research any topic deeply and thoroughly. This guide covers question decomposition, source verification, document analysis, building evidence chains, and synthesizing findings into actionable intelligence.',
-    price: 19,
+    price: 19.99,
     available: false,
     type: 'guide',
     features: [
@@ -54,7 +54,7 @@ export const products: Product[] = [
     tagline: 'Turn raw data into searchable databases',
     description: 'SQLite, indexing, full-text search. Step-by-step.',
     longDescription: 'Transform messy data into organized, searchable archives. Learn how to structure data, build SQLite databases, implement full-text search, and create interfaces for exploring your data. Includes real examples from my own archive projects.',
-    price: 24,
+    price: 24.99,
     available: false,
     type: 'guide',
     features: [
@@ -71,7 +71,7 @@ export const products: Product[] = [
     tagline: 'Techniques that actually work',
     description: 'Rate limiting, proxies, headers, browser automation.',
     longDescription: 'The definitive guide to scraping websites without getting blocked. Covers rate limiting strategies, rotating proxies, proper headers, browser automation with Playwright, and handling CAPTCHAs. Includes code examples and battle-tested techniques.',
-    price: 19,
+    price: 19.99,
     available: false,
     type: 'guide',
     features: [
@@ -90,7 +90,7 @@ export const products: Product[] = [
     tagline: 'Personalized setup with live expert help',
     description: '1 hour video call to set up your OpenClaw instance.',
     longDescription: 'Get personalized help setting up OpenClaw with a 1-hour video call. We\'ll walk through installation together, configure your channels, customize your agent, and answer all your questions. Perfect if you want to get up and running fast without the trial and error.',
-    price: 99,
+    price: 0.50, // TEMP: Testing - change back to 99
     available: true,
     type: 'session',
     features: [
