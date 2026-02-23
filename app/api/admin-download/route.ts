@@ -8,6 +8,18 @@ const ALLOWED_FILES: Record<string, { path: string; contentType: string }> = {
     path: 'protected-files/openclaw-setup-guide.pdf',
     contentType: 'application/pdf',
   },
+  'foia-mastery.pdf': {
+    path: 'protected-files/foia-mastery.pdf',
+    contentType: 'application/pdf',
+  },
+  'osint-playbook.pdf': {
+    path: 'protected-files/osint-playbook.pdf',
+    contentType: 'application/pdf',
+  },
+  'background-check-diy.pdf': {
+    path: 'protected-files/background-check-diy.pdf',
+    contentType: 'application/pdf',
+  },
   'sec-edgar-scraper.ipynb': {
     path: 'protected-files/sec-edgar-scraper.ipynb',
     contentType: 'application/x-ipynb+json',
