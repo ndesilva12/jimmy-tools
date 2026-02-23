@@ -26,7 +26,7 @@ const products = {
     { id: 'podcast-transcripts', name: 'Podcast Transcript Archive', description: 'Full transcripts of top 50 business/tech podcasts. 5000+ episodes searchable.', price: 39 },
   ],
   guides: [
-    { id: 'investigation-methodology', name: 'Investigation Methodology Guide', description: 'My complete framework for OSINT research. Source verification, document analysis, investigative workflows. 30+ pages.', price: 19, available: true },
+    { id: 'openclaw-setup', name: 'The Complete OpenClaw Setup Guide', description: 'From zero to your own AI assistant. Installation, configuration, channels, troubleshooting. 30+ pages.', price: 19, available: true },
     { id: 'deep-research', name: 'The Deep Research Methodology', description: 'My complete framework for investigating any topic. How to decompose questions, verify claims, find primary sources.', price: 19 },
     { id: 'archive-building', name: 'Building Searchable Archives', description: 'Step-by-step guide to turning raw data into searchable databases. SQLite, indexing, full-text search.', price: 24 },
     { id: 'scraping-guide', name: 'Web Scraping Without Getting Blocked', description: 'Techniques that actually work. Rate limiting, proxies, headers, browser automation.', price: 19 },
@@ -74,25 +74,25 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-4">Investigation Methodology Guide</h2>
+              <h2 className="text-3xl font-bold mb-4">The Complete OpenClaw Setup Guide</h2>
               <p className="text-zinc-400 mb-6">
-                My complete OSINT research framework. The exact methods I use to investigate any topic:
+                Go from zero to your own AI assistant in under an hour. This 30+ page guide covers everything:
               </p>
               <ul className="space-y-2 text-zinc-300 mb-6">
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Question decomposition techniques
+                  <span className="text-green-400">✓</span> Installation on Mac, Linux, Windows
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Source verification methods
+                  <span className="text-green-400">✓</span> Onboarding wizard walkthrough
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Document analysis workflows
+                  <span className="text-green-400">✓</span> Channel setup (Telegram, WhatsApp, Discord)
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Finding primary sources
+                  <span className="text-green-400">✓</span> Troubleshooting common issues
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="text-green-400">✓</span> Building evidence chains
+                  <span className="text-green-400">✓</span> Advanced configuration options
                 </li>
               </ul>
               <div className="flex items-center gap-4">
@@ -104,12 +104,12 @@ export default function Home() {
             </div>
             <div className="bg-zinc-900 rounded-xl p-6 border border-zinc-700">
               <div className="bg-zinc-800 rounded-lg p-4 mb-4">
-                <div className="text-xs text-zinc-500 mb-2">WHAT'S INSIDE</div>
+                <div className="text-xs text-zinc-500 mb-2">PREVIEW</div>
                 <div className="font-mono text-sm text-zinc-300 space-y-1">
-                  <div>📄 30+ pages of methodology</div>
-                  <div>🔍 Real investigation examples</div>
-                  <div>🛠️ Tool recommendations</div>
-                  <div>📋 Reusable checklists</div>
+                  <div>📄 30+ pages</div>
+                  <div>📋 Step-by-step instructions</div>
+                  <div>🔧 Troubleshooting guide</div>
+                  <div>💡 Pro tips throughout</div>
                 </div>
               </div>
               <div className="text-sm text-zinc-500">
