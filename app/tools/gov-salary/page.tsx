@@ -7,7 +7,11 @@ interface SalaryRecord {
   name: string;
   jobTitle: string;
   employer: string;
+  regularPay?: string;
+  overtime?: string;
   totalPay: string;
+  benefits?: string;
+  totalComp?: string;
   year?: string;
   state: string;
 }
@@ -70,8 +74,18 @@ export default function GovSalaryTool() {
   const downloadCSV = () => {
     if (!results.length) return;
 
-    const headers = ['Name', 'Job Title', 'Employer', 'Total Pay', 'State'];
-    const rows = results.map(r => [r.name, r.jobTitle, r.employer, r.totalPay, r.state]);
+    const headers = ['Name', 'Job Title', 'Employer', 'Regular Pay', 'Overtime', 'Total Pay', 'Benefits', 'Total Compensation', 'State'];
+    const rows = results.map(r => [
+      r.name, 
+      r.jobTitle, 
+      r.employer, 
+      r.regularPay || '', 
+      r.overtime || '', 
+      r.totalPay || '', 
+      r.benefits || '', 
+      r.totalComp || r.totalPay || '', 
+      r.state
+    ]);
     
     const csv = [headers, ...rows].map(row => row.map(cell => `"${cell || ''}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
@@ -229,27 +243,31 @@ export default function GovSalaryTool() {
                       <th className="text-left py-3 px-4 text-zinc-500 font-medium">Name</th>
                       <th className="text-left py-3 px-4 text-zinc-500 font-medium">Title</th>
                       <th className="text-left py-3 px-4 text-zinc-500 font-medium">Employer</th>
-                      <th className="text-right py-3 px-4 text-zinc-500 font-medium">Total Pay</th>
+                      <th className="text-right py-3 px-4 text-zinc-500 font-medium">Base Pay</th>
+                      <th className="text-right py-3 px-4 text-zinc-500 font-medium">Total Comp</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {results.slice(0, 100).map((record, i) => (
+                    {results.slice(0, 150).map((record, i) => (
                       <tr key={i} className="border-b border-zinc-800/50 hover:bg-zinc-800/30">
                         <td className="py-3 px-4 text-zinc-300">{record.name}</td>
                         <td className="py-3 px-4 text-zinc-400">{record.jobTitle}</td>
                         <td className="py-3 px-4 text-zinc-400 max-w-xs truncate">{record.employer}</td>
+                        <td className="py-3 px-4 text-right text-zinc-300">
+                          {formatSalary(record.regularPay || record.totalPay)}
+                        </td>
                         <td className="py-3 px-4 text-right">
                           <span className="text-lime-400 font-medium">
-                            {formatSalary(record.totalPay)}
+                            {formatSalary(record.totalComp || record.totalPay)}
                           </span>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                {results.length > 100 && (
+                {results.length > 150 && (
                   <p className="text-zinc-500 text-sm text-center mt-4">
-                    Showing first 100 of {results.length} results. Download CSV for all.
+                    Showing first 150 of {results.length} results. Download CSV for all.
                   </p>
                 )}
               </div>
