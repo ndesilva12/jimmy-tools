@@ -118,9 +118,9 @@ export default function DownloadPage() {
 
           {/* Support Note */}
           <p className="text-center text-gray-500 text-sm mt-6">
-            Problems? Email{' '}
-            <a href="mailto:jimmytools.open@gmail.com" className="text-blue-400 hover:text-blue-300">
-              jimmytools.open@gmail.com
+            Problems?{' '}
+            <a href="/contact" className="text-blue-400 hover:text-blue-300">
+              Contact Support
             </a>
           </p>
         </div>
