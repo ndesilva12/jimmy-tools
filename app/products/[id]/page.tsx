@@ -118,6 +118,71 @@ export default function ProductPage() {
                 ))}
               </ul>
             </div>
+
+            {/* Detailed Script Instructions */}
+            {product.type === 'script' && (
+              <div className="mb-8 p-6 bg-zinc-900 rounded-2xl border border-zinc-800">
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <span>📖</span> How to Use Your Script (Step-by-Step)
+                </h3>
+                
+                <div className="space-y-6 text-sm">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-[#9CB853] text-black rounded-full flex items-center justify-center font-bold">1</div>
+                    <div>
+                      <p className="font-semibold text-white mb-1">Download the file</p>
+                      <p className="text-zinc-400">After purchase, click the download button. You'll get a file ending in <code className="bg-zinc-800 px-2 py-0.5 rounded text-[#A8C45E]">.ipynb</code> — this is a Jupyter notebook file.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-[#9CB853] text-black rounded-full flex items-center justify-center font-bold">2</div>
+                    <div>
+                      <p className="font-semibold text-white mb-1">Go to Google Colab</p>
+                      <p className="text-zinc-400">Open <a href="https://colab.research.google.com" target="_blank" className="text-[#A8C45E] underline">colab.research.google.com</a> in your browser. Sign in with any Google account (free).</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-[#9CB853] text-black rounded-full flex items-center justify-center font-bold">3</div>
+                    <div>
+                      <p className="font-semibold text-white mb-1">Upload the notebook</p>
+                      <p className="text-zinc-400">Click <strong>File → Upload notebook</strong> in the top menu. Select the <code className="bg-zinc-800 px-2 py-0.5 rounded text-[#A8C45E]">.ipynb</code> file you downloaded.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-[#9CB853] text-black rounded-full flex items-center justify-center font-bold">4</div>
+                    <div>
+                      <p className="font-semibold text-white mb-1">Run the script</p>
+                      <p className="text-zinc-400">Click <strong>Runtime → Run all</strong> in the top menu (or press Ctrl+F9). The script will run automatically.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-[#9CB853] text-black rounded-full flex items-center justify-center font-bold">5</div>
+                    <div>
+                      <p className="font-semibold text-white mb-1">Follow the prompts</p>
+                      <p className="text-zinc-400">The script will ask you questions (like "Enter stock ticker"). Type your answers in the boxes that appear and press Enter.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-[#9CB853] text-black rounded-full flex items-center justify-center font-bold">6</div>
+                    <div>
+                      <p className="font-semibold text-white mb-1">Download your results</p>
+                      <p className="text-zinc-400">When finished, the script automatically downloads CSV/Excel files to your computer. Check your Downloads folder!</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-zinc-800/50 rounded-xl">
+                  <p className="text-zinc-400 text-sm">
+                    <span className="text-[#A8C45E] font-semibold">💡 Tip:</span> Google Colab is completely free. Your data stays in your browser — we never see your searches or results.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right: Purchase Card */}
@@ -150,11 +215,13 @@ export default function ProductPage() {
               )}
 
               {product.type === 'script' && (
-                <div className="mt-6 p-4 bg-zinc-800/50 rounded-xl">
-                  <p className="text-zinc-400 text-sm">
-                    <span className="text-[#A8C45E] font-semibold">No coding required.</span>{' '}
-                    Scripts run in Google Colab (free). Just open the notebook, click "Run All", and follow the prompts.
-                  </p>
+                <div className="mt-6 space-y-4">
+                  <div className="p-4 bg-[#9CB853]/10 border border-[#9CB853]/30 rounded-xl">
+                    <p className="text-[#A8C45E] font-semibold text-sm mb-1">✨ No coding required</p>
+                    <p className="text-zinc-400 text-sm">
+                      Scripts run in Google Colab — a free tool from Google that runs code in your browser. You don't install anything.
+                    </p>
+                  </div>
                 </div>
               )}
 

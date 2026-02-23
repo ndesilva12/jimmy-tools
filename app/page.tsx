@@ -45,6 +45,7 @@ export default function Home() {
   const databases = getProductsByType('database');
   const sessionProduct = products.find(p => p.id === 'openclaw-session')!;
   const guideProduct = products.find(p => p.id === 'openclaw-setup')!;
+  const edgarProduct = products.find(p => p.id === 'sec-edgar-scraper')!;
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -62,7 +63,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured: Two Main Products */}
+      {/* Featured: Main Products */}
       <section className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-2 text-[#A8C45E] text-sm font-medium mb-8">
@@ -70,7 +71,7 @@ export default function Home() {
             AVAILABLE NOW
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Guide */}
             <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
               <div className="text-[#A8C45E] text-sm font-medium mb-3">📚 GUIDE</div>
@@ -116,6 +117,29 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* SEC EDGAR Scraper */}
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
+              <div className="text-[#A8C45E] text-sm font-medium mb-3">📜 SCRIPT</div>
+              <h3 className="text-2xl font-bold mb-2">{edgarProduct.name}</h3>
+              <p className="text-zinc-400 mb-6">{edgarProduct.tagline}</p>
+              <ul className="space-y-2 text-zinc-300 text-sm mb-6">
+                {edgarProduct.features.slice(0, 4).map((f, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-[#A8C45E]">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center justify-between">
+                <span className="text-3xl font-bold text-[#A8C45E]">${edgarProduct.price}</span>
+                <div className="flex gap-3">
+                  <Link href={`/products/${edgarProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-zinc-500 rounded-lg text-sm transition">
+                    Learn More
+                  </Link>
+                  <BuyButton productId={edgarProduct.id} price={edgarProduct.price} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -157,13 +181,20 @@ export default function Home() {
               <Link 
                 key={product.id}
                 href={`/products/${product.id}`}
-                className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:border-[#9CB853]/50 transition block"
+                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-[#9CB853]/30' : 'border-zinc-800'} hover:border-[#9CB853]/50 transition block`}
               >
+                {product.available && (
+                  <div className="text-xs font-medium text-[#A8C45E] mb-2">✓ AVAILABLE</div>
+                )}
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                 <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
                   <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
-                  <span className="text-zinc-500 text-sm">Coming Soon</span>
+                  {product.available ? (
+                    <span className="text-[#A8C45E] text-sm">View Details →</span>
+                  ) : (
+                    <span className="text-zinc-500 text-sm">Coming Soon</span>
+                  )}
                 </div>
               </Link>
             ))}
