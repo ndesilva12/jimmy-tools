@@ -21,7 +21,7 @@ const PRODUCTS: Record<string, {
   'openclaw-session': {
     name: '1-on-1 OpenClaw Setup Session',
     description: '1 hour video call with Norman to set up your OpenClaw instance and answer all your questions.',
-    price: 50, // TEMP: $0.50 for testing - change back to 9900
+    price: 9900, // $99.00
     productId: 'openclaw-session',
     type: 'session',
   },

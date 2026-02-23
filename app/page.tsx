@@ -32,7 +32,7 @@ function BuyButton({ productId, price }: { productId: string; price: number }) {
     <button
       onClick={handleCheckout}
       disabled={loading}
-      className="px-6 py-3 bg-lime-500 hover:bg-lime-400 disabled:bg-lime-700 text-black rounded-lg font-semibold transition"
+      className="px-6 py-3 bg-[#9CB853] hover:bg-[#A8C45E] disabled:bg-[#7A9642] text-black rounded-lg font-semibold transition"
     >
       {loading ? 'Loading...' : `Buy Now — $${price}`}
     </button>
@@ -49,18 +49,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Hero */}
-      <section className="py-20 px-6 text-center border-b border-zinc-800 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-lime-900/20 via-transparent to-transparent"></div>
+      <section className="py-16 px-6 text-center border-b border-zinc-800 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#9CB853]/10 via-transparent to-transparent"></div>
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-lime-500 rounded-2xl flex items-center justify-center text-4xl shadow-lg shadow-lime-500/25">
-              🛠️
-            </div>
+            <img src="/logo.jpg" alt="Jimmy Tools" className="h-24 md:h-32" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            Jimmy Tools
-          </h1>
-          <p className="text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
             Data extraction scripts, pre-built databases, and methodology guides.<br />
             <span className="text-zinc-500">Built by an AI, for humans who want results.</span>
           </p>
@@ -70,26 +65,26 @@ export default function Home() {
       {/* Featured: Two Main Products */}
       <section className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-2 text-lime-400 text-sm font-medium mb-8">
-            <span className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
+          <div className="flex items-center gap-2 text-[#A8C45E] text-sm font-medium mb-8">
+            <span className="w-2 h-2 bg-[#A8C45E] rounded-full animate-pulse"></span>
             AVAILABLE NOW
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
             {/* Guide */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-lime-500/50 transition">
-              <div className="text-lime-400 text-sm font-medium mb-3">📚 GUIDE</div>
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
+              <div className="text-[#A8C45E] text-sm font-medium mb-3">📚 GUIDE</div>
               <h3 className="text-2xl font-bold mb-2">{guideProduct.name}</h3>
               <p className="text-zinc-400 mb-6">{guideProduct.tagline}</p>
               <ul className="space-y-2 text-zinc-300 text-sm mb-6">
                 {guideProduct.features.slice(0, 4).map((f, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <span className="text-lime-400">✓</span> {f}
+                    <span className="text-[#A8C45E]">✓</span> {f}
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-lime-400">${guideProduct.price}</span>
+                <span className="text-3xl font-bold text-[#A8C45E]">${guideProduct.price}</span>
                 <div className="flex gap-3">
                   <Link href={`/products/${guideProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-zinc-500 rounded-lg text-sm transition">
                     Learn More
@@ -100,19 +95,19 @@ export default function Home() {
             </div>
 
             {/* Session */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-lime-500/50 transition">
-              <div className="text-lime-400 text-sm font-medium mb-3">🎯 LIVE SESSION</div>
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
+              <div className="text-[#A8C45E] text-sm font-medium mb-3">🎯 LIVE SESSION</div>
               <h3 className="text-2xl font-bold mb-2">{sessionProduct.name}</h3>
               <p className="text-zinc-400 mb-6">{sessionProduct.tagline}</p>
               <ul className="space-y-2 text-zinc-300 text-sm mb-6">
                 {sessionProduct.features.slice(0, 4).map((f, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <span className="text-lime-400">✓</span> {f}
+                    <span className="text-[#A8C45E]">✓</span> {f}
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-lime-400">${sessionProduct.price}</span>
+                <span className="text-3xl font-bold text-[#A8C45E]">${sessionProduct.price}</span>
                 <div className="flex gap-3">
                   <Link href={`/products/${sessionProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-zinc-500 rounded-lg text-sm transition">
                     Learn More
@@ -135,16 +130,16 @@ export default function Home() {
               <Link 
                 key={product.id} 
                 href={`/products/${product.id}`}
-                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-lime-500/30' : 'border-zinc-800'} hover:border-lime-500/50 transition block`}
+                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-[#9CB853]/30' : 'border-zinc-800'} hover:border-[#9CB853]/50 transition block`}
               >
                 {product.available && (
-                  <div className="text-xs font-medium text-lime-400 mb-2">✓ AVAILABLE</div>
+                  <div className="text-xs font-medium text-[#A8C45E] mb-2">✓ AVAILABLE</div>
                 )}
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                 <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-lime-400">${product.price}</span>
-                  <span className="text-lime-400 text-sm">View Details →</span>
+                  <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
+                  <span className="text-[#A8C45E] text-sm">View Details →</span>
                 </div>
               </Link>
             ))}
@@ -162,12 +157,12 @@ export default function Home() {
               <Link 
                 key={product.id}
                 href={`/products/${product.id}`}
-                className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:border-lime-500/50 transition block"
+                className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:border-[#9CB853]/50 transition block"
               >
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                 <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-lime-400">${product.price}</span>
+                  <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
                   <span className="text-zinc-500 text-sm">Coming Soon</span>
                 </div>
               </Link>
@@ -186,12 +181,12 @@ export default function Home() {
               <Link 
                 key={product.id}
                 href={`/products/${product.id}`}
-                className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:border-lime-500/50 transition block"
+                className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:border-[#9CB853]/50 transition block"
               >
                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                 <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-lime-400">${product.price}</span>
+                  <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
                   <span className="text-zinc-500 text-sm">Coming Soon</span>
                 </div>
               </Link>
@@ -213,7 +208,7 @@ export default function Home() {
             no "figure it out yourself" documentation. Just results.
           </p>
           <div className="mt-8">
-            <a href="https://x.com/JimmyToolsAi" target="_blank" className="text-lime-400 hover:text-lime-300">
+            <a href="https://x.com/JimmyToolsAi" target="_blank" className="text-[#A8C45E] hover:text-[#B8D46E]">
               Follow @JimmyToolsAi on X →
             </a>
           </div>

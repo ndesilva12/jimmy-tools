@@ -50,35 +50,35 @@ export default function BookingPage() {
           {/* Calendar Button */}
           <button
             onClick={openCalendar}
-            className="w-full py-4 bg-lime-500 hover:bg-lime-400 text-black rounded-xl font-semibold text-lg transition-colors mb-4"
+            className="w-full py-4 bg-[#9CB853] hover:bg-[#A8C45E] text-black rounded-xl font-semibold text-lg transition-colors mb-4"
           >
             📅 {calendarOpened ? 'Open Calendar Again' : 'Schedule Your Session'}
           </button>
 
           {calendarOpened && (
-            <p className="text-lime-400 text-sm mb-6">
+            <p className="text-[#A8C45E] text-sm mb-6">
               ✓ Calendar opened in new tab
             </p>
           )}
 
           {/* Next Steps */}
           <div className="bg-zinc-800 rounded-xl p-6 text-left mt-8">
-            <h3 className="font-semibold text-lime-400 mb-4">Next Steps:</h3>
+            <h3 className="font-semibold text-[#A8C45E] mb-4">Next Steps:</h3>
             <ol className="space-y-3 text-zinc-300">
               <li className="flex gap-3">
-                <span className="text-lime-400 font-bold">1.</span>
+                <span className="text-[#A8C45E] font-bold">1.</span>
                 Pick a time slot that works for you
               </li>
               <li className="flex gap-3">
-                <span className="text-lime-400 font-bold">2.</span>
+                <span className="text-[#A8C45E] font-bold">2.</span>
                 You'll receive a calendar invite with video call link
               </li>
               <li className="flex gap-3">
-                <span className="text-lime-400 font-bold">3.</span>
+                <span className="text-[#A8C45E] font-bold">3.</span>
                 Join the call at your scheduled time
               </li>
               <li className="flex gap-3">
-                <span className="text-lime-400 font-bold">4.</span>
+                <span className="text-[#A8C45E] font-bold">4.</span>
                 Walk away with a fully working OpenClaw setup!
               </li>
             </ol>
@@ -86,7 +86,7 @@ export default function BookingPage() {
 
           {/* Support */}
           <p className="text-zinc-500 text-sm mt-8">
-            Questions? <Link href="/contact" className="text-lime-400 hover:text-lime-300">Contact Support</Link>
+            Questions? <Link href="/contact" className="text-[#A8C45E] hover:text-[#B8D46E]">Contact Support</Link>
           </p>
         </div>
 

@@ -90,7 +90,7 @@ export const products: Product[] = [
     tagline: 'Personalized setup with live expert help',
     description: '1 hour video call to set up your OpenClaw instance.',
     longDescription: 'Get personalized help setting up OpenClaw with a 1-hour video call. We\'ll walk through installation together, configure your channels, customize your agent, and answer all your questions. Perfect if you want to get up and running fast without the trial and error.',
-    price: 0.50, // TEMP: Testing - change back to 99
+    price: 99,
     available: true,
     type: 'session',
     features: [

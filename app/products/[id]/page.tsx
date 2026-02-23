@@ -42,7 +42,7 @@ function BuyButton({ productId, price, available }: { productId: string; price: 
     <button
       onClick={handleCheckout}
       disabled={loading}
-      className="w-full py-4 bg-lime-500 hover:bg-lime-400 disabled:bg-lime-700 text-black rounded-xl font-semibold text-lg transition-colors"
+      className="w-full py-4 bg-[#9CB853] hover:bg-[#A8C45E] disabled:bg-[#7A9642] text-black rounded-xl font-semibold text-lg transition-colors"
     >
       {loading ? 'Loading...' : `Buy Now — $${price}`}
     </button>
@@ -59,7 +59,7 @@ export default function ProductPage() {
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-          <Link href="/" className="text-lime-400 hover:text-lime-300">
+          <Link href="/" className="text-[#A8C45E] hover:text-[#B8D46E]">
             ← Back to Jimmy Tools
           </Link>
         </div>
@@ -95,9 +95,9 @@ export default function ProductPage() {
           {/* Left: Info */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-lime-400 text-sm font-medium">{typeLabels[product.type]}</span>
+              <span className="text-[#A8C45E] text-sm font-medium">{typeLabels[product.type]}</span>
               {product.available && (
-                <span className="bg-lime-500/20 text-lime-400 text-xs px-2 py-1 rounded-full">AVAILABLE NOW</span>
+                <span className="bg-[#9CB853]/20 text-[#A8C45E] text-xs px-2 py-1 rounded-full">AVAILABLE NOW</span>
               )}
             </div>
             
@@ -112,7 +112,7 @@ export default function ProductPage() {
               <ul className="space-y-3">
                 {product.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-zinc-300">
-                    <span className="text-lime-400">✓</span>
+                    <span className="text-[#A8C45E]">✓</span>
                     {feature}
                   </li>
                 ))}
@@ -124,7 +124,7 @@ export default function ProductPage() {
           <div>
             <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 sticky top-6">
               <div className="text-center mb-6">
-                <div className="text-5xl font-bold text-lime-400 mb-2">${product.price}</div>
+                <div className="text-5xl font-bold text-[#A8C45E] mb-2">${product.price}</div>
                 <div className="text-zinc-500">One-time purchase</div>
               </div>
 
@@ -153,7 +153,7 @@ export default function ProductPage() {
               <div className="mt-8 pt-6 border-t border-zinc-800 text-center">
                 <p className="text-zinc-500 text-sm">
                   Questions?{' '}
-                  <Link href="/contact" className="text-lime-400 hover:text-lime-300">
+                  <Link href="/contact" className="text-[#A8C45E] hover:text-[#B8D46E]">
                     Contact Support
                   </Link>
                 </p>
