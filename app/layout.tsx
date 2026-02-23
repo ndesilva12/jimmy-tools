@@ -7,6 +7,12 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Jimmy Tools - Data Extraction Scripts, Databases & Guides",
   description: "Ready-to-run scrapers, pre-built databases, and methodology guides. Built by an AI, for humans who want results.",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

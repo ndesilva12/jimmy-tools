@@ -72,23 +72,25 @@ export default function Home() {
             AVAILABLE NOW
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Guide */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
-              <div className="text-[#A8C45E] text-sm font-medium mb-3">📚 GUIDE</div>
-              <h3 className="text-2xl font-bold mb-2">{guideProduct.name}</h3>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Guide - Emerald/Teal */}
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-emerald-500/50 transition">
+              <div className="text-emerald-400 text-sm font-medium mb-3">📚 GUIDE</div>
+              <Link href={`/products/${guideProduct.id}`} className="block">
+                <h3 className="text-2xl font-bold mb-2 hover:text-emerald-400 transition">{guideProduct.name}</h3>
+              </Link>
               <p className="text-zinc-400 mb-6">{guideProduct.tagline}</p>
               <ul className="space-y-2 text-zinc-300 text-sm mb-6">
                 {guideProduct.features.slice(0, 4).map((f, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <span className="text-[#A8C45E]">✓</span> {f}
+                    <span className="text-emerald-400">✓</span> {f}
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-[#A8C45E]">${guideProduct.price}</span>
+                <span className="text-3xl font-bold text-emerald-400">${guideProduct.price}</span>
                 <div className="flex gap-3">
-                  <Link href={`/products/${guideProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-zinc-500 rounded-lg text-sm transition">
+                  <Link href={`/products/${guideProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-emerald-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
                   <BuyButton productId={guideProduct.id} price={guideProduct.price} />
@@ -96,22 +98,24 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Session */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
-              <div className="text-[#A8C45E] text-sm font-medium mb-3">🎯 LIVE SESSION</div>
-              <h3 className="text-2xl font-bold mb-2">{sessionProduct.name}</h3>
+            {/* Session - Cyan/Blue */}
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-cyan-500/50 transition">
+              <div className="text-cyan-400 text-sm font-medium mb-3">🎯 LIVE SESSION</div>
+              <Link href={`/products/${sessionProduct.id}`} className="block">
+                <h3 className="text-2xl font-bold mb-2 hover:text-cyan-400 transition">{sessionProduct.name}</h3>
+              </Link>
               <p className="text-zinc-400 mb-6">{sessionProduct.tagline}</p>
               <ul className="space-y-2 text-zinc-300 text-sm mb-6">
                 {sessionProduct.features.slice(0, 4).map((f, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <span className="text-[#A8C45E]">✓</span> {f}
+                    <span className="text-cyan-400">✓</span> {f}
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-[#A8C45E]">${sessionProduct.price}</span>
+                <span className="text-3xl font-bold text-cyan-400">${sessionProduct.price}</span>
                 <div className="flex gap-3">
-                  <Link href={`/products/${sessionProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-zinc-500 rounded-lg text-sm transition">
+                  <Link href={`/products/${sessionProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-cyan-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
                   <BuyButton productId={sessionProduct.id} price={sessionProduct.price} />
@@ -119,25 +123,52 @@ export default function Home() {
               </div>
             </div>
 
-            {/* SEC EDGAR Scraper */}
-            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-[#9CB853]/50 transition">
-              <div className="text-[#A8C45E] text-sm font-medium mb-3">📜 SCRIPT</div>
-              <h3 className="text-2xl font-bold mb-2">{edgarProduct.name}</h3>
+            {/* SEC EDGAR Scraper - Lime Green */}
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-lime-500/50 transition">
+              <div className="text-lime-400 text-sm font-medium mb-3">📜 SCRIPT</div>
+              <Link href={`/products/${edgarProduct.id}`} className="block">
+                <h3 className="text-2xl font-bold mb-2 hover:text-lime-400 transition">{edgarProduct.name}</h3>
+              </Link>
               <p className="text-zinc-400 mb-6">{edgarProduct.tagline}</p>
               <ul className="space-y-2 text-zinc-300 text-sm mb-6">
                 {edgarProduct.features.slice(0, 4).map((f, i) => (
                   <li key={i} className="flex items-center gap-2">
-                    <span className="text-[#A8C45E]">✓</span> {f}
+                    <span className="text-lime-400">✓</span> {f}
                   </li>
                 ))}
               </ul>
               <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-[#A8C45E]">${edgarProduct.price}</span>
+                <span className="text-3xl font-bold text-lime-400">${edgarProduct.price}</span>
                 <div className="flex gap-3">
-                  <Link href={`/products/${edgarProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-zinc-500 rounded-lg text-sm transition">
+                  <Link href={`/products/${edgarProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-lime-500/50 rounded-lg text-sm transition">
                     Learn More
                   </Link>
                   <BuyButton productId={edgarProduct.id} price={edgarProduct.price} />
+                </div>
+              </div>
+            </div>
+
+            {/* Gov Salary Scraper - Lime Green */}
+            <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-lime-500/50 transition">
+              <div className="text-lime-400 text-sm font-medium mb-3">📜 SCRIPT</div>
+              <Link href={`/products/${salaryProduct.id}`} className="block">
+                <h3 className="text-2xl font-bold mb-2 hover:text-lime-400 transition">{salaryProduct.name}</h3>
+              </Link>
+              <p className="text-zinc-400 mb-6">{salaryProduct.tagline}</p>
+              <ul className="space-y-2 text-zinc-300 text-sm mb-6">
+                {salaryProduct.features.slice(0, 4).map((f, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-lime-400">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center justify-between">
+                <span className="text-3xl font-bold text-lime-400">${salaryProduct.price}</span>
+                <div className="flex gap-3">
+                  <Link href={`/products/${salaryProduct.id}`} className="px-4 py-2 border border-zinc-700 hover:border-lime-500/50 rounded-lg text-sm transition">
+                    Learn More
+                  </Link>
+                  <BuyButton productId={salaryProduct.id} price={salaryProduct.price} />
                 </div>
               </div>
             </div>
@@ -145,54 +176,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Guides */}
+      {/* Guides - Emerald */}
       <section id="guides" className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
-          <Link href="#guides" className="text-3xl font-bold mb-2 block hover:text-[#A8C45E] transition cursor-pointer">📚 Methodology Guides</Link>
+          <Link href="#guides" className="text-3xl font-bold mb-2 block hover:text-emerald-400 transition cursor-pointer">📚 Methodology Guides</Link>
           <p className="text-zinc-400 mb-8">Complete frameworks, not just tips.</p>
           <div className="grid md:grid-cols-2 gap-6">
             {guides.map((product) => (
               <Link 
                 key={product.id} 
                 href={`/products/${product.id}`}
-                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-[#9CB853]/30' : 'border-zinc-800'} hover:border-[#9CB853]/50 transition block`}
+                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-emerald-500/30' : 'border-zinc-800'} hover:border-emerald-500/50 transition block`}
               >
                 {product.available && (
-                  <div className="text-xs font-medium text-[#A8C45E] mb-2">✓ AVAILABLE</div>
+                  <div className="text-xs font-medium text-emerald-400 mb-2">✓ AVAILABLE</div>
                 )}
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                <h3 className="text-lg font-semibold mb-2 hover:text-emerald-400 transition">{product.name}</h3>
                 <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
-                  <span className="text-[#A8C45E] text-sm">View Details →</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Scripts */}
-      <section id="scripts" className="py-16 px-6 border-b border-zinc-800">
-        <div className="max-w-6xl mx-auto">
-          <Link href="#scripts" className="text-3xl font-bold mb-2 block hover:text-[#A8C45E] transition cursor-pointer">📜 Scripts</Link>
-          <p className="text-zinc-400 mb-8">Ready-to-run Google Colab notebooks. No coding required.</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {scripts.map((product) => (
-              <Link 
-                key={product.id}
-                href={`/products/${product.id}`}
-                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-[#9CB853]/30' : 'border-zinc-800'} hover:border-[#9CB853]/50 transition block`}
-              >
-                {product.available && (
-                  <div className="text-xs font-medium text-[#A8C45E] mb-2">✓ AVAILABLE</div>
-                )}
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
+                  <span className="text-2xl font-bold text-emerald-400">${product.price}</span>
                   {product.available ? (
-                    <span className="text-[#A8C45E] text-sm">View Details →</span>
+                    <span className="text-emerald-400 text-sm">View Details →</span>
                   ) : (
                     <span className="text-zinc-500 text-sm">Coming Soon</span>
                   )}
@@ -203,23 +207,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Databases */}
+      {/* Scripts - Lime */}
+      <section id="scripts" className="py-16 px-6 border-b border-zinc-800">
+        <div className="max-w-6xl mx-auto">
+          <Link href="#scripts" className="text-3xl font-bold mb-2 block hover:text-lime-400 transition cursor-pointer">📜 Scripts</Link>
+          <p className="text-zinc-400 mb-8">Ready-to-run Google Colab notebooks. No coding required.</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {scripts.map((product) => (
+              <Link 
+                key={product.id}
+                href={`/products/${product.id}`}
+                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-lime-500/30' : 'border-zinc-800'} hover:border-lime-500/50 transition block`}
+              >
+                {product.available && (
+                  <div className="text-xs font-medium text-lime-400 mb-2">✓ AVAILABLE</div>
+                )}
+                <h3 className="text-lg font-semibold mb-2 hover:text-lime-400 transition">{product.name}</h3>
+                <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-2xl font-bold text-lime-400">${product.price}</span>
+                  {product.available ? (
+                    <span className="text-lime-400 text-sm">View Details →</span>
+                  ) : (
+                    <span className="text-zinc-500 text-sm">Coming Soon</span>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Databases - Teal */}
       <section id="databases" className="py-16 px-6 border-b border-zinc-800">
         <div className="max-w-6xl mx-auto">
-          <Link href="#databases" className="text-3xl font-bold mb-2 block hover:text-[#A8C45E] transition cursor-pointer">🗃️ Databases</Link>
+          <Link href="#databases" className="text-3xl font-bold mb-2 block hover:text-teal-400 transition cursor-pointer">🗃️ Databases</Link>
           <p className="text-zinc-400 mb-8">Pre-scraped, cleaned, and indexed. Hours of work, done for you.</p>
           <div className="grid md:grid-cols-2 gap-6">
             {databases.map((product) => (
               <Link 
                 key={product.id}
                 href={`/products/${product.id}`}
-                className="bg-zinc-900/50 rounded-xl p-6 border border-zinc-800 hover:border-[#9CB853]/50 transition block"
+                className={`bg-zinc-900/50 rounded-xl p-6 border ${product.available ? 'border-teal-500/30' : 'border-zinc-800'} hover:border-teal-500/50 transition block`}
               >
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                {product.available && (
+                  <div className="text-xs font-medium text-teal-400 mb-2">✓ AVAILABLE</div>
+                )}
+                <h3 className="text-lg font-semibold mb-2 hover:text-teal-400 transition">{product.name}</h3>
                 <p className="text-zinc-400 text-sm mb-4">{product.description}</p>
                 <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-[#A8C45E]">${product.price}</span>
-                  <span className="text-zinc-500 text-sm">Coming Soon</span>
+                  <span className="text-2xl font-bold text-teal-400">${product.price}</span>
+                  {product.available ? (
+                    <span className="text-teal-400 text-sm">View Details →</span>
+                  ) : (
+                    <span className="text-zinc-500 text-sm">Coming Soon</span>
+                  )}
                 </div>
               </Link>
             ))}
