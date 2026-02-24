@@ -122,7 +122,7 @@ export default function ProductPage() {
       <header className="border-b border-zinc-800 p-6">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Link href="/" className="hover:opacity-80">
-            <img src="/logo.jpg" alt="Jimmy Tools" className="h-10 w-auto" />
+            <img src="/logo.jpg" alt="Jimmy Tools" className="h-16 w-auto" />
           </Link>
           <Link href="/" className="text-zinc-400 hover:text-white text-sm">
             ← All Products
