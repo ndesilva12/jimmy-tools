@@ -96,7 +96,7 @@ export const products: Product[] = [
   {
     id: 'openclaw-session',
     name: '1-on-1 OpenClaw Setup Session',
-    tagline: 'Personalized setup with live expert help',
+    tagline: '1-hour personalized setup with live expert help',
     description: '1 hour video call to set up your OpenClaw instance.',
     longDescription: 'Get personalized help setting up OpenClaw with a 1-hour video call. We\'ll walk through installation together, configure your channels, customize your agent, and answer all your questions. Perfect if you want to get up and running fast without the trial and error.',
     price: 99,
