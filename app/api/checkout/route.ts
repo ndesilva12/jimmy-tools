@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     // Create Stripe Checkout Session
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
+      // Don't restrict payment_method_types - let Stripe auto-enable Link, Apple Pay, etc.
       line_items: [
         {
           price_data: {
